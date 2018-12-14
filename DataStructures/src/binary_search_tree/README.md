@@ -23,6 +23,10 @@
 
 * [Key ceiling(Key key)](#ceiling) - Returns largest key >= input key
 
+* [int rank(Key key)](#rank) - Returns # of keys <= given key
+
+* [Key select(int k)](#select) - Returns kth key (zero based)
+
 ---
 
 * [void add(Key key , Value val)](#add) - Adds a node to tree with given key and associated value
@@ -105,12 +109,12 @@ In order words, ceiling() finds the smallest key >= given key
 </br><b>Parameters</b> : Key key
 </br><b>Return</b> : Smallest key larger or equal to given key
 
-## <a name="rank">void deleteMax()</a>
-<b>Description</b> : Deletes the maximum key in BST
-</br><b>Parameters</b> : NONE
-</br><b>Return</b> : NONE
+## <a name="rank">int rank(Key key)</a>
+<b>Description</b> : Finds how many key <= given key
+</br><b>Parameters</b> : Key key
+</br><b>Return</b> : # of keys smaller than or equal to input key
 
-## <a name="select">void deleteMax()</a>
-<b>Description</b> : Deletes the maximum key in BST
-</br><b>Parameters</b> : NONE
-</br><b>Return</b> : NONE
+## <a name="select">Key select(int k)</a>
+<b>Description</b> : Finds the kth key in BST starting from 0th
+</br><b>Parameters</b> : int k - kth key of interest
+</br><b>Return</b> : kth key
