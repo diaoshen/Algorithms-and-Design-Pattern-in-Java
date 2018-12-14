@@ -21,6 +21,7 @@ package binary_search_tree;
  * public int 		size() 						//Returns total # of nodes in BST
  * public Value 	get(Key key)				//Returns value of given key
  * public void 		add(Key key , Value val)  	//Adds a node to tree with given key and associated value
+ * public void 		delete(Key key)				//Removes a key/value pair of a given key
  * public Key		min()						//Returns minimum key in tree
  * public Key		max()						//Returns maximum key in tree
  * public Key 		floor(Key key)				//Returns largest key <= parameter key
@@ -202,23 +203,48 @@ public class BST <Key extends Comparable<Key> , Value>{
 			root = delete(root , key);
 		}
 		private Node delete(Node node , Key key) {
-			if(node == null) return null;
+			/*
+			 * Same logic as get , add
+			 * 1. Do comparison with current node and key to determine go left or go right
+			 * 2. If reach to null then key doesn't exist. 
+			 */
+			
+			
+			if(node == null) return null; //Can only get here if passed in empty root or got a null node from going left or right
 			int cmp = key.compareTo(node.key);
-			if(cmp < 0) {
+			if(cmp < 0) { // target key < current key , go left
 				node.left = delete(node.left,key);
-			}else if(cmp > 0) {
+			}else if(cmp > 0) { // target key > current key , go right
 				node.right = delete(node.right,key);
-			}else {
-				if(node.right == null) {
+			}else { //Key found
+				/*
+				 * 4 Case for removal
+				 * 
+				 * 1. a node with a left child only   -fix is  link left to grandparent
+				 * 2. a node with a right child only -fix is link right to grandparent
+				 * 3. a node with both left and right child -fix is replace with 
+				 */
+				
+				if(node.right == null) { //Only has left child
 					return node.left;
 				}
 				if(node.left == null) {
 					return node.right;
 				}
 				Node t = node;
-				node = min(t.right);
-				node.right = deleteMin(t.right);
+				node = min(t.right); //Find successor = the smallest key in target key's right subtree and let node point to it
+				/*
+				 * calling deleteMin(t.right) will unlink successor in tree t.right and returns t.right
+				 * node.right = t.right  is what really is happening 
+				 * since n is really the successor and t is the deleted node.
+				 * doing that assignment means successor's right link is old node's right link
+				 */
+				node.right = deleteMin(t.right); //Delete successor from target key's right subtree
+				/*
+				 * successor.left = old.left
+				 */
 				node.left = t.left;
+				//Overall process is that when deleting node that has 2 child , first go to right subtree to find successor , remove it and put to head to replace deleted node.
 			}
 			node.nField = size(node.left) + size(node.right) + 1;
 			return node;
@@ -277,7 +303,10 @@ public class BST <Key extends Comparable<Key> , Value>{
 			if(node.right == null) {
 				return node.left;
 			}
-			node.right = deleteMax(node.right);
+			/*
+			 * node.right need to link back to subtree of node.right after max is deleted
+			 */
+			node.right = deleteMax(node.right); //after deleteMax is called , tree in node.right no longer contains maximum key
 			//Update n field
 			node.nField = size(node.left) + size(node.right) + 1;
 			return node;
