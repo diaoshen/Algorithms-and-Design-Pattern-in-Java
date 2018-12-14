@@ -133,7 +133,7 @@ public class BST <Key extends Comparable<Key> , Value>{
 			return get(root , key);
 		}
 		private Value get(Node x, Key key) {
-			if(x == null) return null;
+			if(x == null) return null; //Search miss , this happens when going left or right ended up reaching a null node
 			
 			/*
 			 * Target key can only exists on the left side  if target key < current node's key
