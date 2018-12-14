@@ -21,6 +21,10 @@
 
 * [void delete(Key key)](#del) - Remove a key/value pair given key
 
+* [void deleteMin()(#delMin) - Removes the minimum key from BST
+
+* [void deleteMax()(#delMax) - Removes the maximum key from BST
+
 ## <a name="size">int size(Node x)</a>
 <b>Description</b> : Returns number of nodes in left subtree of node x + number of nodes in right subtree of x  + 1 as total size. </br>Empty node will is default to size = 0 </br>
 <b>Parameters</b> : Node x - the node of interest</br>
