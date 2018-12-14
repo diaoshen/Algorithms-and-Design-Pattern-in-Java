@@ -17,7 +17,7 @@
 Formula : x.left.nField + x.right.nField + 1
 
 
-## <a name="size">int size(Node x)</a>
-<b>Description</b> : Returns number of nodes in left subtree of node x + number of nodes in right subtree of x  + 1 as total size. </br>Empty node will is default to size = 0 </br>
-<b>Parameters</b> : Node x - the node of interest</br>
-<b>Return</b> : Number of nodes in x's subtree plus node x
+## <a name="min">Key min()</a>
+<b>Description</b> : Returns the minimum key in BST
+</br><b>Parameters</b> : NONE
+</br><b>Return</b> : Minimum key in BST
