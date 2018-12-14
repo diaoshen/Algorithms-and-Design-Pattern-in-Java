@@ -21,9 +21,9 @@
 
 * [void delete(Key key)](#del) - Remove a key/value pair given key
 
-* [void deleteMin()(#delMin) - Removes the minimum key from BST
+* [void deleteMin()](#delMin) - Removes the minimum key from BST
 
-* [void deleteMax()(#delMax) - Removes the maximum key from BST
+* [void deleteMax()](#delMax) - Removes the maximum key from BST
 
 ## <a name="size">int size(Node x)</a>
 <b>Description</b> : Returns number of nodes in left subtree of node x + number of nodes in right subtree of x  + 1 as total size. </br>Empty node will is default to size = 0 </br>
@@ -61,5 +61,15 @@ Formula : x.left.nField + x.right.nField + 1
 ## <a name="del">void delete(Key key)</a>
 <b>Description</b> : traverse BST to target and deletes it from BST , if target has left and right child then target's successor is used to replace target.
 </br><b>Parameters</b> : Key key - target key 
+</br><b>Return</b> : NONE
+
+## <a name="delMin">void deleteMin()</a>
+<b>Description</b> : Deletes the minimum key in BST
+</br><b>Parameters</b> : NONE
+</br><b>Return</b> : NONE
+
+## <a name="delMax">void deleteMax()</a>
+<b>Description</b> : Deletes the maximum key in BST
+</br><b>Parameters</b> : NONE
 </br><b>Return</b> : NONE
 
