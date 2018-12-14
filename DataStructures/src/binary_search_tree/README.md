@@ -1,6 +1,7 @@
 # Table of Contents
+---
 
-##<a name="size">Size(Node x)</a>
+## <a name="size">Size(Node x)</a>
 Param : Node x
 Return : Number of nodes in x's subtree.
 
