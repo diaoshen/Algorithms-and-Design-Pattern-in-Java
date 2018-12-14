@@ -1,4 +1,6 @@
 # Table of Contents
+
+*[int size(Node x)](#size)
 ---
 
 ## <a name="size">int size(Node x)</a>
