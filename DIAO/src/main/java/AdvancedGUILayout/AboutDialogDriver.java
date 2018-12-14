@@ -1,7 +1,5 @@
 package AdvancedGUILayout;
 
-import java.awt.*;
-
 import AdvancedGUILayout.AboutDialog;
 
 

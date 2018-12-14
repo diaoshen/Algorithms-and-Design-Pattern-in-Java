@@ -13,6 +13,7 @@ public class Graph {
 	/*
 	 * Constructor : create a V-vertex graph with no edges
 	 */
+	@SuppressWarnings("unchecked")
 	public Graph(int V) {
 		this.V = V;
 		this.E = 0;
@@ -59,7 +60,7 @@ public class Graph {
 	 */
 	public static int degree(Graph G, int v) {
 		int degree = 0;
-		for(int w : G.neighbor(v)) {
+		for(@SuppressWarnings("unused") int w : G.neighbor(v)) {
 			degree++;
 		}
 		return degree;

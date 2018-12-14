@@ -10,7 +10,11 @@ import javax.swing.*;
  */
 public class ScrollFrame extends JFrame implements ActionListener
 {
-    Container       contentPane;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	Container       contentPane;
     ButtonGroup     group;
     JRadioButton    automobilesCB, planesCB, trainsCB;
     JLabel          titleLabel;

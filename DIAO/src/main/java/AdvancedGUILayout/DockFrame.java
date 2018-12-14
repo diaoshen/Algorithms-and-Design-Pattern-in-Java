@@ -11,7 +11,11 @@ import javax.swing.*;
  */
 public class DockFrame extends JFrame implements ActionListener
 {
-    Container      contentPane;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	Container      contentPane;
     JButton        cancelButton, okButton;
     JLabel         titleLabel;
     JTextArea      messageArea;

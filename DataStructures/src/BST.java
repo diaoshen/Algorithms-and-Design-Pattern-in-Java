@@ -1,9 +1,17 @@
 
 /*
- * Binary Search Tree
+ * Binary Search Tree V1
+ * 
  * 
  * Best case : perfectly balanced with ~log N nodes between root and each null link.
- * Worst case : tree looks like a linked-list
+ * Worst case : tree looks like a linked-list O(n)
+ * 
+ * This version of BST uses : 
+ * 
+ * 2 generic type   Key and Value
+ * generic type "Key" extends Comparable so compareTo() can be used for different type of Key
+ * There is a nfield attach to every node. nField of a node x = # of nodes in left n right subtree + 1
+ * 
  */
 
 /*
@@ -26,8 +34,9 @@
 
 public class BST <Key extends Comparable<Key> , Value>{
 	
-	private Node root;  				//ROOT of BST
-	
+	/*
+	 * Definition of a Node
+	 */
 	private class Node {
 		
 		private Key key; 				// key
@@ -37,6 +46,8 @@ public class BST <Key extends Comparable<Key> , Value>{
 
 		/*
 		 * Constructor to create a node
+		 * 
+		 * Construct a node with input key,val,nField
 		 */
 		public Node(Key key, Value val, int nField) {
 			this.key = key;
@@ -44,6 +55,10 @@ public class BST <Key extends Comparable<Key> , Value>{
 			this.nField = nField;
 		}
 	} //END NODE CLASS
+			
+	
+	private Node root;  				//ROOT of BST
+		
 		
 	/*
 	 * Operation Implementations : 
@@ -52,6 +67,9 @@ public class BST <Key extends Comparable<Key> , Value>{
 	
 		/*
 		 * Returns total number of nodes
+		 * 
+		 * total number of nodes of node x = # nodes in left subtree + # nodes in right subtree + this node itself		
+		 * 
 		 */
 		public int size() {
 			return size(root);
@@ -155,11 +173,11 @@ public class BST <Key extends Comparable<Key> , Value>{
 				return new Node(key , val , 1);
 			}
 			int cmp = key.compareTo(x.key);
-			if(cmp < 0) {
+			if(cmp < 0) { // key < current node's key , go left
 				x.left = add(x.left , key , val);
-			}else if(cmp > 0) {
+			}else if(cmp > 0) { // key > current node's key , go right
 				x.right = add(x.right , key , val);
-			}else {
+			}else {	// key == current node's key , key trying to add already exist , update val
 				x.val = val;
 			}
 			x.nField = size(x.left) + size(x.right) + 1; 		//Update n Field

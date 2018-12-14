@@ -16,6 +16,14 @@ public class AboutDialog extends    JDialog
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+
+
+	/**
      * Constructor
      */
     public AboutDialog(Frame owner, String name, String description)

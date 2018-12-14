@@ -1,10 +1,7 @@
 package AdvancedGUILayout;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.text.*;
 
 /**
  * A frame that illustrates the use of a JTabbedPane.
@@ -18,6 +15,11 @@ public class JTabbedPaneFrame extends JFrame
 
     
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Default constructor
      */
     public JTabbedPaneFrame()

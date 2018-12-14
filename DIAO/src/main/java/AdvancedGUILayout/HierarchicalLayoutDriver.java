@@ -1,8 +1,5 @@
 package AdvancedGUILayout;
 
-import java.awt.*;
-import javax.swing.*;
-
 
 /**
  * An example that uses hierarchical layout

@@ -1,5 +1,4 @@
 package AdvancedGUILayout;
-import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -12,13 +11,18 @@ public class CloseableFrame extends    JFrame
 
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
      * Construct a new CloseableFrame
      */
     public CloseableFrame()
     {
         super();
         ImageIcon   icon;
-        String      lookAndFeel;
+        @SuppressWarnings("unused")
+		String      lookAndFeel;
         
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);        
 

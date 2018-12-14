@@ -19,6 +19,10 @@ import javax.swing.*;
  *  
  */
 public class HierarchicalLayoutFrame extends JFrame implements ActionListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Container contentPane;
 	JButton cancelButton, noButton, yesButton;
 	JLabel titleLabel;
