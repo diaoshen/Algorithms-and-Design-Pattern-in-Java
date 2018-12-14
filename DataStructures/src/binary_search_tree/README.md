@@ -1,4 +1,9 @@
 # Table of Contents
+## <a name=""></a>
+<b>Description</b> :
+</br><b>Parameters</b> : 
+</br><b>Return</b> : 
+
 
 * [int size(Node x)](#size) - Returns size of node x
 
@@ -18,6 +23,17 @@ Formula : x.left.nField + x.right.nField + 1
 
 
 ## <a name="min">Key min()</a>
-<b>Description</b> : Returns the minimum key in BST
+<b>Description</b> : Returns the minimum key in BST by recursively go left subtree until a null node is reached.
 </br><b>Parameters</b> : NONE
 </br><b>Return</b> : Minimum key in BST
+
+## <a name="max">Key max()</a>
+<b>Description</b> : Returns the maximum key in BST by recursively go right subtree until a null node is reached.
+</br><b>Parameters</b> : NONE
+</br><b>Return</b> : Maximum key in BST
+
+## <a name="empty">boolean isEmpty()</a>
+<b>Description</b> : Check if a BST is empty by calling size() passing root as arg.  If size() returns 0 then tree is empty.
+</br><b>Parameters</b> : NONE
+</br><b>Return</b> : True if tree is empty , False if not empty.
+
