@@ -5,6 +5,10 @@
 </br><b>Return</b> : 
 
 
+<ul>
+	<a href="#size"</a><li>int size(Node x) </li> - Returns size of node x 
+</ul>
+
 * [int size(Node x)](#size) - Returns size of node x
 
 * [Key min()](#min) - Returns minimum key in tree
