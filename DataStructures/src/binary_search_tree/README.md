@@ -15,6 +15,8 @@
 * [boolean isEmpty()](#empty) - Returns true if tree is empty , false otherwise
 
 * [boolean contains(Key key)](#contain) - Returns true if given key is in BST , false otherwise
+
+* [int getHeight()](#height) - Returns height of BST 
 ---
 
 * [void add(Key key , Value val)](#add) - Adds a node to tree with given key and associated value
@@ -79,4 +81,9 @@ Formula : x.left.nField + x.right.nField + 1
 <b>Description</b> : Returns true if given key is in BST by calling get() passing key as param , false otherwise.
 </br><b>Parameters</b> : Key key - target key
 </br><b>Return</b> : True if target is in BST , False if target is not in BST
+
+## <a name="height">int getHeight()</a>
+<b>Description</b> : Returns height of a BST that is the longest path from root to a leaf node , Default height for empty tree is 0 , tree with only one node is 1. 
+</br><b>Parameters</b> : NONE
+</br><b>Return</b> : Height of BST as an INT
 
