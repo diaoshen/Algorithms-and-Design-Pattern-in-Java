@@ -17,6 +17,12 @@
 * [boolean contains(Key key)](#contain) - Returns true if given key is in BST , false otherwise
 
 * [int getHeight()](#height) - Returns height of BST 
+
+---
+* [Key floor(Key key)](#floor) - Returns smallest key <= input key
+
+* [Key ceiling(Key key)](#ceiling) - Returns largest key >= input key
+
 ---
 
 * [void add(Key key , Value val)](#add) - Adds a node to tree with given key and associated value
@@ -87,3 +93,24 @@ Formula : x.left.nField + x.right.nField + 1
 </br><b>Parameters</b> : NONE
 </br><b>Return</b> : Height of BST as an INT
 
+## <a name="floor">Key floor(Key)</a>
+<b>Description</b> : For a given key in BST , there is a list of number <= key. floor() will return the largest key in this list.
+In order words, floor() finds the largest key <= given key
+</br><b>Parameters</b> : Key key
+</br><b>Return</b> : Largest key smaller or equal to given key
+
+## <a name="ceiling">Key ceiling(Key)</a>
+<b>Description</b> : For a given key in BST , there is a list of number >= key. ceiling() will return the smallest key in this list
+In order words, ceiling() finds the smallest key >= given key
+</br><b>Parameters</b> : Key key
+</br><b>Return</b> : Smallest key larger or equal to given key
+
+## <a name="rank">void deleteMax()</a>
+<b>Description</b> : Deletes the maximum key in BST
+</br><b>Parameters</b> : NONE
+</br><b>Return</b> : NONE
+
+## <a name="select">void deleteMax()</a>
+<b>Description</b> : Deletes the maximum key in BST
+</br><b>Parameters</b> : NONE
+</br><b>Return</b> : NONE
