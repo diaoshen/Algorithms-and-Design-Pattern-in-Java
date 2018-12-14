@@ -9,6 +9,12 @@
 <b>Return</b> : Number of nodes in x's subtree plus node x
 
 Formula : x.left.nField + x.right.nField + 1
-  asd
-  asd
-  asd
+
+## <a name="c430"></a>CISP 430 - Data Structures  
+	A1:   
+	A2: implementation of a sequence  
+	A3: implementation of a sequence using a linked list  
+	A4: implementation of a priority queue using a linked list  
+	A5: a permutation-generating class which permutes a string  
+	A6:   
+	FINAL: code written for final exam ?, circular array  
