@@ -1,0 +1,13 @@
+Observer Design Pattern
+
+Generic Steps : 
+
+	1. Create interface "Subject" : that can add,remove,notify     listener/observer/subscriber 
+	2. The class of interest that needs to send stuff to listener need to implement interface " Subject " , this class contains a list of listeners
+	3. Create interface  "Observer" : that updates 
+	4. Create any listener/observer class and implement Observer
+	
+	
+Example : 
+	
+	1. 

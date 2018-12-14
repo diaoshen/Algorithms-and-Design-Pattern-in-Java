@@ -1,0 +1,29 @@
+Factory Design Pattern
+
+
+Generic Steps 
+	1. Create abstract product
+	2. Create each product that inherits abstract product
+	3. Create a factory that can create product and provide a method for outside to call to create product
+	4. Create factory object and call makeMeThisProduct(Product ID) 
+	
+	
+	KEY: Reason why factory class can create different product is because all product class is inherited from the abstract product. That means all product is actually a type of the
+	generic product.
+	
+	
+	
+Real Example
+ 
+	1. Craete abstract class EnemyShip
+	2. Create Product/Class  :   RocketEnemyShip , UFOEnemyShip   <-- Both class inherits EnemyShip , so is a EnemyShip Object
+	3. EnemyFactory with method makeEnemyShip(int shipType) : EnemyShip  <---- this method can create any Product class b/c all product is EnemyShip Object
+	
+	
+
+//FINAL WORDS: 
+
+It is really polymorphic behavior that enables the factory design pattern
+	
+	
+	

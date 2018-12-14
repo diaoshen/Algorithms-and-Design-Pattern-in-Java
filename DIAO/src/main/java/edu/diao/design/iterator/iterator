@@ -1,0 +1,37 @@
+Iterator Pattern
+
+
+/*
+ * General Steps for Iterator Pattern 
+ */
+ 
+ 1. Create item class
+ 2. Create class that can hold many of object of the item class
+ 3. Create interface iteratorMaker , so any class that uses this interface will have the function =  createIterator() 
+ 4. Create a iterator interface with methods that every iterator should have
+ 5. Create the actual iterator that can traverse the actual collection used in step 2.
+ 
+ 6. Step 1 and 2 and 3 is kind of together
+ 7. Steps 4 and 5 is linked
+
+
+/*
+	Actual Example of Steps 1-
+	
+ 1. Create class "Notification"
+ 2. Create class "NotificationCollection" and implements interface Collection
+ 3. Create interface "Collection" with method Iterator createIterator()
+ 4. Create interface "Iterator" with method hasNext() : bool  &  next() : Object
+ 5. Create class "NotificationIterator" implements Iterator
+ 
+ 
+ //Overall it could be understand as this ..
+ 
+ 
+ 1. Make a object class
+ 2. Make a class that holds collection of this object class.. the collections used can be ArrayList of object , Tree .. LinkedList , Array..
+    and this class have a method that generate iterator for traversal uses.
+ 3. Create interface Iterator and real iterator that inherit from Iterator ... and implement how to traverse....
+ 4. No Magic here really..
+ 
+
