@@ -2,7 +2,7 @@
 ---
 
 ## <a name="size">Size(Node x)</a>
-Param : Node x </br>
+Param : Node x.
 Return : Number of nodes in x's subtree.
 
 Formula : x.left.nField + x.right.nField + 1
