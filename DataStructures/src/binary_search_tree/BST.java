@@ -1,3 +1,4 @@
+package binary_search_tree;
 
 /*
  * Binary Search Tree V1
@@ -169,12 +170,22 @@ public class BST <Key extends Comparable<Key> , Value>{
 			 * 4. Else , Duplicate (Update val)
 			 * 
 			 */
-			if( x == null) {
+			
+			/*
+			 * Case 1 When going left or right result to end of tree , then create node and return this.
+			 * OR
+			 * Case 2 This is a empty BST , then create node and return this.
+			 */
+			if( x == null) { 
 				return new Node(key , val , 1);
 			}
+			/*
+			 * Key is a generic type , could be Int , String , Double
+			 * Because Key extends comparable , compareTo() knows what's the real data type of Key. 
+			 */
 			int cmp = key.compareTo(x.key);
 			if(cmp < 0) { // key < current node's key , go left
-				x.left = add(x.left , key , val);
+				x.left = add(x.left , key , val); //calling add will eventually reach to x==null and turns a new node to be attach to x.left
 			}else if(cmp > 0) { // key > current node's key , go right
 				x.right = add(x.right , key , val);
 			}else {	// key == current node's key , key trying to add already exist , update val
