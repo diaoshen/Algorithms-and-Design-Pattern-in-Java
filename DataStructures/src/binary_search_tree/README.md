@@ -13,6 +13,8 @@
 * [Key max()](#max) - Returns maximum key in tree
 
 * [boolean isEmpty()](#empty) - Returns true if tree is empty , false otherwise
+
+* [boolean contains(Key key)](#contain) - Returns true if given key is in BST , false otherwise
 ---
 
 * [void add(Key key , Value val)](#add) - Adds a node to tree with given key and associated value
@@ -72,4 +74,9 @@ Formula : x.left.nField + x.right.nField + 1
 <b>Description</b> : Deletes the maximum key in BST
 </br><b>Parameters</b> : NONE
 </br><b>Return</b> : NONE
+
+## <a name="contain">boolean contains(Key key)</a>
+<b>Description</b> : Returns true if given key is in BST by calling get() passing key as param , false otherwise.
+</br><b>Parameters</b> : Key key - target key
+</br><b>Return</b> : True if target is in BST , False if target is not in BST
 
