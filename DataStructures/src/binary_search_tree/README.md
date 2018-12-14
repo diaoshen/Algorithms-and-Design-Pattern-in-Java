@@ -45,17 +45,17 @@ Formula : x.left.nField + x.right.nField + 1
 </br><b>Return</b> : True if tree is empty , False if not empty.
 
 ## <a name="add">void add(Key key , Value val)</a>
-<b>Description</b> :
-</br><b>Parameters</b> : 
-</br><b>Return</b> : 
+<b>Description</b> : Recursively traverse BST to look for insertion spot then creates a new node with given key and value and attach to BST
+</br><b>Parameters</b> : Key key , Value val
+</br><b>Return</b> : NONE
 
 ## <a name="get">Value get(Key key)</a>
-<b>Description</b> :
-</br><b>Parameters</b> : 
-</br><b>Return</b> : 
+<b>Description</b> : Recursively traverse BST to look for insertion spot then return the target key's value
+</br><b>Parameters</b> : Key key - target key/node
+</br><b>Return</b> : Target key's value
 
 ## <a name="del">void delete(Key key)</a>
-<b>Description</b> :
-</br><b>Parameters</b> : 
-</br><b>Return</b> : 
+<b>Description</b> : traverse BST to target and deletes it from BST , if target has left and right child then target's successor is used to replace target.
+</br><b>Parameters</b> : Key key - target key 
+</br><b>Return</b> : NONE
 
