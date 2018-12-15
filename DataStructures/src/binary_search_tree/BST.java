@@ -210,7 +210,7 @@ public class BST <Key extends Comparable<Key> , Value>{
 			 */
 			
 			
-			if(node == null) return null; //Can only get here if passed in empty root or got a null node from going left or right
+			if(node == null) return null; //Can only get here if passed in empty root or got a null node from going left or right(search miss)
 			int cmp = key.compareTo(node.key);
 			if(cmp < 0) { // target key < current key , go left
 				node.left = delete(node.left,key);
@@ -247,7 +247,7 @@ public class BST <Key extends Comparable<Key> , Value>{
 				//Overall process is that when deleting node that has 2 child , first go to right subtree to find successor , remove it and put to head to replace deleted node.
 			}
 			node.nField = size(node.left) + size(node.right) + 1;
-			return node;
+			return node; // Returns tree with target node delete to whoever call me. that whoeever will link me.
 		}
 		
 		/*
