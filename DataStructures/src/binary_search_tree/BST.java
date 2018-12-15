@@ -321,6 +321,54 @@ public class BST <Key extends Comparable<Key> , Value>{
 			return x.key;
 		}
 		private Node floor(Node x , Key key) {
+			
+			/*
+			 * How floor works is that If floor(key) exists then it could be on the left. doing floor(x.left) will eventually return null or target
+			 * If during the recursion it went to right then floor(key) will return target only if target does exist on the right. Else the node before going to right is the floor.
+			 * 
+			 * floor basically looks where key can exists as if it is trying to add this key to BST.
+			 * 
+			 * 
+			 * 
+			 * If above is confusing. Take a look at example
+			 * 
+			 * Case 1:
+			 * 				S
+			 *            /   \
+			 *			E      X
+			 *		   / \
+			 *	     A    R
+			 * floor(A) would call these function in order : floor(S,A)->floor(E,A)->floor(A,A)->return A to floor(A,A)->floor(E,A)->floor(S,A)
+			 * 
+			 * Case 2:
+			 *  			S
+			 *            /   \
+			 *			E      X
+			 *		   / \
+			 *	     NULL    R
+			 *floor(A) = floor(S,A)->floor(E,A)->floor(NULL,A)-> then floor(NULL,A) returns NULL to floor(E,A)->floor(S,A)
+			 *
+			 *Case 3:
+			 * 				S
+			 *            /   \
+			 *			E      X
+			 *		   / \
+			 *	     A    R
+			 *			 / \
+			 *			H
+			 *		   / \
+			 *		null  M
+			 *floor(G)=floor(S,A)->floor(E,A) t=floor(R,G) -> floor(H,G) -> floor(NULL,G) returns NULL to floor(H,G)->floor(R,G)->t then since t == null
+			 *returns E to floor(S,A) , In this case H.left is null thus NULL recursively returns up and T will end up having value of null.
+			 *If H.left = G that is floor(G) was able to locate H then t would have become H and return value of floor(E,A) would be G.
+			 *
+			 *The reason why going to right need to check if T is null or not IS In order to need to go right that means current node is potentially 
+			 * the floor already in the example floor(G) , when reaching node E we know is going to right because if were to insert G. It must be 
+			 * going to right subtree of E.  E's right subtree can contain F, the next smallest key <= G or it can contain G itself.
+			 * 
+			 * ceiling works the same with compare sign flipped.
+			 */
+			
 			//floor of X doesn't exist
 			if(x == null) {
 				return null;
@@ -330,19 +378,17 @@ public class BST <Key extends Comparable<Key> , Value>{
 			if (cmp == 0) {
 				return x;
 			}
-			//search left side 
+			//search left side
 			if(cmp < 0) {
 				return floor(x.left,key);
 			}
 			//could be right side only if there exists a key <= key
-			//For example.. it went from root.left -> root.left.right
-			//When search from root.left.right , there could be a search hit or miss 
 			Node t = floor(x.right,key);
 			if(t != null) {
-				//search hit
+				//search hit , t is now floor(key)
 				return t;
 			}else {
-				return x; // search miss , so for above example, if root.left.right fails then floor must be at root.left
+				return x; // search miss , x is the floor(key)
 			}
 		}
 		
