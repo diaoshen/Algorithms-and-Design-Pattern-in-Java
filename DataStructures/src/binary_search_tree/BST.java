@@ -320,8 +320,7 @@ public class BST <Key extends Comparable<Key> , Value>{
 			if(x == null) return null;
 			return x.key;
 		}
-		private Node floor(Node x , Key key) {
-			
+		private Node floor(Node x , Key key) {			
 			/*
 			 * How floor works is that If floor(key) exists then it could be on the left. doing floor(x.left) will eventually return null or target
 			 * If during the recursion it went to right then floor(key) will return target only if target does exist on the right. Else the node before going to right is the floor.
