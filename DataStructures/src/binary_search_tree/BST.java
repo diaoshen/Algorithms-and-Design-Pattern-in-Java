@@ -19,19 +19,21 @@ package binary_search_tree;
  * Current Supported Operations
  * 
  * public int 		size() 						//Returns total # of nodes in BST
+ * public in		getHeight()					//Returns the height of BST
  * public Value 	get(Key key)				//Returns value of given key
  * public void 		add(Key key , Value val)  	//Adds a node to tree with given key and associated value
  * public void 		delete(Key key)				//Removes a key/value pair of a given key
+ * public void 		deleteMin()					//Removes the minimum key 
+ * public void 		deleteMax()					//Removes the maximum key
  * public Key		min()						//Returns minimum key in tree
  * public Key		max()						//Returns maximum key in tree
  * public Key 		floor(Key key)				//Returns largest key <= parameter key
  * public Key		ceiling(Key key)			//Returns smallest key >= parameter key
  * public boolean 	contains(Key key);			//Returns true if a value of a given key exists or not
  * public boolean 	isEmpty();					//Returns true if BST is empty , false otherwise
+ * public int 		Rank(Key key)				//Returns # of keys <= given key
+ * public Key 		Select(int key)				//Returns the kth element. 
  * 
- * TODO: 
- * RANK() ???
- * public Key select(int k)   SEE Module 6 , pg 21
  */
 
 public class BST <Key extends Comparable<Key> , Value>{
