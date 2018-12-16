@@ -437,7 +437,7 @@ public class BST <Key extends Comparable<Key> , Value>{
 			int cmp = key.compareTo(x.key);
 			if (cmp < 0) return rank(key, x.left);
 			else if (cmp > 0) return 1 + size(x.left) + rank(key, x.right);
-			else return size(x.left);
+			else return size(x.left); //Target found
 		}
 				
 		/*
