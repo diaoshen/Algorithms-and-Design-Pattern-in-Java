@@ -436,9 +436,10 @@ public class BST <Key extends Comparable<Key> , Value>{
 			return rank(key, root);
 		}
 		private int rank(Key key, Node x){
-		 // Return number of keys less than x.key in the subtree rooted at x.
+		 // Return number of keys less than x.key in the subtree rooted at x. Confused? See picture RANK.png for help.
+		 
 			if (x == null) return 0;
-			int cmp = key.compareTo(x.key);
+			int cmp = key.compareTo(x.key); //Uses compareTo to determine where can key be. Similar to add(key)
 			if (cmp < 0) return rank(key, x.left);
 			else if (cmp > 0) return 1 + size(x.left) + rank(key, x.right);
 			else return size(x.left); //Target found
