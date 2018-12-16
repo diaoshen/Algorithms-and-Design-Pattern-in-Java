@@ -345,7 +345,8 @@ public class BST <Key extends Comparable<Key> , Value>{
 					   / \
 					  E   X
 					 / \
-				  NULL  R 
+				 NULL   R
+					NULLR 
 			 floor(A) = floor(S,A)->floor(E,A)->floor(NULL,A)-> then floor(NULL,A) returns NULL to floor(E,A)->floor(S,A)
 			 
 			 
