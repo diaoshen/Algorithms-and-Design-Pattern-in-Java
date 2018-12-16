@@ -331,8 +331,8 @@ public class BST <Key extends Comparable<Key> , Value>{
 			 * 
 			 * If above is confusing. Take a look at example
 			 * 
-			 * Case 1:  
-			 * 			S
+			Case 1:  
+ 						S
 					   / \
 					  E   X
 					 / \
