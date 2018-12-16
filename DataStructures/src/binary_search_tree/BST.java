@@ -331,8 +331,8 @@ public class BST <Key extends Comparable<Key> , Value>{
 			 * 
 			 * If above is confusing. Take a look at example
 			 * 
-			Case 1:  
- 						S
+			 * Case 1:  
+ 					    S
 					   / \
 					  E   X
 					 / \
@@ -340,23 +340,23 @@ public class BST <Key extends Comparable<Key> , Value>{
 			 * floor(A) would call these function in order : floor(S,A)->floor(E,A)->floor(A,A)->return A to floor(A,A)->floor(E,A)->floor(S,A)
 			 * 
 			 * Case 2:
-			 *  			S
+			 *  		S
 			 *            /   \
-			 *			E      X
-			 *		   / \
-			 *	     NULL    R
+			 *	     E     X
+			 *		  / \
+			 *	      NULL   R
 			 *floor(A) = floor(S,A)->floor(E,A)->floor(NULL,A)-> then floor(NULL,A) returns NULL to floor(E,A)->floor(S,A)
 			 *
 			 *Case 3:
-			 * 				S
+			 * 		S
 			 *            /   \
-			 *			E      X
+			 *	     E      X
 			 *		   / \
 			 *	     A    R
-			 *			 / \
-			 *			H
-			 *		   / \
-			 *		null  M
+			 *		 / \
+			 *		H
+			 *	       / \
+			 *	     null  M
 			 *floor(G)=floor(S,A)->floor(E,A) t=floor(R,G) -> floor(H,G) -> floor(NULL,G) returns NULL to floor(H,G)->floor(R,G)->t then since t == null
 			 *returns E to floor(S,A) , In this case H.left is null thus NULL recursively returns up and T will end up having value of null.
 			 *If H.left = G that is floor(G) was able to locate H then t would have become H and return value of floor(E,A) would be G.
