@@ -350,15 +350,17 @@ public class BST <Key extends Comparable<Key> , Value>{
 			 
 			 
 			 *Case 3:
-			  	   S
-			      / \
-			 	 E   X
-			    / \
-			   A   R
-			      / \
-			     H
-			 	/ \
-			 null  M
+			 	
+ 					    S
+					   / \
+					  E   X
+					 / \
+					A   R
+					   / \
+					  H
+					 / \
+					    M
+
 			     
 			 *floor(G)=floor(S,A)->floor(E,A) t=floor(R,G) -> floor(H,G) -> floor(NULL,G) returns NULL to floor(H,G)->floor(R,G)->t then since t == null
 			 *returns E to floor(S,A) , In this case H.left is null thus NULL recursively returns up and T will end up having value of null.
