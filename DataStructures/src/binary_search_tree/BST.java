@@ -137,6 +137,28 @@ public class BST <Key extends Comparable<Key> , Value>{
 		}
 		
 		/*
+		 * Returns kth largest (zero based key)
+		 */
+		public Key select2(int k) {
+			Node node = select(root,k);
+			if(node == null) {
+				return null;
+			}else {
+				return node.key;
+			}
+		}
+		private Node select2(Node node , int k) {
+			if(node == null) return null;
+			int t = size(node.right);
+			if(t > k)
+				return select2(node.right,k);
+			else if(t < k)
+				return select2(node.left, k-t-1);
+			else
+				return node;			
+		}
+		
+		/*
 		 * Returns height of a BST 
 		 * Height of a tree with single node is 0 
 		 * Height of a tree is the maximum height of left and right sub-tree plus 1
@@ -572,6 +594,9 @@ public class BST <Key extends Comparable<Key> , Value>{
 			bst.add("X", 1);
 			
 			bst.printSideWays();
+			
+			System.out.println(bst.rank2("A"));
+			System.out.println(bst.select2(bst.rank2("A")));
 			
 
 //			
