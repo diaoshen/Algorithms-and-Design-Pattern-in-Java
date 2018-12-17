@@ -37,6 +37,8 @@ import java.util.Queue;
  * public int 		Rank(Key key)				//Returns # of keys <= given key
  * public Key 		Select(int key)				//Returns the kth element. 
  * public void		printSideWays()				//Print tree side ways
+ * public double	getAverage(k)				//Returns average of k smallest key's value from a BST
+ * public void		printLevel()				//Prints BST level by level
  * 
  */
 
@@ -512,11 +514,10 @@ public class BST <Key extends Comparable<Key> , Value>{
 			System.out.println("");
 			return average/(double)k;
 		}
-		
-		
+				
 		
 		/*
-		 * TODO print level by level
+		 *  print level by level
 		 */
 		public void printLevel() {
 			printLevel(root);
