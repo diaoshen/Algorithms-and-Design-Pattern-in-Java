@@ -33,6 +33,7 @@ package binary_search_tree;
  * public boolean 	isEmpty();					//Returns true if BST is empty , false otherwise
  * public int 		Rank(Key key)				//Returns # of keys <= given key
  * public Key 		Select(int key)				//Returns the kth element. 
+ * public void		printSideWays()				//Print tree side ways
  * 
  */
 
@@ -62,11 +63,20 @@ public class BST <Key extends Comparable<Key> , Value>{
 			
 	
 	private Node root;  				//ROOT of BST
+	
+	/*
+	 * Constructor : Construct a Empty BST
+	 */
+	public BST() {
+		root = null;
+	}
+	
 		
 		
 	/*
 	 * Operation Implementations : 
 	 */
+		
 	
 	
 		/*
@@ -471,7 +481,36 @@ public class BST <Key extends Comparable<Key> , Value>{
 			return size() == 0;
 		}
 		
+		/*
+		 * Print tree sideways
+		 */
+		public void printSideWays() {
+			String indent = "";
+			printSideWays(root, indent);
+		}
+		private void printSideWays(Node x , String indent) {
+			if(x != null) {
+				String indent2 = indent + "  ";
+				printSideWays(x.right,indent2);
+				System.out.println(indent + x.key);			
+				printSideWays(x.left,indent2);	
+			}
+		}
+		
+		public static void main(String args[]) {
+			BST<String,Integer> bst = new BST<String, Integer>();
+			
+			bst.add("S", 1);
+			bst.add("E", 2);
+			bst.add("A", 1);
+			bst.add("C", 1);
+			bst.add("R", 1);
+			bst.add("H", 1);
+			bst.add("M", 1);
+			bst.add("X", 1);
+			
+			bst.printSideWays();
+		}
 		
 		
-	
 }//END Class BST
