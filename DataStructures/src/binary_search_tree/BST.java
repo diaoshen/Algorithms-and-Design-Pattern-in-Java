@@ -94,13 +94,24 @@ public class BST <Key extends Comparable<Key> , Value>{
 			}
 		}
 		private Node select(Node node, int k) {
+			/*
+			 * Example : finding select(3) means the key of rank(3) which is the key that has 3 element <= key
+			 * In other words.. find the key that there is 3 element <= this key. Equivalent saying find the 4th element because
+			 * there is 3 element before 4th element.
+			 * 
+			 * Algorithm basically checks if there is enough on the left to find rank(3) If a node's left subtree have t count of 6
+			 * then there is guarantee 6 elements smaller than this node. Thus compare 3 against node's left subtree is a good choice.
+			 * If node's left subtree doesn't have enough elements then It must go right and all the elements on the left subtree of the node
+			 * + the node itself is smaller than the target key we are looking for. Thus searching from the right subtree should search a rank of
+			 * k-t-1
+			 */
 			if(node == null) return null;
 			
 			int t = size(node.left);
-			if(t> k)
+			if(t> k) 
 				return select(node.left,k);
 			else if(t < k)
-				return select(node.right, k-t-1);
+				return select(node.right, k-t-1); 
 			else
 				return node;
 		}
@@ -438,10 +449,9 @@ public class BST <Key extends Comparable<Key> , Value>{
 			return rank(key, root);
 		}
 		private int rank(Key key, Node x){
-		 // Return number of keys less than x.key in the subtree rooted at x. Confused? See picture RANK.png for help.
-		 
+		 // Return number of keys less than x.key in the subtree rooted at x.
 			if (x == null) return 0;
-			int cmp = key.compareTo(x.key); //Uses compareTo to determine where can key be. Similar to add(key)
+			int cmp = key.compareTo(x.key);
 			if (cmp < 0) return rank(key, x.left);
 			else if (cmp > 0) return 1 + size(x.left) + rank(key, x.right);
 			else return size(x.left); //Target found
