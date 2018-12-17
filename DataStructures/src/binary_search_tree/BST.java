@@ -35,10 +35,15 @@ import java.util.Queue;
  * public boolean 	contains(Key key);			//Returns true if a value of a given key exists or not
  * public boolean 	isEmpty();					//Returns true if BST is empty , false otherwise
  * public int 		Rank(Key key)				//Returns # of keys <= given key
- * public Key 		Select(int key)				//Returns the kth element. 
+ * public Key 		Select(int k)				//Returns the kth smallest element. 
  * public void		printSideWays()				//Print tree side ways
- * public double	getAverage(k)				//Returns average of k smallest key's value from a BST
+ * public double	getAverage(int k)			//Returns average of k smallest key's value from a BST
  * public void		printLevel()				//Prints BST level by level
+ * 
+ * TODO
+ * public int		Rank2()						//Returns # of keys >= given key
+ * public Key		select2(int k)				//Returns the kth largest element
+ * public double 	getAverage2(int k)			//Returns average of k largest key's value from BST
  * 
  */
 
@@ -98,7 +103,7 @@ public class BST <Key extends Comparable<Key> , Value>{
 		}
 		
 		/*
-		 * Returns kth (zero based) key
+		 * Returns kth smallest (zero based) key
 		 */
 		public Key select(int k) {
 			Node node = select(root,k);
@@ -471,6 +476,20 @@ public class BST <Key extends Comparable<Key> , Value>{
 			else if (cmp > 0) return 1 + size(x.left) + rank(key, x.right);
 			else return size(x.left); //Target found
 		}
+		
+		/*
+		 * Returns # of keys >= key
+		 */
+		public int rank2(Key key) {
+			return rank2(key,root);
+		}
+		private int rank2(Key key, Node x) {
+			if(x == null) return 0;
+			int cmp = key.compareTo(x.key);
+			if(cmp < 0) return 1 + size(x.right) + rank2(key,x.left);
+			else if(cmp > 0) return rank2(key,x.right);
+			else return size(x.right);
+		}
 				
 		/*
 		 * Returns true if there is a value paired for given key , false otherwise
@@ -541,9 +560,9 @@ public class BST <Key extends Comparable<Key> , Value>{
 		
 		
 		public static void main(String args[]) {
-			BST<Integer,Integer> bst = new BST<Integer, Integer>();
+			BST<String,Integer> bst = new BST<String, Integer>();
 			
-/*			bst.add("S", 1);
+			bst.add("S", 1);
 			bst.add("E", 2);
 			bst.add("A", 1);
 			bst.add("C", 1);
@@ -554,11 +573,13 @@ public class BST <Key extends Comparable<Key> , Value>{
 			
 			bst.printSideWays();
 			
-			for(int i = 0 ; i < bst.size(); i++) {
-				System.out.print(bst.select(i) + ",");
-			}*/
+
+//			
+//			for(int i = 0 ; i < bst.size(); i++) {
+//				System.out.print(bst.select(i) + ",");
+//			}
 			
-			bst.add(44, 44);
+/*			bst.add(44, 44);
 			bst.add(14, 14);
 			bst.add(6, 6);
 			bst.add(30, 30);
@@ -567,13 +588,13 @@ public class BST <Key extends Comparable<Key> , Value>{
 			bst.add(57, 57);
 			bst.add(55, 55);
 			bst.add(65, 65);
-			bst.add(51, 51);
+			bst.add(51, 51);*/
 			
 			//bst.printSideWays();
 			
-			System.out.println(bst.getAverage(4));
+		//	System.out.println(bst.getAverage(4));
 			
-			bst.printLevel();
+		//	bst.printLevel();
 		}
 		
 		
