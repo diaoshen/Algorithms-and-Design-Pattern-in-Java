@@ -593,6 +593,21 @@ public class BST <Key extends Comparable<Key> , Value>{
 			}
 		}
 		
+		/*
+		 * Print in order A-Z
+		 */
+		public void printInOrder() {
+			printInOrder(root);
+			System.out.println();
+		}
+		private void printInOrder(Node x) {
+			if(x != null) {
+				printInOrder(x.left);
+				System.out.print(x.key + ",");
+				printInOrder(x.right);
+			}
+		}
+		
 		
 		public static void main(String args[]) {
 //			BST<String,Integer> bst = new BST<String, Integer>();
@@ -641,7 +656,7 @@ BST<String,Integer> bst = new BST<String,Integer>();
 
 			bst.add("44", 44);
 			bst.add("14", 14);
-			bst.add("6", 6);
+			bst.add("06", 6);
 			bst.add("30", 30);
 			bst.add("36", 36);
 			bst.add("32", 32);
@@ -652,9 +667,12 @@ BST<String,Integer> bst = new BST<String,Integer>();
 			
 			
 			
-			//bst.printSideWays();
+			bst.printSideWays();
+			System.out.println();
+			bst.printInOrder();
 			
-		//	System.out.println(bst.getAverage(4));
+			
+			System.out.println(bst.getAverage(4));
 			
 		//	bst.printLevel();
 		}
