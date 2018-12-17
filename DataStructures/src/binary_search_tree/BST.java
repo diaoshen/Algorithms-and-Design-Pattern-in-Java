@@ -610,71 +610,61 @@ public class BST <Key extends Comparable<Key> , Value>{
 		
 		
 		public static void main(String args[]) {
-//			BST<String,Integer> bst = new BST<String, Integer>();
+			BST<String,Integer> bst = new BST<String, Integer>();
 			
-//			bst.add("S", 1);
-//			bst.add("E", 2);
-//			bst.add("A", 1);
-//			bst.add("C", 1);
-//			bst.add("R", 1);
-//			bst.add("H", 1);
-//			bst.add("M", 1);
-//			bst.add("X", 1);
-//			
-//			bst.printSideWays();
-//			
-//
-//		//	System.out.println(bst.select2(7));
-//			
-//
-//			for(int i = bst.size()-1 ; i >= 0; i--) {
-//				System.out.print(i + ",");
-//			}
-//			System.out.println("");
-//			for(int i = 0 ; i < bst.size(); i++) {
-//				System.out.print(bst.select(i) + ",");
-//			}
-//			System.out.println("");
-//			System.out.println("Rank(A) = " + bst.rank2("M"));
-//			System.out.println("Select(7) = " + bst.select2(3));
-//	
+			bst.add("S", 1);
+			bst.add("E", 2);
+			bst.add("A", 1);
+			bst.add("C", 1);
+			bst.add("R", 1);
+			bst.add("H", 1);
+			bst.add("M", 1);
+			bst.add("X", 1);
+			
+			bst.printSideWays();
+			
+			
+
+			for(int i = bst.size()-1 ; i >= 0; i--) {
+				System.out.print(i + ",");
+			}
+			System.out.println("");
+			for(int i = 0 ; i < bst.size(); i++) {
+				System.out.print(bst.select(i) + ",");
+			}
+			System.out.println("");
+			System.out.println("Rank(H) = " + bst.rank2("H"));
+			System.out.println("Select(4) = " + bst.select2(4));
+	
 			
 			
 			
 //TEST CASE 2
-BST<String,Integer> bst = new BST<String,Integer>();
-//			bst.add(44, 44);
-//			bst.add(14, 14);
-//			bst.add(6, 6);
-//			bst.add(30, 30);
-//			bst.add(36, 36);
-//			bst.add(32, 32);
-//			bst.add(57, 57);
-//			bst.add(55, 55);
-//			bst.add(65, 65);
-//			bst.add(51, 51);
+//BST<String,Integer> bst = new BST<String,Integer>();
 
-			bst.add("44", 44);
-			bst.add("14", 14);
-			bst.add("06", 6);
-			bst.add("30", 30);
-			bst.add("36", 36);
-			bst.add("32", 32);
-			bst.add("57", 57);
-			bst.add("55", 55);
-			bst.add("65", 65);
-			bst.add("51", 51);
-			
-			
-			
-			bst.printSideWays();
-			System.out.println();
-			bst.printInOrder();
-			
-			
-			System.out.println(bst.getAverage(4));
-			
-		//	bst.printLevel();
+
+//			bst.add("44", 44);
+//			bst.add("14", 14);
+//			bst.add("06", 6);
+//			bst.add("30", 30);
+//			bst.add("36", 36);
+//			bst.add("32", 32);
+//			bst.add("57", 57);
+//			bst.add("55", 55);
+//			bst.add("65", 65);
+//			bst.add("51", 51);
+//			
+//			
+//			
+//			bst.printSideWays();
+//			System.out.print("In Order = ");
+//			bst.printInOrder();
+//			System.out.println();
+//			
+//			System.out.println("Average of lowest 4");
+//			System.out.println(bst.getAverage(4));
+//			System.out.println("Average of highest 4");
+//			System.out.println(bst.getAverage2(4));
 		}
 		
 		
