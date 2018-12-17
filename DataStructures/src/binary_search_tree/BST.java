@@ -140,7 +140,7 @@ public class BST <Key extends Comparable<Key> , Value>{
 		 * Returns kth largest (zero based key)
 		 */
 		public Key select2(int k) {
-			Node node = select(root,k);
+			Node node = select2(root,k);
 			if(node == null) {
 				return null;
 			}else {
@@ -595,14 +595,20 @@ public class BST <Key extends Comparable<Key> , Value>{
 			
 			bst.printSideWays();
 			
-			System.out.println(bst.rank2("A"));
-			System.out.println(bst.select2(bst.rank2("A")));
+
+		//	System.out.println(bst.select2(7));
 			
 
-//			
-//			for(int i = 0 ; i < bst.size(); i++) {
-//				System.out.print(bst.select(i) + ",");
-//			}
+			for(int i = bst.size()-1 ; i >= 0; i--) {
+				System.out.print(i + ",");
+			}
+			System.out.println("");
+			for(int i = 0 ; i < bst.size(); i++) {
+				System.out.print(bst.select(i) + ",");
+			}
+			System.out.println("");
+			System.out.println("Rank(A) = " + bst.rank2("M"));
+			System.out.println("Select(7) = " + bst.select2(3));
 			
 /*			bst.add(44, 44);
 			bst.add(14, 14);
