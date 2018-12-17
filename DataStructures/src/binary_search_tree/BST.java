@@ -628,13 +628,30 @@ public class BST <Key extends Comparable<Key> , Value>{
 			for(int i = bst.size()-1 ; i >= 0; i--) {
 				System.out.print(i + ",");
 			}
-			System.out.println("");
+			System.out.println();
 			for(int i = 0 ; i < bst.size(); i++) {
 				System.out.print(bst.select(i) + ",");
 			}
-			System.out.println("");
+			System.out.println();
 			System.out.println("Rank(H) = " + bst.rank2("H"));
 			System.out.println("Select(4) = " + bst.select2(4));
+			
+			
+			System.out.println();
+			
+			
+			
+			for(int i = 0 ; i< bst.size(); i++) {
+				System.out.print(i + ",");
+			}
+			System.out.println();
+			for(int i = 0 ; i < bst.size(); i++) {
+				System.out.print(bst.select2(i) + ",");
+			}
+			System.out.println();
+			System.out.println("Rank(H) = " + bst.rank2("H"));
+			System.out.println("Select(4) = " + bst.select2(4));
+			
 	
 			
 			
