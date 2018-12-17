@@ -1,4 +1,5 @@
-# Table of Contents(Total supported operations = 18)
+# Table of Contents
+# Number of Supported Operations [18]
 ## <a name=""></a>
 <b>Description</b> :
 </br><b>Parameters</b> : 
