@@ -19,6 +19,12 @@
 * [int getHeight()](#height) - Returns height of BST 
 
 ---
+
+* [void printLevel()](#printlevel) - Prints tree level by level
+
+* [void printSideWays()](#printsideway) - Prints tree side ways
+
+---
 * [Key floor(Key key)](#floor) - Returns smallest key <= input key
 
 * [Key ceiling(Key key)](#ceiling) - Returns largest key >= input key
@@ -26,6 +32,8 @@
 * [int rank(Key key)](#rank) - Returns # of keys <= given key
 
 * [Key select(int k)](#select) - Returns kth key (zero based)
+
+* [double getAverage(int k)](#avg) - Returns average of k smallest element's key from BST
 
 ---
 
@@ -97,6 +105,16 @@ Formula : x.left.nField + x.right.nField + 1
 </br><b>Parameters</b> : NONE
 </br><b>Return</b> : Height of BST as an INT
 
+## <a name="printlevel">void printLevel()</a>
+<b>Description</b> : Prints BST level by level starting at level/row = root  , ending at last leaf row
+</br><b>Parameters</b> : NONE
+</br><b>Return</b> : SEE ABOVE.
+
+## <a name="printsideway">void printSideWays()</a>
+<b>Description</b> : Prints BST side ways
+</br><b>Parameters</b> : NONE
+</br><b>Return</b> : NONE
+
 ## <a name="floor">Key floor(Key)</a>
 <b>Description</b> : For a given key in BST , there is a list of number <= key. floor() will return the largest key in this list.
 In order words, floor() finds the largest key <= given key
@@ -110,7 +128,8 @@ In order words, ceiling() finds the smallest key >= given key
 </br><b>Return</b> : Smallest key larger or equal to given key
 
 ## <a name="rank">int rank(Key key)</a>
-<b>Description</b> : Finds how many key <= given key
+<b>Description</b> : Finds how many key <= given key 
+NOTE: If all nodes in BST are sorted in list then key will be at position rank(key). In other words int n = rank(k) , n is the nth key in the BST
 </br><b>Parameters</b> : Key key
 </br><b>Return</b> : # of keys smaller than or equal to input key
 
@@ -118,3 +137,8 @@ In order words, ceiling() finds the smallest key >= given key
 <b>Description</b> : Finds the kth key in BST starting from 0th
 </br><b>Parameters</b> : int k - kth key of interest
 </br><b>Return</b> : kth key
+
+## <a name="avg">double getAverage(int k)</a>
+<b>Description</b> : Returns average of (0-k)
+</br><b>Parameters</b> : upper limit k
+</br><b>Return</b> : Returns average of (0-k)
