@@ -1,5 +1,8 @@
 package binary_search_tree;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /*
  * Binary Search Tree V1
  * 
@@ -497,10 +500,49 @@ public class BST <Key extends Comparable<Key> , Value>{
 			}
 		}
 		
-		public static void main(String args[]) {
-			BST<String,Integer> bst = new BST<String, Integer>();
+		/*
+		 * Returns average of k smallest elements' key from BST
+		 */
+		public double getAverage(int k) {
+			Integer average = 0;
+			for(int i = 0 ; i < k ; i++) {
+				average += (Integer)get(select(i));
+				System.out.print(get(select(i)) + ",");
+			}
+			System.out.println("");
+			return average/(double)k;
+		}
+		
+		
+		
+		/*
+		 * TODO print level by level
+		 */
+		public void printLevel() {
+			printLevel(root);
+		}
+		private void printLevel(Node x) {
+			if(x == null) return;
 			
-			bst.add("S", 1);
+			Queue<Node> queue = new LinkedList<Node>();
+			queue.add(x);
+			while(!queue.isEmpty()) {
+				Node curNode = queue.poll();
+				System.out.print(curNode.key + ",");
+				if(curNode.left != null) {
+					queue.add(curNode.left);
+				}
+				if(curNode.right != null) {
+					queue.add(curNode.right);
+				}
+			}
+		}
+		
+		
+		public static void main(String args[]) {
+			BST<Integer,Integer> bst = new BST<Integer, Integer>();
+			
+/*			bst.add("S", 1);
 			bst.add("E", 2);
 			bst.add("A", 1);
 			bst.add("C", 1);
@@ -510,6 +552,27 @@ public class BST <Key extends Comparable<Key> , Value>{
 			bst.add("X", 1);
 			
 			bst.printSideWays();
+			
+			for(int i = 0 ; i < bst.size(); i++) {
+				System.out.print(bst.select(i) + ",");
+			}*/
+			
+			bst.add(44, 44);
+			bst.add(14, 14);
+			bst.add(6, 6);
+			bst.add(30, 30);
+			bst.add(36, 36);
+			bst.add(32, 32);
+			bst.add(57, 57);
+			bst.add(55, 55);
+			bst.add(65, 65);
+			bst.add(51, 51);
+			
+			//bst.printSideWays();
+			
+			System.out.println(bst.getAverage(4));
+			
+			bst.printLevel();
 		}
 		
 		
