@@ -431,10 +431,10 @@ public class BST <Key extends Comparable<Key> , Value>{
 			}
 			//Search right side
 			if(cmp > 0) {
-				return floor(x.right,key);
+				return ceiling(x.right,key);
 			}
 			//It could also be at left side only if there is a key that's >= key 
-			Node t = floor(x.left,key);
+			Node t = ceiling(x.left,key);
 			if(t != null) {
 				return t;
 			}else {
