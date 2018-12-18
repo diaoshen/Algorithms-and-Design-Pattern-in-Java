@@ -30,7 +30,7 @@
 ---
 * [Key floor(Key key)](#key-floorkey) - Returns smallest key <= input key
 
-* [Key ceiling(Key key)](#key-ceilingkey-key) - Returns largest key >= input key
+* [Key ceiling(Key key)](#key-ceilingkey) - Returns largest key >= input key
 
 * [int rank(Key key)](#int-rankkey-key) - Returns # of keys <= given key
 
