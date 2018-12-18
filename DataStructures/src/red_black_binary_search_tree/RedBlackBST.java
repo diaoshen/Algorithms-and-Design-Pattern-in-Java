@@ -11,9 +11,11 @@ package red_black_binary_search_tree;
 /*
  * Current Supported Operations :
  * 
- * public 	int size()						//Returns total number of TreeNodes 
- * private	boolean isRed(TreeNode x)		//Returns true if a TreeNode is red , Default = BLACK
- * 
+ * public 	int 		size()						//Returns total number of TreeNodes 
+ * private	boolean 	isRed(TreeNode x)			//Returns true if a TreeNode is red , Default = BLACK
+ * private	TreeNode	rotateLeft(TreeNode h)		//Switch color between h and h.right and return h.right
+ * private 	TreeNode	rotateRight(TreeNode h)		//Switch color between h and h.left and return h.left
+ * private 	void		flipColors(TreeNode h)		//
  */
 
 
@@ -91,6 +93,22 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 		TreeNode x = h.right;
 		h.right = x.left;
 		x.left = h;
+		x.color = h.color;
+		x.n = h.n;
+		h.n = size(h.left) + size(h.right) + 1;
+		return x;
+	}
+	
+	/*
+	 * Right rotation
+	 */
+	private TreeNode rotateRight(TreeNode h) {
+		/*
+		 *Similar Steps to rotateLeft
+		 */
+		TreeNode x = h.left;
+		h.left = x.right;
+		x.right = h;
 		x.color = h.color;
 		x.n = h.n;
 		h.n = size(h.left) + size(h.right) + 1;
