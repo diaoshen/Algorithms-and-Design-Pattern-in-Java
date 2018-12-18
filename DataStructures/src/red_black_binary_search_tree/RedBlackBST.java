@@ -11,6 +11,8 @@ package red_black_binary_search_tree;
 /*
  * Current Supported Operations :
  * 
+ * public 	int size()						//Returns total number of TreeNodes 
+ * private	boolean isRed(TreeNode x)		//Returns true if a TreeNode is red , Default = BLACK
  * 
  */
 
@@ -24,7 +26,7 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 	 * Private members
 	 */
 	private static final boolean RED = true;
-	private static final boolean BLUE = false;
+	private static final boolean BLACK = false;
 	
 	private TreeNode root;
 	
@@ -47,6 +49,30 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 	}//END TREENODE CLASS
 	
 	
+	
+	/*
+	 * Operation Definitions : 
+	 */
+	
+	
+	
+	/*
+	 * Returns total number of nodes
+	 */
+	public int size() {
+		return size(root);
+	}
+	private int size(TreeNode x) {
+		return x == null ? 0 : x.n;
+	}
+	
+	/*
+	 * is a node red?  Default color of a null tree is BLACK=FALSE, Any newly created TreeNode is RED
+	 */
+	private boolean isRed(TreeNode x) {
+		if(x == null) return BLACK; 
+		return x.color = RED;
+	}
 	
 	
 	
