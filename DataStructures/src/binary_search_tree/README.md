@@ -28,7 +28,7 @@
 * [void printPostOrder()](#void-printpostorder) - Prints post-order traversal result
 
 ---
-* [Key floor(Key key)](#key-floorkey-key) - Returns smallest key <= input key
+* [Key floor(Key key)](#key-floorkey) - Returns smallest key <= input key
 
 * [Key ceiling(Key key)](#key-ceilingkey-key) - Returns largest key >= input key
 
