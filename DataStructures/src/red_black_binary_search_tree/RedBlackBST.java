@@ -4,6 +4,8 @@ package red_black_binary_search_tree;
  * Time created : 12/18/2018
  */
 
+import binary_search_tree.BST.Node;
+
 /*
  * RED-BLACK BINARY SEARCH TREE V1
  */
@@ -124,7 +126,65 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 		h.right.color = BLACK;
 	}
 	
-	
+	/*
+	 *  add key/value pair 
+	 */
+	public void add(Key key , Value val) {
+		root = add(root, key , val);
+		root.color = BLACK;
+	}
+	private TreeNode add(TreeNode currNode , Key key , Value val) {
+		
+		/*
+		 * Add  operation for the most part is same as regular BST
+		 * Difference is : all new TreeNode is RED and must check for balance after inserting.
+		 * 
+		 * 1. If no TreeNode exists, or Reached to Bottom(this new node should be a leaf)
+		 * 2. Else If , this node belongs to left branch
+		 * 3. Else if , this node belongs to right branch
+		 * 4. Else , Duplicate (Update val)
+		 * 
+		 */
+		
+		/*
+		 * Case 1 When going left or right result to end of tree , then create node and return this.
+		 * OR
+		 * Case 2 This is a empty BST , then create node and return this.
+		 */
+		if( currNode == null) { 
+			return new TreeNode(key , val , 1 , RED);
+		}		
+		/*
+		 * Key is a generic type , could be Int , String , Double
+		 * Because Key extends comparable , compareTo() knows what's the real data type of Key. 
+		 */
+		int cmp = key.compareTo(currNode.key);
+		if(cmp < 0) { // key < current node's key , go left
+			currNode.left = add(currNode.left , key , val); //calling add will eventually reach to x==null and turns a new node to be attach to x.left
+		}else if(cmp > 0) { // key > current node's key , go right
+			currNode.right = add(currNode.right , key , val);
+		}else {	// key == current node's key , key trying to add already exist , update val
+			currNode.val = val;
+		}
+		
+		//When done inserting.. Tree might be un-balanced, so perform below steps to balance tree
+		
+		//BLACK LEFT  , RED RIGHT    then should rotate LEFT
+		if(isRed(currNode.right) && !isRed(currNode.left)) {
+			currNode = rotateLeft(currNode);
+		}
+		//2 Left RED link in a row    then should rotate RIGHT
+		if(isRed(currNode.left) && isRed(currNode.left.left)) {
+			currNode = rotateRight(currNode);
+		}
+		//Color Flip
+		if(isRed(currNode.left) && isRed(currNode.right)) {
+			flipColors(currNode);
+		}
+		
+		currNode.n = size(currNode.left) + size(currNode.right) + 1;
+		return currNode; // This returns to possibly case 2,3,4 thus will perform balance check at each level		
+	}
 	
 	
 	
