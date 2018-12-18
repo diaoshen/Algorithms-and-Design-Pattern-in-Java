@@ -635,6 +635,30 @@ public class BST <Key extends Comparable<Key> , Value>{
 			printPostOrder(x.right);
 		}
 		
+		/*
+		 * Returns list of keys in the range x,y
+		 */
+		public Iterable<Key> range(Key x, Key y){
+			Queue<Key> queue = new LinkedList<Key>(); //Create queue to store range
+			range(root,queue,x,y);
+			return queue;
+		}
+		private void range(Node currNode, Queue<Key> queue , Key low, Key high) {
+			if(currNode == null) return;
+			int compareLow = low.compareTo(currNode.key); 
+			int compareHigh = high.compareTo(currNode.key);
+			if(compareLow < 0) { // currNode > low
+				range(currNode.left, queue, low , high);
+			}
+			// low <= currNode
+			if(compareLow <= 0 && compareHigh >= 0) {
+				queue.add(currNode.key);
+			}
+			if(compareHigh > 0) {
+				range(currNode.right,queue,low,high);
+			}
+		}
+		
 		public static void main(String args[]) {
 			BST<String,Integer> bst = new BST<String, Integer>();
 			
