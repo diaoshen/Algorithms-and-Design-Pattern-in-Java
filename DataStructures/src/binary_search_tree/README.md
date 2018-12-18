@@ -44,7 +44,6 @@
 
 * [void deleteMax()](#void-deletemax) - Removes the maximum key from BST
 
-# int-size-node-x
 ##int size(Node x)
 <b>Description</b> : Returns number of nodes in left subtree of node x + number of nodes in right subtree of x  + 1 as total size. </br>Empty node will is default to size = 0 </br>
 <b>Parameters</b> : Node x - the node of interest</br>
