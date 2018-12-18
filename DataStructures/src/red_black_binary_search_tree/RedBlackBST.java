@@ -18,6 +18,7 @@ import binary_search_tree.BST.Node;
  * private	TreeNode	rotateLeft(TreeNode h)		//Switch color between h and h.right and return h.right
  * private 	TreeNode	rotateRight(TreeNode h)		//Switch color between h and h.left and return h.left
  * private 	void		flipColors(TreeNode h)		//Change h to red  and childs of h to black
+ * public 	void		add(Key key , Value val)	//Add a key/value pair to BST
  */
 
 
