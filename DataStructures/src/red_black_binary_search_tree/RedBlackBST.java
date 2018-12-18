@@ -8,6 +8,9 @@ import binary_search_tree.BST.Node;
 
 /*
  * RED-BLACK BINARY SEARCH TREE V1
+ * 
+ * This version of RED-BLACK BST has a 1-1 mapping to 2-3 Tree
+ * 
  */
 
 /*
