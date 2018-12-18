@@ -28,29 +28,29 @@
 * [void printPostOrder()](#void-printpostorder) - Prints post-order traversal result
 
 ---
-* [Key floor(Key key)](#key-floor-key) - Returns smallest key <= input key
+* [Key floor(Key key)](#key-floorkey-key) - Returns smallest key <= input key
 
-* [Key ceiling(Key key)](#key-ceiling-key) - Returns largest key >= input key
+* [Key ceiling(Key key)](#key-ceilingkey-key) - Returns largest key >= input key
 
-* [int rank(Key key)](#int-rank-key-key) - Returns # of keys <= given key
+* [int rank(Key key)](#int-rankkey-key) - Returns # of keys <= given key
 
-* [int rank2(Key key)](#int-rank2-key-key) - Returns # of keys >= given key
+* [int rank2(Key key)](#int-rank2key-key) - Returns # of keys >= given key
 
-* [Key select(int k)](#key-select-int-k) - Returns kth  min key (zero based)
+* [Key select(int k)](#key-selectint-k) - Returns kth  min key (zero based)
 
-* [Key select2(int k)](#key-select2-int-k) - Returns kth max key (zero based)
+* [Key select2(int k)](#key-select2int-k) - Returns kth max key (zero based)
 
-* [double getAverage(int k)](#double-getaverage-int-k) - Returns average of k smallest element's key from BST
+* [double getAverage(int k)](#double-getaverageint-k) - Returns average of k smallest element's key from BST
 
-* [double getAverage2(int k)](#double-getaverage2-int-k) - Returns average of k largest element's key from BST
+* [double getAverage2(int k)](#double-getaverage2int-k) - Returns average of k largest element's key from BST
 
 ---
 
-* [void add(Key key , Value val)](#void-add-key-key-value-val) - Adds a node to tree with given key and associated value
+* [void add(Key key , Value val)](#void-addkey-key---val) - Adds a node to tree with given key and associated value
 
-* [Value get(Key key)](#value-get-key-key) - Returns the value of a given key
+* [Value get(Key key)](#value-getkey-key) - Returns the value of a given key
 
-* [void delete(Key key)](#void-delete-key-key) - Remove a key/value pair given key
+* [void delete(Key key)](#void-deletekey-key) - Remove a key/value pair given key
 
 * [void deleteMin()](#void-deletemin) - Removes the minimum key from BST
 
