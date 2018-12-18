@@ -46,7 +46,7 @@
 
 ---
 
-* [void add(Key key , Value val)](#void-addkey-key---val) - Adds a node to tree with given key and associated value
+* [void add(Key key , Value val)](#void-addkey-key--value-val) - Adds a node to tree with given key and associated value
 
 * [Value get(Key key)](#value-getkey-key) - Returns the value of a given key
 
