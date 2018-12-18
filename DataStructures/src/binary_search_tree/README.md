@@ -11,7 +11,7 @@
 
 * [boolean isEmpty()](#boolean-isempty) - Returns true if tree is empty , false otherwise
 
-* [boolean contains(Key key)](#boolean-contains-key-key) - Returns true if given key is in BST , false otherwise
+* [boolean contains(Key key)](#boolean-containskey-key) - Returns true if given key is in BST , false otherwise
 
 * [int getHeight()](#int-getheight) - Returns height of BST 
 
