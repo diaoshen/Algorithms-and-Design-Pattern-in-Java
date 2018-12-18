@@ -3,7 +3,7 @@
 
 
 
-* [int size(Node x)](#int-sizenode-x) - Returns size of node x
+* [int size(Node x)](#int-size-node-x) - Returns size of node x
 
 * [Key min()](#key-min) - Returns minimum key in tree
 
@@ -11,7 +11,7 @@
 
 * [boolean isEmpty()](#boolean-isempty) - Returns true if tree is empty , false otherwise
 
-* [boolean contains(Key key)](#boolean-containskey-key) - Returns true if given key is in BST , false otherwise
+* [boolean contains(Key key)](#boolean-contains-key-key) - Returns true if given key is in BST , false otherwise
 
 * [int getHeight()](#int-getheight) - Returns height of BST 
 
@@ -21,28 +21,35 @@
 
 * [void printSideWays()](#void-printsideways) - Prints tree side ways
 
----
-* [Key floor(Key key)](#key-floorkey) - Returns smallest key <= input key
+* [void printInOrder()](#void-printinorder) - Prints in-order traversal result
 
-* [Key ceiling(Key key)](#key-ceilingkey) - Returns largest key >= input key
+* [void printPreOrder()](#void-printpreorder) - Prints pre-order traversal result
 
-* [int rank(Key key)](#int-rankkey-key) - Returns # of keys <= given key
-
-* [Key select(int k)](#key-selectint-k) - Returns kth key (zero based)
-
-* [double getAverage(int k)](#double-getaverageint-k) - Returns average of k smallest element's key from BST
+* [void printPostOrder()](#void-printpostorder) - Prints post-order traversal result
 
 ---
+* [Key floor(Key key)](#key-floor-key) - Returns smallest key <= input key
 
-* [void add(Key key , Value val)](#void-addkey-key--value-val) - Adds a node to tree with given key and associated value
+* [Key ceiling(Key key)](#key-ceiling-key) - Returns largest key >= input key
 
-* [Value get(Key key)](#value-getkey-key) - Returns the value of a given key
+* [int rank(Key key)](#int-rank-key-key) - Returns # of keys <= given key
 
-* [void delete(Key key)](#void-deletekey-key) - Remove a key/value pair given key
+* [Key select(int k)](#key-select-int-k) - Returns kth key (zero based)
+
+* [double getAverage(int k)](#double-getaverage-int-k) - Returns average of k smallest element's key from BST
+
+---
+
+* [void add(Key key , Value val)](#void-add-key-key-value-val) - Adds a node to tree with given key and associated value
+
+* [Value get(Key key)](#value-get-key-key) - Returns the value of a given key
+
+* [void delete(Key key)](#void-delete-key-key) - Remove a key/value pair given key
 
 * [void deleteMin()](#void-deletemin) - Removes the minimum key from BST
 
 * [void deleteMax()](#void-deletemax) - Removes the maximum key from BST
+
 
 ## int size(Node x)
 <b>Description</b> : Returns number of nodes in left subtree of node x + number of nodes in right subtree of x  + 1 as total size. </br>Empty node will is default to size = 0 </br>
@@ -109,6 +116,21 @@ Formula : x.left.nField + x.right.nField + 1
 
 ## void printSideWays()
 <b>Description</b> : Prints BST side ways
+</br><b>Parameters</b> : NONE
+</br><b>Return</b> : NONE
+
+##void printInOrder()
+<b>Description</b> : Prints BST in order : Least to Greatest
+</br><b>Parameters</b> : NONE
+</br><b>Return</b> : NONE
+
+##void printPreOrder()
+<b>Description</b> : Prints BST in  pre order : To Print ME , all of Me's LEFT must be printed first then all of Me's RIGHT must be printed. (LEFT-RIGHT-ME)
+</br><b>Parameters</b> : NONE
+</br><b>Return</b> : NONE
+
+##void printPostOrder()
+<b>Description</b> : Prints BST in post order : Similar to pre-order , in-order. Post order prints ME first then my left and my right. (ME-LEFT-RIGHT)
 </br><b>Parameters</b> : NONE
 </br><b>Return</b> : NONE
 
