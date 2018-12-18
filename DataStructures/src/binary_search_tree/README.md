@@ -34,9 +34,15 @@
 
 * [int rank(Key key)](#int-rank-key-key) - Returns # of keys <= given key
 
-* [Key select(int k)](#key-select-int-k) - Returns kth key (zero based)
+* [int rank2(Key key)](#int-rank2-key-key) - Returns # of keys >= given key
+
+* [Key select(int k)](#key-select-int-k) - Returns kth  min key (zero based)
+
+* [Key select2(int k)](#key-select2-int-k) - Returns kth max key (zero based)
 
 * [double getAverage(int k)](#double-getaverage-int-k) - Returns average of k smallest element's key from BST
+
+* [double getAverage2(int k)](#double-getaverage2-int-k) - Returns average of k largest element's key from BST
 
 ---
 
@@ -148,16 +154,32 @@ In order words, ceiling() finds the smallest key >= given key
 
 ## int rank(Key key)
 <b>Description</b> : Finds how many key <= given key 
-NOTE: If all nodes in BST are sorted in list then key will be at position rank(key). In other words int n = rank(k) , n is the nth key in the BST
+NOTE: If all nodes in BST are sorted(A-Z) in list then key will be at position rank(key). In other words int n = rank(k) , n is the nth key in the BST
 </br><b>Parameters</b> : Key key
 </br><b>Return</b> : # of keys smaller than or equal to input key
 
+## int rank2(Key key)
+<b>Description</b> : Finds how many key >= given key 
+NOTE: If all nodes in BST are sorted(Z-A) in list then key will be at position rank(key). In other words int n = rank(k) , n is the nth key in the BST
+</br><b>Parameters</b> : Key key
+</br><b>Return</b> : # of keys larger than or equal to input key
+
 ## Key select(int k)
-<b>Description</b> : Finds the kth key in BST starting from 0th
+<b>Description</b> : Finds the kth min key in BST starting from 0th
+</br><b>Parameters</b> : int k - kth key of interest
+</br><b>Return</b> : kth key
+
+## Key select2(int k)
+<b>Description</b> : Finds the kth max key in BST starting from 0th
 </br><b>Parameters</b> : int k - kth key of interest
 </br><b>Return</b> : kth key
 
 ## double getAverage(int k)
-<b>Description</b> : Returns average of (0-k)
+<b>Description</b> : Returns average of 0th to kth min
 </br><b>Parameters</b> : upper limit k
-</br><b>Return</b> : Returns average of (0-k)
+</br><b>Return</b> : Returns average of (0-k) min
+
+## double getAverage2(int k)
+<b>Description</b> : Returns average of 0th to kth max
+</br><b>Parameters</b> : upper limit k
+</br><b>Return</b> : Returns average of (0-k) max
