@@ -288,7 +288,7 @@ public class BST <Key extends Comparable<Key> , Value>{
 				if(node.left == null) {
 					return node.right;
 				}
-				Node t = node;
+				Node t = node; //Save the node to be deleted to t
 				node = min(t.right); //Find successor = the smallest key in target key's right subtree and let node point to it
 				/*
 				 * calling deleteMin(t.right) will unlink successor in tree t.right and returns t.right
