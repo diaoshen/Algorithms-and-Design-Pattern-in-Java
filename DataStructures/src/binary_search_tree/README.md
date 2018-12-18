@@ -22,9 +22,9 @@
 * [void printSideWays()](#void-printsideways) - Prints tree side ways
 
 ---
-* [Key floor(Key key)](#key-floorkey-key) - Returns smallest key <= input key
+* [Key floor(Key key)](#key-floorkey) - Returns smallest key <= input key
 
-* [Key ceiling(Key key)](#key-ceilingkey-key) - Returns largest key >= input key
+* [Key ceiling(Key key)](#key-ceilingkey) - Returns largest key >= input key
 
 * [int rank(Key key)](#int-rankkey-key) - Returns # of keys <= given key
 
@@ -34,7 +34,7 @@
 
 ---
 
-* [void add(Key key , Value val)](#void-addkey-key-value-val) - Adds a node to tree with given key and associated value
+* [void add(Key key , Value val)](#void-addkey-key--value-val) - Adds a node to tree with given key and associated value
 
 * [Value get(Key key)](#value-getkey-key) - Returns the value of a given key
 
