@@ -3,7 +3,7 @@
 
 
 
-* [int size(Node x)](#int-sizenode-x) - Returns size of node x
+* [int size(Node x)](#int-size-node-x) - Returns size of node x
 
 * [Key min()](#key-min) - Returns minimum key in tree
 
