@@ -34,16 +34,18 @@ import java.util.Queue;
  * public Key		ceiling(Key key)			//Returns smallest key >= parameter key
  * public boolean 	contains(Key key);			//Returns true if a value of a given key exists or not
  * public boolean 	isEmpty();					//Returns true if BST is empty , false otherwise
- * public int 		Rank(Key key)				//Returns # of keys <= given key
- * public Key 		Select(int k)				//Returns the kth smallest element. 
+ * public int 		rank(Key key)				//Returns # of keys <= given key
+ * public int		rank2()						//Returns # of keys >= given key
+ * public Key 		select(int k)				//Returns the kth smallest element. 
+ * public Key		select2(int k)				//Returns the kth largest element
  * public void		printSideWays()				//Print tree side ways
  * public double	getAverage(int k)			//Returns average of k smallest key's value from a BST
- * public void		printLevel()				//Prints BST level by level
- * 
- * TODO
- * public int		Rank2()						//Returns # of keys >= given key
- * public Key		select2(int k)				//Returns the kth largest element
  * public double 	getAverage2(int k)			//Returns average of k largest key's value from BST
+ * public void		printLevel()				//Prints BST level by level
+ * public void		printInOrder()				//Prints BST in order A-Z = LEFT,ME,RIGHT
+ * public void		printPreOrder()				//Prints BST in Pre-order = LEFT,RIGHT,ME
+ * public void		printPostOrder()			//Prints BST in Post-order = ME,LEFT,RIGHT
+ * 
  * 
  */
 
@@ -569,7 +571,6 @@ public class BST <Key extends Comparable<Key> , Value>{
 			return average/(double)k;
 		}
 				
-		
 		/*
 		 *  print level by level
 		 */
@@ -608,6 +609,31 @@ public class BST <Key extends Comparable<Key> , Value>{
 			}
 		}
 		
+		/*
+		 * Print in pre-order = LEFT,RIGHT,ME
+		 */
+		public void printPreOrder() {
+			printPreOrder(root);
+			System.out.println();
+		}
+		private void printPreOrder(Node x) {
+			printPreOrder(x.left);
+			printPreOrder(x.right);
+			System.out.print(x.key + ",");
+		}
+		
+		/*
+		 * Print in post-order = ME,LEFT,RIGHT
+		 */
+		public void printPostOrder() {
+			printPostOrder(root);
+			System.out.println();
+		}
+		private void printPostOrder(Node x) {
+			System.out.print(x.key + ",");
+			printPostOrder(x.left);
+			printPostOrder(x.right);
+		}
 		
 		public static void main(String args[]) {
 			BST<String,Integer> bst = new BST<String, Integer>();
