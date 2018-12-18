@@ -74,7 +74,28 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 		return x.color = RED;
 	}
 	
-	
+	/*
+	 * Left Rotation
+	 */
+	private TreeNode rotateLeft(TreeNode h) {
+		/*
+		 * Input h is BLACK. h.right is RED , To switch them perform:
+		 * Steps : 
+		 * 1. Create a TreeNode and point to h.right(The RED Node)
+		 * 2. Connect H's right link to X's left link
+		 * 3. Connect X's left  link to H
+		 * 4. X is the new root so update colors by setting X's color to H's color
+		 * 5. H is now RED 
+		 * 6. update N Field
+		 */
+		TreeNode x = h.right;
+		h.right = x.left;
+		x.left = h;
+		x.color = h.color;
+		x.n = h.n;
+		h.n = size(h.left) + size(h.right) + 1;
+		return x;
+	}
 	
 	
 	
