@@ -119,17 +119,17 @@ Formula : x.left.nField + x.right.nField + 1
 </br><b>Parameters</b> : NONE
 </br><b>Return</b> : NONE
 
-##void printInOrder()
+## void printInOrder()
 <b>Description</b> : Prints BST in order : Least to Greatest
 </br><b>Parameters</b> : NONE
 </br><b>Return</b> : NONE
 
-##void printPreOrder()
+## void printPreOrder()
 <b>Description</b> : Prints BST in  pre order : To Print ME , all of Me's LEFT must be printed first then all of Me's RIGHT must be printed. (LEFT-RIGHT-ME)
 </br><b>Parameters</b> : NONE
 </br><b>Return</b> : NONE
 
-##void printPostOrder()
+## void printPostOrder()
 <b>Description</b> : Prints BST in post order : Similar to pre-order , in-order. Post order prints ME first then my left and my right. (ME-LEFT-RIGHT)
 </br><b>Parameters</b> : NONE
 </br><b>Return</b> : NONE
