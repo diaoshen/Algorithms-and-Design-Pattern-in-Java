@@ -15,7 +15,7 @@ package red_black_binary_search_tree;
  * private	boolean 	isRed(TreeNode x)			//Returns true if a TreeNode is red , Default = BLACK
  * private	TreeNode	rotateLeft(TreeNode h)		//Switch color between h and h.right and return h.right
  * private 	TreeNode	rotateRight(TreeNode h)		//Switch color between h and h.left and return h.left
- * private 	void		flipColors(TreeNode h)		//
+ * private 	void		flipColors(TreeNode h)		//Change h to red  and childs of h to black
  */
 
 
@@ -115,6 +115,14 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 		return x;
 	}
 	
+	/*
+	 * Color Flip
+	 */
+	private void flipColors(TreeNode h) {
+		h.color = RED;
+		h.left.color = BLACK;
+		h.right.color = BLACK;
+	}
 	
 	
 	
