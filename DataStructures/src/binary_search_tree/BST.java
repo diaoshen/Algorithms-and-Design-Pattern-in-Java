@@ -638,12 +638,27 @@ public class BST <Key extends Comparable<Key> , Value>{
 		/*
 		 * Returns list of keys in the range x,y
 		 */
+		public Iterable<Key> range(){
+			return range(min(),max());
+		}
 		public Iterable<Key> range(Key x, Key y){
 			Queue<Key> queue = new LinkedList<Key>(); //Create queue to store range
 			range(root,queue,x,y);
 			return queue;
 		}
 		private void range(Node currNode, Queue<Key> queue , Key low, Key high) {
+			/*
+			 * This is very similar to inOrder Traversal (LEFT,ME,RIGHT)
+			 * compareLow tells if "low" key can be found in currNode's left subtree
+			 * compareHigh tells if "high" key can be found in currNode's right subtree
+			 * 
+			 * If low possibly exists in left subtree , go left
+			 * If low possibly exists in left subtree and high possible exits in right subtree then currNode is in range.
+			 * OR currNode is LOW or HIGH then  add to queue
+			 * If high possibly exists in right subtree , go right
+			 * 
+			 * 
+			 */
 			if(currNode == null) return;
 			int compareLow = low.compareTo(currNode.key); 
 			int compareHigh = high.compareTo(currNode.key);
@@ -671,39 +686,53 @@ public class BST <Key extends Comparable<Key> , Value>{
 			bst.add("M", 1);
 			bst.add("X", 1);
 			
+			//Print tree sideways
 			bst.printSideWays();
 			
 			
-
-			for(int i = bst.size()-1 ; i >= 0; i--) {
+			//Code to test kth min
+			System.out.print("        Index : ");
+			for(int i = 0 ; i < bst.size(); i++) {
 				System.out.print(i + ",");
 			}
 			System.out.println();
+			System.out.print("Select[Index] : ");
 			for(int i = 0 ; i < bst.size(); i++) {
 				System.out.print(bst.select(i) + ",");
 			}
 			System.out.println();
-			System.out.println("Rank(H) = " + bst.rank2("H"));
-			System.out.println("Select(4) = " + bst.select2(4));
-			
+			System.out.println("Rank(H) = " + bst.rank("H") + " = IndexOf(H)");
+			System.out.println("Select(4) = " + bst.select(4));
+			//END 
 			
 			System.out.println();
 			
 			
-			
+			//Code to test for kth max
+			System.out.print("        Index : ");
 			for(int i = 0 ; i< bst.size(); i++) {
 				System.out.print(i + ",");
 			}
 			System.out.println();
+			System.out.print("Select[Index] : ");
 			for(int i = 0 ; i < bst.size(); i++) {
 				System.out.print(bst.select2(i) + ",");
 			}
 			System.out.println();
 			System.out.println("Rank(H) = " + bst.rank2("H"));
 			System.out.println("Select(4) = " + bst.select2(4));
+			//END
 			
-	
 			
+			//Code to test range
+			System.out.println();
+			for(String key : bst.range("A","Z")) {
+				System.out.print(key + ",");
+			}
+			System.out.println();
+			for(String key : bst.range()) {
+				System.out.print(key + ",");
+			}
 			
 			
 //TEST CASE 2
