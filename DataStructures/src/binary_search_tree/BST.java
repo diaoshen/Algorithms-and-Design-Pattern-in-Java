@@ -665,7 +665,8 @@ public class BST <Key extends Comparable<Key> , Value>{
 			if(compareLow < 0) { // currNode > low
 				range(currNode.left, queue, low , high);
 			}
-			// low <= currNode
+			// (L exists in left subtree or L is currNode)  AND (H exists in right subtree or H is currNode)
+			// When both condition is met , currNode is in range.
 			if(compareLow <= 0 && compareHigh >= 0) {
 				queue.add(currNode.key);
 			}
