@@ -190,6 +190,31 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 		return currNode; // This returns to possibly case 2,3,4 thus will perform balance check at each level		
 	}
 	
+	/*
+	 * Return value of given key
+	 */
+	public Value get(Key key) {
+		TreeNode x = root;
+		while(x != null) {
+			int cmp = key.compareTo(x.key);
+			if(cmp == 0) return x.val;
+			else if(cmp <0) x = x.left;
+			else x = x.right;
+		}
+		return null;
+	}
+	
+	/*
+	 * Return minimum key
+	 */
+	public Key min() {
+		TreeNode x = root;
+		while(x.left != null) {
+			x = x.left;
+		}
+		return x == null ? null : x.key;
+	}
+	
 	
 	
 	
