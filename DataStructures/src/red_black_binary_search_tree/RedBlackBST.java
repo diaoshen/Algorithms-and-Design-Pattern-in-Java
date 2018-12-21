@@ -205,6 +205,20 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 	}
 	
 	/*
+	 * fix un-balance (Perform series of local transformation to restore balance)
+	 */
+	private TreeNode fix(TreeNode h) {
+		if(isRed(h.right))
+			h = rotateLeft(h);
+		if(isRed(h.left) && isRed(h.left.left)) 
+			h = rotateRight(h);
+		if(isRed(h.left) && isRed(h.right)) 
+			flipColors(h);
+		return h;
+	}
+	
+	
+	/*
 	 * Return minimum key
 	 */
 	public Key min() {
