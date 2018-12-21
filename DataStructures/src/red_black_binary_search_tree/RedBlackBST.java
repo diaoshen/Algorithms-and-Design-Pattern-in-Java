@@ -218,8 +218,25 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 	}
 	
 	/*
-	 * 
+	 * Helper function for deleteMax()
+	 * Purpose : turn h.right into a 3-node or 4-node depending on h.left.left
 	 */
+	private TreeNode makeRed(TreeNode h) {
+		flipColors(h); 
+		//Now h.right is a 4-node
+		if(isRed(h.left.left)) { // If there is 2 red in a row  == 5-node 
+			//Break 5-node 
+			h = rotateRight(h);
+			flipColors(h);
+			//Now h.right is a 3-node
+		}
+		return h; //In the end, h.right must be in either a 3-node or 4-node
+	}
+	
+	/*
+	 * Delete maximum key
+	 */
+	
 	
 	
 	/*
