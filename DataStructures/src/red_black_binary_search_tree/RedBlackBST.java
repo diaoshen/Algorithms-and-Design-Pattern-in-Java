@@ -217,6 +217,10 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 		return h;
 	}
 	
+	/*
+	 * 
+	 */
+	
 	
 	/*
 	 * Return minimum key
@@ -225,6 +229,17 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 		TreeNode x = root;
 		while(x.left != null) {
 			x = x.left;
+		}
+		return x == null ? null : x.key;
+	}
+	
+	/*
+	 * Return maximum key
+	 */
+	public Key max() {
+		TreeNode x = root;
+		while(x.right != null) {
+			x = x.right;
 		}
 		return x == null ? null : x.key;
 	}
