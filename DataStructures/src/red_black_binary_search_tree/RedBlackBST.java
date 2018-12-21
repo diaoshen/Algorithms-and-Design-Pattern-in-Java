@@ -83,6 +83,13 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 	}
 	
 	/*
+	 * is a node black?
+	 */
+	private boolean isBlack(TreeNode x) {
+		return isRed(x) ? false : true;
+	}
+	
+	/*
 	 * Left Rotation
 	 */
 	private TreeNode rotateLeft(TreeNode h) {
@@ -233,10 +240,25 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 		return h; //In the end, h.right must be in either a 3-node or 4-node
 	}
 	
+	
 	/*
 	 * Delete maximum key
 	 */
-	
+	public void deleteMax() {
+		root = deleteMax(root);
+		root.color = BLACK;
+	}
+	private TreeNode deleteMax(TreeNode h) {
+		if(isRed(h.left))
+			h = rotateRight(h); //lean 3-nodes to right , prep for deletion
+		if(h.right == null) //remove node on bottom level (h must be RED by invariant)
+			return null;
+		if(isBlack(h.right) && isBlack(h.right.left)) //h.right is not RED
+			h = makeRed(h); //Make it RED
+		h.right = deleteMax(h.right); // Move down one level
+		
+		return fix(h); //fix right red link , double red link , break 4-node on the way up.
+	}	
 	
 	
 	/*
