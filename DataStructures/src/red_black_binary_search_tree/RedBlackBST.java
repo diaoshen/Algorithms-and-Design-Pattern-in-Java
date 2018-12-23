@@ -226,23 +226,60 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 	
 	/*
 	 * Helper function for deleteMax()
-	 * Purpose : turn h.right into a 3-node or 4-node depending on h.left.left
+	 * Purpose : turn h into a 3-node or 4-node depending on h.left.left
 	 */
-	private TreeNode makeRed(TreeNode h) {
+	private TreeNode makeRedRight(TreeNode h) {
 		flipColors(h); 
-		//Now h.right is a 4-node
-		if(isRed(h.left.left)) { // If there is 2 red in a row  == 5-node 
+		//Now h is a 4-node after flipColors(h)
+		if(isRed(h.left.left)) { // If there is 2 red in a row  h is a 5-node instead of 4-node
 			//Break 5-node 
 			h = rotateRight(h);
 			flipColors(h);
-			//Now h.right is a 3-node
+			//Now h is a 3-node
 		}
 		return h; //In the end, h.right must be in either a 3-node or 4-node
 	}
 	
+	/*
+	 * Helper function for deleteMin()
+	 * Purpose : to turn h into a 3-node or 4-node depending on h.right.left
+	 */
+	private TreeNode makeRedLeft(TreeNode h) {
+		flipColors(h);
+		//Now h is a 4-node
+		if(isRed(h.right.left)) { //Why check h.right.left and not h.right.right? because is not possible to have a red link on the right after adding.
+			//Break 5-node
+			h.right = rotateRight(h.right); //After this will create 2 red link in a row on right
+			h = rotateLeft(h); // move the 2 red link to left
+			flipColors(h); // this will fix 2 red link in a row problem.
+		}
+		return h;
+	}
+	
+	/*
+	 * Delete minimum key
+	 */
+	public void deleteMin() {
+		root = deleteMin(root);
+		root.color = BLACK;
+	}
+	private TreeNode deleteMin(TreeNode h) {
+		if(h.left == null) // remove node on bottom level (h must be RED by invariant)
+			return null;
+		
+		if(isBlack(h.left) && isBlack(h.left.left)) //Push red link down if necessary
+			h = makeRedLeft(h);
+		
+		h.left = deleteMin(h.left); // Move down one level
+		
+		return fix(h);
+	}
 	
 	/*
 	 * Delete maximum key
+	 * 
+	 * General strategy is carry a red-link down right subtree , if target key is found. It is within a 3-node or 4-node
+	 * that way deleting a 3/4 node will not destroy balance.
 	 */
 	public void deleteMax() {
 		root = deleteMax(root);
@@ -253,8 +290,13 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 			h = rotateRight(h); //lean 3-nodes to right , prep for deletion
 		if(h.right == null) //remove node on bottom level (h must be RED by invariant)
 			return null;
+		//Carry red-link down if there is not a red link at next level
+		/*
+		 * Also.. if h.right is the target max. then h.right must be in 3-node. That can only happen if h.right OR h.right.left is RED
+		 * if none is RED , makeRedRight must be called so that h.right will be either a 3-node or 4-node
+		 */
 		if(isBlack(h.right) && isBlack(h.right.left)) //h.right is not RED
-			h = makeRed(h); //Make it RED
+			h = makeRedRight(h); //Make it RED
 		h.right = deleteMax(h.right); // Move down one level
 		
 		return fix(h); //fix right red link , double red link , break 4-node on the way up.
