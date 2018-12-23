@@ -294,6 +294,26 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 		/*
 		 * Also.. if h.right is the target max. then h.right must be in 3-node. That can only happen if h.right OR h.right.left is RED
 		 * if none is RED , makeRedRight must be called so that h.right will be either a 3-node or 4-node
+		 * 
+		 * If makeRedRight() ever ran, its result will always be either h.right is RED or h.right.right is RED
+		 * Now..
+		 * Why check h.right + h.right.left and  NOT  h.right + h.right.right ? Answer is simple. 
+		 * h.right.right should not have RED-LINK initially by design. h.right.right will possibly have red-link
+		 * after first makeRedRight is called. It does make sense to check h.right for RED or h.right.left for RED 
+		 * initially. 
+		 * 
+		 * If calling makeRedRight returns h.right is RED then when calling deleteMax(h.right) , If h.right is target
+		 * then it will be deleted. since h.right is RED. If h.right is not target. It will try to rotate a red to right
+		 * if exists a red on the left. If doesn't have red to rotate then will continue to perform h.right && h.right.left check
+		 * to make a red lean right(prepare for next level). Since makeRedRight() returned h.right to be red. IT is guarantee that
+		 * h.right.right IS NOT RED ! so to determine next level is ready for deletion(next node is in RED link) It needs 
+		 * to check for again is "Right" because right could become red if right rotation was performed because h.left is RED
+		 * If h.right is RED then next level is prep. Red can also exists at right.left by design. so checking for right.left is needed
+		 * 
+		 * If calling makeRedRight returns h.right.right is RED then similar things happens... it will still need to check
+		 *  RIGHT and RIGHT.LEFT to determine if next level is RED or not. If not RED , Make RED right
+		 * 
+		 * 
 		 */
 		if(isBlack(h.right) && isBlack(h.right.left)) //h.right is not RED
 			h = makeRedRight(h); //Make it RED
