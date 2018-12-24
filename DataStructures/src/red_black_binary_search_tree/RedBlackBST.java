@@ -4,7 +4,7 @@ package red_black_binary_search_tree;
  * Time created : 12/18/2018
  */
 
-
+//import binary_search_tree.BST;
 
 /*
  * RED-BLACK BINARY SEARCH TREE V1
@@ -282,14 +282,19 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 	 * that way deleting a 3/4 node will not destroy balance.
 	 */
 	public void deleteMax() {
-		root = deleteMax(root);
-		root.color = BLACK;
+		if(root != null) {
+			root = deleteMax(root);
+			if(root != null)
+			root.color = BLACK;
+		}
+			
 	}
 	private TreeNode deleteMax(TreeNode h) {
 		if(isRed(h.left))
 			h = rotateRight(h); //lean 3-nodes to right , prep for deletion
-		if(h.right == null) //remove node on bottom level (h must be RED by invariant)
+		if(h.right == null) {//remove node on bottom level (h must be RED by invariant)
 			return null;
+		}
 		//Carry red-link down if there is not a red link at next level
 		/*
 		 * Also.. if h.right is the target max. then h.right must be in 3-node. That can only happen if h.right OR h.right.left is RED
@@ -302,13 +307,13 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 		 * after first makeRedRight is called. It does make sense to check h.right for RED or h.right.left for RED 
 		 * initially. 
 		 * 
-		 * If calling makeRedRight returns h.right is RED then when calling deleteMax(h.right) , If h.right is target
-		 * then it will be deleted. since h.right is RED. If h.right is not target. It will try to rotate a red to right
-		 * if exists a red on the left. If doesn't have red to rotate then will continue to perform h.right && h.right.left check
+		 * If calling makeRedRight returns h.right is RED then when calling deleteMax(h.right which I name it x) , If x.right is target
+		 * then it will be deleted. since previous deleteMax called makeRedRight and returned h.right is RED. If h.right is not target. It will try to rotate a red to right
+		 * if exists a red on the left. If doesn't have red to rotate then will continue to perform x.right && x.right.left check
 		 * to make a red lean right(prepare for next level). Since makeRedRight() returned h.right to be red. IT is guarantee that
-		 * h.right.right IS NOT RED ! so to determine next level is ready for deletion(next node is in RED link) It needs 
-		 * to check for again is "Right" because right could become red if right rotation was performed because h.left is RED
-		 * If h.right is RED then next level is prep. Red can also exists at right.left by design. so checking for right.left is needed
+		 * h.right.right IS NOT RED BY DESIGN OF makeRedRight() ! so to determine next level is ready for deletion(next node is in RED link) It needs 
+		 * to check x.right  because it is possible that there exists a red on the left and was rotated to right by previous operation.
+		 * If h.right is RED then next level is prep. Red can also exists at right.left by design of LLRBBST. so checking for right.left can also see if next lvl is RED ready.
 		 * 
 		 * If calling makeRedRight returns h.right.right is RED then similar things happens... it will still need to check
 		 *  RIGHT and RIGHT.LEFT to determine if next level is RED or not. If not RED , Make RED right
@@ -316,9 +321,9 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 		 * 
 		 */
 		if(isBlack(h.right) && isBlack(h.right.left)) //h.right is not RED
-			h = makeRedRight(h); //Make it RED
+		h = makeRedRight(h); //Make it RED
 		h.right = deleteMax(h.right); // Move down one level
-		
+		h.n = size(h.left) + size(h.right) + 1;
 		return fix(h); //fix right red link , double red link , break 4-node on the way up.
 	}	
 	
@@ -345,12 +350,51 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 		return x == null ? null : x.key;
 	}
 	
+	/*
+	 * In order traversal
+	 */
+	public void printInOrder() {
+		printInOrder(root);
+	}
+	private void printInOrder(TreeNode x) {
+		if(x != null) {
+			printInOrder(x.left);
+			System.out.print(x.key + ",");
+			printInOrder(x.right);
+		}
+	}
+	
 	
 	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		RedBlackBST<String,Integer> bst = new RedBlackBST<String, Integer>();
+		
+		bst.add("S", 1);
+		bst.add("E", 2);
+		bst.add("A", 1);
+		bst.add("C", 1);
+		bst.add("R", 1);
+		bst.add("H", 1);
+		bst.add("M", 1);
+		bst.add("X", 1);
+		
+		
+		bst.printInOrder();
+		System.out.println(" Size = " + bst.size());
 
-	}
+		
+		
+		while(bst.size() > 0) {
+			bst.deleteMax();
+			bst.printInOrder();
+			System.out.println(" Size = " + bst.size());
+		}
+		bst.deleteMax();
+		bst.printInOrder();
+		System.out.println(" Size = " + bst.size());
+		
+	}//END MAIN
 
-}
+}//END RedBlackBST
