@@ -317,6 +317,12 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 		 * 
 		 * If calling makeRedRight returns h.right.right is RED then similar things happens... it will still need to check
 		 *  RIGHT and RIGHT.LEFT to determine if next level is RED or not. If not RED , Make RED right
+		 *  
+		 *
+		 * NOTE: If you think about it .. if next node IS in fact target max.. it must be in RED LINK. AND WHERE ? Possibly the red link must exists?
+		 * IT MUST exists h.right because it is possible that rotateRight made h.right is RED or exists at h.right.left by design
+		 * 
+		 * NOTE: If is for minimum.. red link can only exists h.left and h.left.left by same logic
 		 * 
 		 * 
 		 */
