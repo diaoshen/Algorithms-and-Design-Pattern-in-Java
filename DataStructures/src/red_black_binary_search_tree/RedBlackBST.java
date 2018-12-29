@@ -4,7 +4,9 @@ package red_black_binary_search_tree;
  * Time created : 12/18/2018
  */
 
+import java.util.LinkedList;
 import java.util.NoSuchElementException;
+import java.util.Queue;
 
 
 
@@ -537,7 +539,114 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
         TreeNode t = ceiling(x.left, key);
         if (t != null) return t; 
         else           return x;
-    }	
+    }
+    
+    /**
+     * Return the key in the symbol table whose rank is {@code k}.
+     * This is the (k+1)st smallest key in the symbol table. 
+     *
+     * @param  k the order statistic
+     * @return the key in the symbol table of rank {@code k}
+     * @throws IllegalArgumentException unless {@code k} is between 0 and
+     *        <em>n</em>¨C1
+     */
+    public Key select(int k) {
+        if (k < 0 || k >= size()) {
+            throw new IllegalArgumentException("argument to select() is invalid: " + k);
+        }
+        TreeNode x = select(root, k);
+        return x.key;
+    }
+
+    // the key of rank k in the subtree rooted at x
+    private TreeNode select(TreeNode x, int k) {
+        // assert x != null;
+        // assert k >= 0 && k < size(x);
+        int t = size(x.left); 
+        if      (t > k) return select(x.left,  k); 
+        else if (t < k) return select(x.right, k-t-1); 
+        else            return x; 
+    }  
+    
+    /**
+     * Return the number of keys in the symbol table strictly less than {@code key}.
+     * @param key the key
+     * @return the number of keys in the symbol table strictly less than {@code key}
+     * @throws IllegalArgumentException if {@code key} is {@code null}
+     */
+    public int rank(Key key) {
+        if (key == null) throw new IllegalArgumentException("argument to rank() is null");
+        return rank(key, root);
+    } 
+
+    // number of keys less than key in the subtree rooted at x
+    private int rank(Key key, TreeNode x) {
+        if (x == null) return 0; 
+        int cmp = key.compareTo(x.key); 
+        if      (cmp < 0) return rank(key, x.left); 
+        else if (cmp > 0) return 1 + size(x.left) + rank(key, x.right); 
+        else              return size(x.left); 
+    } 
+    
+    /**
+     * Returns all keys in the symbol table as an {@code Iterable}.
+     * To iterate over all of the keys in the symbol table named {@code st},
+     * use the foreach notation: {@code for (Key key : st.keys())}.
+     * @return all keys in the symbol table as an {@code Iterable}
+     */
+    public Iterable<Key> keys() {
+        if (isEmpty()) return new LinkedList<Key>();
+        return keys(min(), max());
+    }
+    /**
+     * Returns all keys in the symbol table in the given range,
+     * as an {@code Iterable}.
+     *
+     * @param  lo minimum endpoint
+     * @param  hi maximum endpoint
+     * @return all keys in the sybol table between {@code lo} 
+     *    (inclusive) and {@code hi} (inclusive) as an {@code Iterable}
+     * @throws IllegalArgumentException if either {@code lo} or {@code hi}
+     *    is {@code null}
+     */
+    public Iterable<Key> keys(Key lo, Key hi) {
+        if (lo == null) throw new IllegalArgumentException("first argument to keys() is null");
+        if (hi == null) throw new IllegalArgumentException("second argument to keys() is null");
+
+        Queue<Key> queue = new LinkedList<Key>();
+        // if (isEmpty() || lo.compareTo(hi) > 0) return queue;
+        keys(root, queue, lo, hi);
+        return queue;
+    } 
+    // add the keys between lo and hi in the subtree rooted at x
+    // to the queue
+    private void keys(TreeNode x, Queue<Key> queue, Key lo, Key hi) { 
+        if (x == null) return; 
+        int cmplo = lo.compareTo(x.key); 
+        int cmphi = hi.compareTo(x.key); 
+        if (cmplo < 0) keys(x.left, queue, lo, hi); 
+        if (cmplo <= 0 && cmphi >= 0) queue.add(x.key); 
+        if (cmphi > 0) keys(x.right, queue, lo, hi); 
+    } 
+    
+    /**
+     * Returns the number of keys in the symbol table in the given range.
+     *
+     * @param  lo minimum endpoint
+     * @param  hi maximum endpoint
+     * @return the number of keys in the sybol table between {@code lo} 
+     *    (inclusive) and {@code hi} (inclusive)
+     * @throws IllegalArgumentException if either {@code lo} or {@code hi}
+     *    is {@code null}
+     */
+    public int size(Key lo, Key hi) {
+        if (lo == null) throw new IllegalArgumentException("first argument to size() is null");
+        if (hi == null) throw new IllegalArgumentException("second argument to size() is null");
+
+        if (lo.compareTo(hi) > 0) return 0;
+        if (contains(hi)) return rank(hi) - rank(lo) + 1;
+        else              return rank(hi) - rank(lo);
+    }
 	
 	/*
 	 * In order traversal
@@ -553,6 +662,81 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 		}
 	}
 	
+	  /***************************************************************************
+	    *  Check integrity of red-black tree data structure.
+	    ***************************************************************************/
+	    @SuppressWarnings("unused")
+		private boolean check() {
+	        if (!isBST())            System.out.println("Not in symmetric order");
+	        if (!isSizeConsistent()) System.out.println("Subtree counts not consistent");
+	        if (!isRankConsistent()) System.out.println("Ranks not consistent");
+	        if (!is23())             System.out.println("Not a 2-3 tree");
+	        if (!isBalanced())       System.out.println("Not balanced");
+	        return isBST() && isSizeConsistent() && isRankConsistent() && is23() && isBalanced();
+	    }
+
+	    // does this binary tree satisfy symmetric order?
+	    // Note: this test also ensures that data structure is a binary tree since order is strict
+	    private boolean isBST() {
+	        return isBST(root, null, null);
+	    }
+
+	    // is the tree rooted at x a BST with all keys strictly between min and max
+	    // (if min or max is null, treat as empty constraint)
+	    // Credit: Bob Dondero's elegant solution
+	    private boolean isBST(TreeNode x, Key min, Key max) {
+	        if (x == null) return true;
+	        if (min != null && x.key.compareTo(min) <= 0) return false;
+	        if (max != null && x.key.compareTo(max) >= 0) return false;
+	        return isBST(x.left, min, x.key) && isBST(x.right, x.key, max);
+	    } 
+
+	    // are the size fields correct?
+	    private boolean isSizeConsistent() { return isSizeConsistent(root); }
+	    private boolean isSizeConsistent(TreeNode x) {
+	        if (x == null) return true;
+	        if (x.n != size(x.left) + size(x.right) + 1) return false;
+	        return isSizeConsistent(x.left) && isSizeConsistent(x.right);
+	    } 
+
+	    // check that ranks are consistent
+	    private boolean isRankConsistent() {
+	        for (int i = 0; i < size(); i++)
+	            if (i != rank(select(i))) return false;
+	        for (Key key : keys())
+	            if (key.compareTo(select(rank(key))) != 0) return false;
+	        return true;
+	    }
+
+	    // Does the tree have no red right links, and at most one (left)
+	    // red links in a row on any path?
+	    private boolean is23() { return is23(root); }
+	    private boolean is23(TreeNode x) {
+	        if (x == null) return true;
+	        if (isRed(x.right)) return false;
+	        if (x != root && isRed(x) && isRed(x.left))
+	            return false;
+	        return is23(x.left) && is23(x.right);
+	    } 
+
+	    // do all paths from root to leaf have same number of black edges?
+	    private boolean isBalanced() { 
+	        int black = 0;     // number of black links on path from root to min
+	        TreeNode x = root;
+	        while (x != null) {
+	            if (!isRed(x)) black++;
+	            x = x.left;
+	        }
+	        return isBalanced(root, black);
+	    }
+
+	    // does every path from the root to a leaf have the given number of black links?
+	    private boolean isBalanced(TreeNode x, int black) {
+	        if (x == null) return black == 0;
+	        if (!isRed(x)) black--;
+	        return isBalanced(x.left, black) && isBalanced(x.right, black);
+	    } 
+
 	
 	
 	
