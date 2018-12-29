@@ -62,8 +62,12 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 	 * Operation Definitions : 
 	 */
 	
-	
-	
+	/*
+	 * IsEmpty? 
+	 */
+	public boolean isEmpty() {
+		return root == null && size() == 0 ? true : false;
+	}
 	/*
 	 * Returns total number of nodes
 	 */
@@ -210,6 +214,7 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 		}
 		return null;
 	}
+	@SuppressWarnings("unused")
 	private Value get(TreeNode h , Key key) {
 		TreeNode x = h;
 		while(x != null) {
@@ -219,6 +224,13 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 			else x = x.right;
 		}
 		return null;
+	}
+	
+	/*
+	 * If tree contains input key
+	 */
+	public boolean contains(Key key) {
+		return get(key) != null ? true : false;
 	}
 	
 	/*
@@ -376,8 +388,9 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 			}
 			// Now to check if is TARGET
 			if(cmp == 0) {
-				h.key = min(h.right); //Replace target key with successor
-				h.val = get(h.right , h.key);
+				TreeNode min = min(h.right);
+				h.key = min.key; //Replace target key with successor
+				h.val = min.val;
 				h.right = deleteMin(h.right);
 				
 			}else { // Just like in deleteMax() , if current isn't TARGET , then move one level down.
@@ -386,7 +399,6 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 		}
 		return fix(h);
 	}
-	
 	
 	/*
 	 * Return minimum key
@@ -400,14 +412,14 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 	}
 	
 	/*
-	 * Helper function for delete() : To find successor
+	 * Helper function for delete() : Returns successor node
 	 */
-	private Key min(TreeNode h) {
+	private TreeNode min(TreeNode h) {
 		TreeNode x = h;
 		while(x.left != null) {
 			x = x.left;
 		}
-		return x == null? null : x.key;
+		return x == null? null : x;
 	}
 	
 	/*
