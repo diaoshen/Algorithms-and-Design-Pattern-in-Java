@@ -1,4 +1,4 @@
-package binary_search_tree;
+package map.ordered.bst;
 
 import java.util.LinkedList;
 import java.util.Queue;
