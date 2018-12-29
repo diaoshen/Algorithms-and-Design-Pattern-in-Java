@@ -251,6 +251,8 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 	 * Purpose : turn h into a 3-node or 4-node depending on h.left.left
 	 */
 	private TreeNode makeRedRight(TreeNode h) {
+		//TODO assert(h != null) && isRed(h.left)
+	
 		flipColors(h); 
 		//Now h is a 4-node after flipColors(h)
 		if(isRed(h.left.left)) { // If there is 2 red in a row  h is a 5-node instead of 4-node
