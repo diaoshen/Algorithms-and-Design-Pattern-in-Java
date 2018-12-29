@@ -6,6 +6,8 @@ package red_black_binary_search_tree;
 
 import java.util.NoSuchElementException;
 
+
+
 //import binary_search_tree.BST;
 
 /*
@@ -472,6 +474,70 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 		}
 		return x == null ? null : x.key;
 	}
+	
+    /**
+     * Returns the largest key in the symbol table less than or equal to key
+     * @param key the key
+     * @return the largest key in the symbol table less than or equal to key
+     * @throws NoSuchElementException if there is no such key
+     * @throws IllegalArgumentException if key is null
+     */
+	public Key floor(Key key) {
+		if(key == null) throw new IllegalArgumentException("arugment to floor() is null");
+		if(isEmpty()) throw new NoSuchElementException("floor() was called , but tree was empty");
+		TreeNode x = floor(root,key);
+		if(x == null) return null;
+		else		  return x.key;
+	}
+	private TreeNode floor(TreeNode x , Key key) {
+		//floor of X doesn't exist
+		if(x == null) {
+			return null;
+		}
+		int cmp = key.compareTo(x.key);
+		//floor(x) is x 
+		if (cmp == 0) {
+			return x;
+		}
+		//search left side
+		if(cmp < 0) {
+			return floor(x.left,key);
+		}
+		//could be right side only if there exists a key <= key
+		TreeNode t = floor(x.right,key);
+		if(t != null) {
+			//search hit , t is now floor(key)
+			return t;
+		}else {
+			return x; // search miss , x is the floor(key)
+		}		
+	}
+	
+    /**
+     * Returns the smallest key in the symbol table greater than or equal to {@code key}.
+     * @param key the key
+     * @return the smallest key in the symbol table greater than or equal to {@code key}
+     * @throws NoSuchElementException if there is no such key
+     * @throws IllegalArgumentException if {@code key} is {@code null}
+     */
+    public Key ceiling(Key key) {
+        if (key == null) throw new IllegalArgumentException("argument to ceiling() is null");
+        if (isEmpty()) throw new NoSuchElementException("calls ceiling() with empty symbol table");
+        TreeNode x = ceiling(root, key);
+        if (x == null) return null;
+        else           return x.key;  
+    }
+
+    // the smallest key in the subtree rooted at x greater than or equal to the given key
+    private TreeNode ceiling(TreeNode x, Key key) {  
+        if (x == null) return null;
+        int cmp = key.compareTo(x.key);
+        if (cmp == 0) return x;
+        if (cmp > 0)  return ceiling(x.right, key);
+        TreeNode t = ceiling(x.left, key);
+        if (t != null) return t; 
+        else           return x;
+    }	
 	
 	/*
 	 * In order traversal
