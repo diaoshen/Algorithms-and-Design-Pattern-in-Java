@@ -70,6 +70,7 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 	public boolean isEmpty() {
 		return root == null;
 	}
+	
 	/*
 	 * Returns total number of nodes
 	 */
@@ -78,6 +79,18 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 	}
 	private int size(TreeNode x) {
 		return x == null ? 0 : x.n;
+	}
+	
+	/*
+	 * Returns the height of the BST(for debugging purposes)
+	 * @return the height of the BST( a 1-node tree has height 0)
+	 */
+	public int height() {
+		return height(root);
+	}
+	private int height(TreeNode x) {
+		if (x == null) return -1;
+		return 1 + Math.max(height(x.left), height(x.right));
 	}
 	
 	/*
@@ -429,6 +442,7 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 	 * Return minimum key
 	 */
 	public Key min() {
+		if(isEmpty()) throw new NoSuchElementException("Trying to get min key from empty tree");
 		TreeNode x = root;
 		while(x.left != null) {
 			x = x.left;
@@ -451,6 +465,7 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 	 * Return maximum key
 	 */
 	public Key max() {
+		if(isEmpty()) throw new NoSuchElementException("Trying to get max key from empty tree");
 		TreeNode x = root;
 		while(x.right != null) {
 			x = x.right;
@@ -499,7 +514,7 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 			bst.printInOrder();
 			System.out.println(" Size = " + bst.size());
 		}
-		bst.deleteMax();
+		bst.deleteMax(); //This should throw exception !  , b/c tree is null/empty
 		bst.printInOrder();
 		System.out.println(" Size = " + bst.size());
 		
