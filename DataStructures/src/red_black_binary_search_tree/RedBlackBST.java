@@ -10,6 +10,8 @@ import java.util.Queue;
 
 
 
+
+
 //import binary_search_tree.BST;
 
 /*
@@ -662,6 +664,28 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 		return average/(double)k;
     }
     
+	/*
+	 *  print level by level
+	 */
+	public void printLevel() {
+		printLevel(root);
+	}
+	private void printLevel(TreeNode x) {
+		if(x == null) return;
+		
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.add(x);
+		while(!queue.isEmpty()) {
+			TreeNode curNode = queue.poll();
+			System.out.print(curNode.key + ",");
+			if(curNode.left != null) {
+				queue.add(curNode.left);
+			}
+			if(curNode.right != null) {
+				queue.add(curNode.right);
+			}
+		}
+	}
 	
 	/*
 	 * In order traversal
