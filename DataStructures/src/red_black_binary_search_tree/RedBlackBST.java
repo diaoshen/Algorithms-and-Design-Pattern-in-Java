@@ -8,6 +8,8 @@ import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 
+import binary_search_tree.BST.Node;
+
 
 
 
@@ -699,6 +701,32 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 			System.out.print(x.key + ",");
 			printInOrder(x.right);
 		}
+	}
+
+	/*
+	 * Print in pre-order = LEFT,RIGHT,ME
+	 */
+	public void printPreOrder() {
+		printPreOrder(root);
+		System.out.println();
+	}
+	private void printPreOrder(TreeNode x) {
+		printPreOrder(x.left);
+		printPreOrder(x.right);
+		System.out.print(x.key + ",");
+	}
+	
+	/*
+	 * Print in post-order = ME,LEFT,RIGHT
+	 */
+	public void printPostOrder() {
+		printPostOrder(root);
+		System.out.println();
+	}
+	private void printPostOrder(TreeNode x) {
+		System.out.print(x.key + ",");
+		printPostOrder(x.left);
+		printPostOrder(x.right);
 	}
 	
 	  /***************************************************************************
