@@ -647,6 +647,21 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
         if (contains(hi)) return rank(hi) - rank(lo) + 1;
         else              return rank(hi) - rank(lo);
     }
+    
+    /*
+     * getAverage(int k)
+     * @return average of k smallest element's key from BST
+     */
+    public double getAverage(int k) {
+		Integer average = 0;
+		for(int i = 0 ; i < k ; i++) {
+			average += (Integer)get(select(i));
+			System.out.print(get(select(i)) + ",");
+		}
+		System.out.println("");
+		return average/(double)k;
+    }
+    
 	
 	/*
 	 * In order traversal
