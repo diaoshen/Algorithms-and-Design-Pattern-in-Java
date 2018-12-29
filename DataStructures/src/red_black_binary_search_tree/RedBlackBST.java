@@ -210,6 +210,16 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 		}
 		return null;
 	}
+	private Value get(TreeNode h , Key key) {
+		TreeNode x = h;
+		while(x != null) {
+			int cmp = key.compareTo(x.key);
+			if(cmp == 0) return x.val;
+			else if(cmp <0) x = x.left;
+			else x = x.right;
+		}
+		return null;
+	}
 	
 	/*
 	 * fix un-balance (Perform series of local transformation to restore balance)
@@ -331,7 +341,51 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 		h.right = deleteMax(h.right); // Move down one level
 		h.n = size(h.left) + size(h.right) + 1;
 		return fix(h); //fix right red link , double red link , break 4-node on the way up.
-	}	
+	}
+	
+	/*
+	 * Delete a key/value pair
+	 */
+	public void delete(Key key) {
+		if(key == null) {
+			throw new IllegalArgumentException("argument to delete() is null");
+		}
+		if(!contains(key)) return;
+		root = delete(root,key);
+		if(!isEmpty()) root.color = BLACK;
+	}
+	private TreeNode delete(TreeNode h , Key key) {
+		int cmp = key.compareTo(h.key);
+		if(cmp < 0) { // Similar to DeleteMin Code)
+			if(isBlack(h.left) && isBlack(h.left.left)) {
+				h = makeRedLeft(h);
+			}
+			h.left = delete(h.left,key);
+		} else { //RIGHT OR EQUAL (Similar to DeleteMax Code)
+			//Either right or equal , still need to prep a RED to right
+			if(isRed(h.left)) {
+				h = rotateRight(h);
+			}
+			//EQUAL AND AT BOTTOM
+			if(cmp == 0 && h.right == null) { //By design of LLRB, h.right must be null as if h.right is not null then perfect black doesn't exist. thus h.right must be null for successor
+				return null;
+			}
+			//Carry red link down if necessary , just like in deleteMax()
+			if(isBlack(h.right) && isBlack(h.right.left)) {
+				h = makeRedRight(h);
+			}
+			// Now to check if is TARGET
+			if(cmp == 0) {
+				h.key = min(h.right); //Replace target key with successor
+				h.val = get(h.right , h.key);
+				h.right = deleteMin(h.right);
+				
+			}else { // Just like in deleteMax() , if current isn't TARGET , then move one level down.
+				h.right = delete(h.right,key);
+			}	
+		}
+		return fix(h);
+	}
 	
 	
 	/*
@@ -343,6 +397,17 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 			x = x.left;
 		}
 		return x == null ? null : x.key;
+	}
+	
+	/*
+	 * Helper function for delete() : To find successor
+	 */
+	private Key min(TreeNode h) {
+		TreeNode x = h;
+		while(x.left != null) {
+			x = x.left;
+		}
+		return x == null? null : x.key;
 	}
 	
 	/*
