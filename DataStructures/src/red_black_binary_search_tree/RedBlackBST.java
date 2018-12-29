@@ -4,6 +4,8 @@ package red_black_binary_search_tree;
  * Time created : 12/18/2018
  */
 
+import java.util.NoSuchElementException;
+
 //import binary_search_tree.BST;
 
 /*
@@ -66,7 +68,7 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 	 * IsEmpty? 
 	 */
 	public boolean isEmpty() {
-		return root == null && size() == 0 ? true : false;
+		return root == null;
 	}
 	/*
 	 * Returns total number of nodes
@@ -145,6 +147,11 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 	 *  add key/value pair 
 	 */
 	public void add(Key key , Value val) {
+		if(key == null) throw new IllegalArgumentException("First arg to add() is null");
+		if(val == null) {
+			delete(key);
+			return;
+		}
 		root = add(root, key , val);
 		root.color = BLACK;
 	}
@@ -243,6 +250,9 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 			h = rotateRight(h);
 		if(isRed(h.left) && isRed(h.right)) 
 			flipColors(h);
+		
+		h.n = size(h.left) + size(h.right) + 1;
+		
 		return h;
 	}
 	
@@ -284,8 +294,16 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 	 * Delete minimum key
 	 */
 	public void deleteMin() {
+		if(isEmpty()) throw new NoSuchElementException("BST underflow");
+		
+		//Root could be the minimum so get root to RED  OR serve as initial delete
+		if(isBlack(root.left) && isBlack(root.right)) root.color = RED;
+
+		
 		root = deleteMin(root);
-		root.color = BLACK;
+		if(!isEmpty()) {
+			root.color = BLACK;
+		}
 	}
 	private TreeNode deleteMin(TreeNode h) {
 		if(h.left == null) // remove node on bottom level (h must be RED by invariant)
@@ -306,12 +324,17 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 	 * that way deleting a 3/4 node will not destroy balance.
 	 */
 	public void deleteMax() {
-		if(root != null) {
-			root = deleteMax(root);
-			if(root != null)
-			root.color = BLACK;
+		if(isEmpty()) throw new NoSuchElementException("BST Underflow");
+		
+		//if both children of root are black, set root to RED  ( MAKE RED IF NO RED)
+		if(isBlack(root.left) && isBlack(root.right)) {
+			root.color = RED;
 		}
-			
+		
+			root = deleteMax(root);
+			if(!isEmpty()) {
+				root.color = BLACK;
+			}		
 	}
 	private TreeNode deleteMax(TreeNode h) {
 		if(isRed(h.left))
