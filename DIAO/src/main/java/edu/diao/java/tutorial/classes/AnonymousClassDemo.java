@@ -58,7 +58,29 @@ public class AnonymousClassDemo {
 		//Usage 1 using lambda expression
 		IntCalculator square2 = num -> num * num;
 		System.out.println("Square2 5 = " + square2.calculate(5));
-
+		
+		
+		
+		/*
+		 * Other lambda expressions
+		 */
+		
+		//Lambda Expression that Do Not Return a Value
+		LambdaVoid p = x-> System.out.println(x);
+		p.display(5);
+		
+		//Lambda Expression with Multiple Parameters , Explitcly declare param data type , multiple statement body
+		LambdaMulti m = (a,b) -> a+b;
+		System.out.println(m.add(5, 2));
+		LambdaMulti n = (int a , int b ) -> {
+			int y = a + b;
+			return y;
+		};
+		System.out.println(n.add(10, 20));
+		
+		//Lambda Expression with No Parameters
+		LambdaNoParam x = () -> System.out.println("hello");
+		x.display();
 		
 		
 	}//END MAIN
