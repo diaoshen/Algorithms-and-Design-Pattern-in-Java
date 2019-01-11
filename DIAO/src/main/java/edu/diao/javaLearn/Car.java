@@ -6,7 +6,7 @@ public abstract class Car implements Engine , RaceCarEngine , myRaceCarEngine{ /
 	 */
 	
 	/*
-	 * Variables can be : 
+	 * Variables can be : Final | STATIC | BOTH | NEITHER
 	 */
 	
 	//Final , Non Static
@@ -40,11 +40,12 @@ public abstract class Car implements Engine , RaceCarEngine , myRaceCarEngine{ /
 	 
 	 
 	/*
-	 * Can provide implementation of interface if wanted to
+	 * Can provide implementation of interface if wanted to ,  then any class extends this will auto have all interface functions
 	 */
 	 public void setHP() {
 		 //TODO
 	 }
+
 	 
 	 
 

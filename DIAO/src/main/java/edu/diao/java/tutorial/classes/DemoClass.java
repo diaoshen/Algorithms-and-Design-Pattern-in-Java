@@ -48,6 +48,14 @@ public class DemoClass {
 		
 		a = b.copy();
 		System.out.println("Object a's x : " + a.x);
+		
+		
+		if(a instanceof DemoClass) {
+			System.out.println("object a is an instance of DemoClass");
+		}
+		if(a instanceof Object) {
+			System.out.println("object a is an instance of Object");
+		}
 	}
 
 }

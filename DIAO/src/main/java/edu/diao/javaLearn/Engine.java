@@ -16,7 +16,6 @@ public interface Engine {
 	final int gas = 1; // same as int gas = 1;
 	//Static Final 
 	static final int a = 1000;
-
 	
 	
 	/*
@@ -25,7 +24,7 @@ public interface Engine {
 	
 	//ABSTRACT
 	abstract void setHP(); //same as void setHP();
-	
+
 	//STATIC
 	static void blah() {
 		//PROVIDE BODY HERE

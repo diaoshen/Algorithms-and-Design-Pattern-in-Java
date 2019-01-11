@@ -6,4 +6,6 @@ public interface RaceCarEngine extends Engine {
 	 * 
 	 */
 	
+	void kill();
+	
 }
