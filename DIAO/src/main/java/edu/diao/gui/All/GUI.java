@@ -224,6 +224,7 @@ public class GUI extends JFrame {
 			else if(x == nameBox) {
 				text1.setText((String) nameBox.getSelectedItem());
 			}
+			pack();
 			
 		}
 		@Override
@@ -250,6 +251,7 @@ public class GUI extends JFrame {
 					text1.setText("Check3 false");
 				}
 			}
+			pack();
 		}
 		@SuppressWarnings({ "deprecation", "unchecked" })
 		@Override
@@ -263,8 +265,8 @@ public class GUI extends JFrame {
 			}
 			text1.setText(all);
 			list2.setListData(nameList.getSelectedValues());
+			pack();
 		}
-		
 	}
 	
 	
