@@ -397,7 +397,26 @@ public class GUI extends JFrame {
 	}
 	
 	
+	
+	/*
+	 * paint() is called when app is first launched.
+	 * paint() is called whenever windows need to redisplayed
+	 *  canvas size = whole app window
+	 *  
+	 *  similar method is the drawComponent(Graphics g) which is in every JComponents for redisplaying components
+	 */
 	public void paint(Graphics g) {
+		//Call superclass paint()
+		super.paint(g);
+		
+		//draw a red line from (20,20) to (280,280)
+		g.setColor(Color.RED);
+		g.drawLine(20,20,280,280);
+		
+		//draw a blue line from (280,20) to (20,280)
+		g.setColor(Color.blue);
+		g.drawLine(280, 20, 20, 280);
+		
 		
 	}
 	
