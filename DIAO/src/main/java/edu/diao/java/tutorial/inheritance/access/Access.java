@@ -5,10 +5,12 @@ package edu.diao.java.tutorial.inheritance.access;
  */
 public class Access {
 	public int x; //Anyone can access
+	@SuppressWarnings("unused")
 	private int y; //Only Access Object can access 
 	protected int z; //Any class in same package and subclass in same/different package
 	
 	public void x() {}; //Anyone can access
+	@SuppressWarnings("unused")
 	private void y() {}; //Only Access Object can access
 	protected void z() {}; //Any class in same package and subclass in same/different package
 	

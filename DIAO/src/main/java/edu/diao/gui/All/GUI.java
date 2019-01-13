@@ -1,11 +1,15 @@
 package edu.diao.gui.All;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.*;
-import java.util.Vector;
+
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -31,23 +35,31 @@ public class GUI extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JButton button1,button2,button3;
-	private JPanel  panel1,panel2,panel3,panel4,panel5;	
+	private JButton button1,button2,button3,clearButton,addButton,fileOpenButton;
+	private JPanel  panel1,panel2,panel3,panel4,panel5,panel6;
+	@SuppressWarnings("unused")
 	private JLabel 	label1,label2,label3,label4;
 	private ButtonGroup	group;
 	private JRadioButton radio1,radio2,radio3;
 	private JCheckBox check1,check2,check3;
-	private JTextField text1;
+	private JTextField text1,inputTextBox;
 	private JList<String> nameList;
-	private JScrollPane scrollPane;
+	private JScrollPane scrollPane,scroll2;
 	private final int WINDOW_WIDTH = 1200;	//Window width
 	private final int WINDOW_HEIGHT = 200;	//Window height
-	private JButton addButton;
-	private JTextField inputTextBox;
 	private DefaultListModel<String> names;
-	private JButton clearButton;
-	private JList list2;
+	private JList<String> list2;
 	private JComboBox<String> nameBox;
+	private JMenuBar menuBar;
+	private JMenuItem exitItem;
+	private JMenu fileMenu;
+	private JRadioButtonMenuItem blackItem;
+	private JRadioButtonMenuItem redItem;
+	private JCheckBoxMenuItem visibleItem;
+	private JMenu textMenu;
+	private JTextArea area1;
+	private JSlider slider1,slider2;
+
 	
 	/*
 	 * Constructor
@@ -102,15 +114,26 @@ public class GUI extends JFrame {
 		/*
 		 * Column 3
 		 */
-		text1 = new JTextField(10);
-		text1.setEditable(false);
 		label4 = new JLabel("Output");
 
+		
+		text1 = new JTextField(10);
+		text1.setEditable(false);
+
+		
+		area1 = new JTextArea("Blah" , 3 , 3);
+		area1.setLineWrap(true);
+		area1.setFont(new Font("Serif" , Font.BOLD + Font.ITALIC , 24));
+		scroll2 = new JScrollPane(area1);
+		scroll2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scroll2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		
 		
 		panel3 = new JPanel();
 		panel3.setLayout(new GridLayout(3,0));
 		panel3.add(label4);
 		panel3.add(text1);
+		panel3.add(scroll2);
 
 
 		/*
@@ -149,7 +172,10 @@ public class GUI extends JFrame {
 
 		addButton = new JButton("Add");
 		addButton.addActionListener(new listener());
+		addButton.setMnemonic(KeyEvent.VK_A);
+		addButton.setToolTipText("Click to add item to JLIST");
 		clearButton = new JButton("Clear");
+		clearButton.setMnemonic(KeyEvent.VK_C);
 		clearButton.addActionListener(new listener());
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridLayout(0,2));
@@ -174,13 +200,79 @@ public class GUI extends JFrame {
 		panel5.setLayout(new GridLayout(5,0));
 		
 		/*
+		 * Column 6 / Choosers
+		 */
+		fileOpenButton = new JButton("Open");
+		fileOpenButton.addActionListener(new listener());
+		
+		slider1 = new JSlider(JSlider.HORIZONTAL, 0 , 50 ,25);
+		slider1.setMajorTickSpacing(10);
+		slider1.setMinorTickSpacing(2);
+		slider1.setPaintTicks(true);
+		slider1.setPaintLabels(true);
+		slider1.addChangeListener(new listener());
+		slider2 = new JSlider(JSlider.VERTICAL, 0 , 50 , 25);
+		
+		panel6 = new JPanel();
+		panel6.setLayout(new GridLayout(3,0));
+		panel6.add(fileOpenButton);
+		panel6.add(slider1);
+		panel6.add(slider2);
+		/*
 		 * Borders
 		 */
-		panel1.setBorder(BorderFactory.createTitledBorder("Column 1"));
-		panel2.setBorder(BorderFactory.createTitledBorder("Column 2"));
-		panel3.setBorder(BorderFactory.createTitledBorder("Column 3"));
-		panel4.setBorder(BorderFactory.createTitledBorder("Column 4"));
+		panel1.setBorder(BorderFactory.createTitledBorder("JButton"));
+		panel2.setBorder(BorderFactory.createTitledBorder("JRadioButton"));
+		panel3.setBorder(BorderFactory.createTitledBorder("JLabel,JTextField/Area"));
+		panel4.setBorder(BorderFactory.createTitledBorder("JCheckBox"));
 		panel5.setBorder(BorderFactory.createTitledBorder("Column 5"));
+		panel6.setBorder(BorderFactory.createTitledBorder("Choosers"));
+		
+		/*
+		 * Menus 
+		 */
+
+		//File Menu
+		exitItem = new JMenuItem("Exit");
+		exitItem.setMnemonic(KeyEvent.VK_X);
+		exitItem.addActionListener(new listener());
+		
+		fileMenu = new JMenu("File");
+		fileMenu.setMnemonic(KeyEvent.VK_F);
+		fileMenu.add(exitItem);
+		
+		//Text Menu
+		blackItem = new JRadioButtonMenuItem("Black", true);
+		blackItem.addActionListener(new listener());
+		
+		redItem = new JRadioButtonMenuItem("Red");
+		redItem.addActionListener(new listener());
+		
+		ButtonGroup radioMenuGroup = new ButtonGroup();
+		radioMenuGroup.add(blackItem);
+		radioMenuGroup.add(redItem);
+		
+		visibleItem = new JCheckBoxMenuItem("Visible", true);
+		visibleItem.addActionListener(new listener());
+		
+		textMenu = new JMenu("Text");
+		textMenu.add(blackItem);
+		textMenu.add(redItem);
+		textMenu.addSeparator();
+		textMenu.add(visibleItem);
+		
+		
+		
+		//MenuBar
+		menuBar = new JMenuBar(); //MenuBar	
+		
+		menuBar.add(fileMenu);
+		menuBar.add(textMenu);
+		
+		setJMenuBar(menuBar);
+		
+		
+		
 		
 		
 		
@@ -190,6 +282,7 @@ public class GUI extends JFrame {
 		add(panel3);
 		add(panel4);
 		add(panel5);
+		add(panel6);
 		//Display window
 		pack();
 		setVisible(true);	
@@ -198,8 +291,9 @@ public class GUI extends JFrame {
 	/*
 	 * Private Inner Class 
 	 */
-	private class listener implements ActionListener , ItemListener , ListSelectionListener{
+	private class listener implements ActionListener , ItemListener , ListSelectionListener , ChangeListener{
 
+		@SuppressWarnings("unused")
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Object x = e.getSource();
@@ -223,6 +317,31 @@ public class GUI extends JFrame {
 			}
 			else if(x == nameBox) {
 				text1.setText((String) nameBox.getSelectedItem());
+			}
+			else if(x == fileOpenButton) {
+				JFileChooser chooser = new JFileChooser();
+				int status = chooser.showOpenDialog(null);
+				if(status == JFileChooser.APPROVE_OPTION) {
+					text1.setText(chooser.getSelectedFile().getPath());
+				}
+				int status2 = chooser.showSaveDialog(null);
+				text1.setText(chooser.getSelectedFile().getPath());
+			}
+			else if(x == exitItem) {
+				System.exit(0);
+			}
+			else if(x == blackItem) {
+				text1.setForeground(Color.BLACK);
+			}
+			else if(x == redItem) {
+				text1.setForeground(Color.RED);
+			}
+			else if(x == visibleItem) {
+				if(visibleItem.isSelected() == true) {
+					getContentPane().setVisible(true);
+				}else {
+					getContentPane().setVisible(false);
+				}
 			}
 			pack();
 			
@@ -253,7 +372,7 @@ public class GUI extends JFrame {
 			}
 			pack();
 		}
-		@SuppressWarnings({ "deprecation", "unchecked" })
+		@SuppressWarnings({ "deprecation" })
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
 			// TODO Auto-generated method stub
@@ -264,13 +383,23 @@ public class GUI extends JFrame {
 				all  += (s + "\r\n");
 			}
 			text1.setText(all);
-			list2.setListData(nameList.getSelectedValues());
+			list2.setListData((String[]) nameList.getSelectedValues());
 			pack();
+		}
+		@Override
+		public void stateChanged(ChangeEvent e) {
+			// TODO Auto-generated method stub
+			Object x = e.getSource();
+			if(x == slider1) {
+				area1.append(Integer.toString(slider1.getValue()) + "\n");
+			}
 		}
 	}
 	
 	
-	
+	public void paint(Graphics g) {
+		
+	}
 	
 	
 	
