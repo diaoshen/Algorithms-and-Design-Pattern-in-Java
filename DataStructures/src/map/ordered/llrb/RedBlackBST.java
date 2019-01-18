@@ -646,8 +646,12 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
     public int size(Key lo, Key hi) {
         if (lo == null) throw new IllegalArgumentException("first argument to size() is null");
         if (hi == null) throw new IllegalArgumentException("second argument to size() is null");
-
-        if (lo.compareTo(hi) > 0) return 0;
+        
+        //rank(hi) returns position of hi , rank(lo) returns position of low
+        //rank(hi)-rank(lo) gives difference in position or # of keys between low and high
+        //If high exists then add 1 to count hi (inclusive)
+        //If high doesn't exists, then don't need to add 1 as rank(hi) already excluded high
+        if (lo.compareTo(hi) > 0) return 0; //Return 0 if low > high
         if (contains(hi)) return rank(hi) - rank(lo) + 1;
         else              return rank(hi) - rank(lo);
     }

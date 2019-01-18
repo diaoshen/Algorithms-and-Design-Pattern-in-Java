@@ -21,31 +21,41 @@ import java.util.Queue;
 /*
  * Current Supported Operations
  * 
- * public int 		size() 						//Returns total # of nodes in BST
- * public in		getHeight()					//Returns the height of BST
- * public Value 	get(Key key)				//Returns value of given key
- * public void 		add(Key key , Value val)  	//Adds a node to tree with given key and associated value
- * public void 		delete(Key key)				//Removes a key/value pair of a given key
- * public void 		deleteMin()					//Removes the minimum key 
- * public void 		deleteMax()					//Removes the maximum key
- * public Key		min()						//Returns minimum key in tree
- * public Key		max()						//Returns maximum key in tree
- * public Key 		floor(Key key)				//Returns largest key <= parameter key
- * public Key		ceiling(Key key)			//Returns smallest key >= parameter key
- * public boolean 	contains(Key key);			//Returns true if a value of a given key exists or not
- * public boolean 	isEmpty();					//Returns true if BST is empty , false otherwise
- * public int 		rank(Key key)				//Returns # of keys <= given key
- * public int		rank2()						//Returns # of keys >= given key
- * public Key 		select(int k)				//Returns the kth smallest element. 
- * public Key		select2(int k)				//Returns the kth largest element
- * public void		printSideWays()				//Print tree side ways
- * public double	getAverage(int k)			//Returns average of k smallest key's value from a BST
- * public double 	getAverage2(int k)			//Returns average of k largest key's value from BST
- * public void		printLevel()				//Prints BST level by level
- * public void		printInOrder()				//Prints BST in order A-Z = LEFT,ME,RIGHT
- * public void		printPreOrder()				//Prints BST in Pre-order = LEFT,RIGHT,ME
- * public void		printPostOrder()			//Prints BST in Post-order = ME,LEFT,RIGHT
+ * public int 				size() 						//Returns total # of nodes in BST
+ * public in				getHeight()					//Returns the height of BST
+ * public Value 			get(Key key)				//Returns value of given key
+ * public void 				add(Key key , Value val)  	//Adds a node to tree with given key and associated value
+ * public void 				delete(Key key)				//Removes a key/value pair of a given key
+ * public void 				deleteMin()					//Removes the minimum key 
+ * public void 				deleteMax()					//Removes the maximum key
+ * public Key				min()						//Returns minimum key in tree
+ * public Key				max()						//Returns maximum key in tree
+ * public Key 				floor(Key key)				//Returns largest key <= parameter key
+ * public Key				ceiling(Key key)			//Returns smallest key >= parameter key
+ * public boolean 			contains(Key key);			//Returns true if a value of a given key exists or not
+ * public boolean 			isEmpty();					//Returns true if BST is empty , false otherwise
+ * public int 				rank(Key key)				//Returns # of keys <= given key
+ * public int				rank2()						//Returns # of keys >= given key
+ * public Key 				select(int k)				//Returns the kth smallest element. 
+ * public Key				select2(int k)				//Returns the kth largest element
+ * public void				printSideWays()				//Print tree side ways
+ * public double			getAverage(int k)			//Returns average of k smallest key's value from a BST
+ * public double 			getAverage2(int k)			//Returns average of k largest key's value from BST
+ * public void				printLevel()				//Prints BST level by level
+ * public void				printInOrder()				//Prints BST in order A-Z = LEFT,ME,RIGHT
+ * public void				printPreOrder()				//Prints BST in Pre-order = LEFT,RIGHT,ME
+ * public void				printPostOrder()			//Prints BST in Post-order = ME,LEFT,RIGHT
+ * public Iterable<Key>		range()						//Returns Iterable from lowest to highest
+ * public Iterable<key>		range(key1,key2)			//Returns Iterable from key1 to key2
+ * public int 				size(key1,key2)				//Returns # of keys between key1 - key2
+ * 		
  * 
+ * Similar function mechanics 
+	add  , get , rank , delete , floor, ceiling all share similar code
+
+
+	range similar to InOrderTraversal
+
  * 
  */
 
@@ -421,7 +431,7 @@ public class BST <Key extends Comparable<Key> , Value>{
 			     
 			 *floor(G)=floor(S,A)->floor(E,A) t=floor(R,G) -> floor(H,G) -> floor(NULL,G) returns NULL to floor(H,G)->floor(R,G)->t then since t == null
 			 *returns E to floor(S,A) , In this case H.left is null thus NULL recursively returns up and T will end up having value of null.
-			 *If H.left = G that is floor(G) was able to locate H then t would have become H and return value of floor(E,A) would be G.
+			 *If H.left = G that is floor(G) was able to locate G then t would have become G and return value of floor(E,A) would be G.
 			 *
 			 *The reason why going to right need to check if T is null or not IS In order to need to go right that means current node is potentially 
 			 * the floor already in the example floor(G) , when reaching node E we know is going to right because if were to insert G. It must be 
@@ -652,7 +662,7 @@ public class BST <Key extends Comparable<Key> , Value>{
 			 * compareLow tells if "low" key can be found in currNode's left subtree
 			 * compareHigh tells if "high" key can be found in currNode's right subtree
 			 * 
-			 * If low possibly exists in left subtree , go left
+			 * If low possibly exists in left subtree , go left because it needs to find the lowest
 			 * If low possibly exists in left subtree and high possible exits in right subtree then currNode is in range.
 			 * OR currNode is LOW or HIGH then  add to queue
 			 * If high possibly exists in right subtree , go right
@@ -662,7 +672,7 @@ public class BST <Key extends Comparable<Key> , Value>{
 			if(currNode == null) return;
 			int compareLow = low.compareTo(currNode.key); 
 			int compareHigh = high.compareTo(currNode.key);
-			if(compareLow < 0) { // currNode > low
+			if(compareLow < 0) { // currNode > low 
 				range(currNode.left, queue, low , high);
 			}
 			// (L exists in left subtree or L is currNode)  AND (H exists in right subtree or H is currNode)
@@ -673,6 +683,12 @@ public class BST <Key extends Comparable<Key> , Value>{
 			if(compareHigh > 0) {
 				range(currNode.right,queue,low,high);
 			}
+		}
+		
+		public int size(Key low , Key high) {
+			if(low.compareTo(high) > 0) return 0; //Return 0 as size b/c low > high , this is the case if is trying to call size(10,5) , there is 0 key between 10th and 5th
+			if(contains(high)) return rank(high) - rank(low) + 1;
+			else 			   return rank(high) - rank(low);
 		}
 		
 		public static void main(String args[]) {
