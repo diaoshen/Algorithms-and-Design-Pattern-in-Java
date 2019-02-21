@@ -2,14 +2,12 @@ package map.ordered.llrb;
 /*
  * Author : DIAO
  * Time created : 12/18/2018
+ * Last updated : 01/18/2019
  */
 
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.Queue;
-
-
-
 
 
 
@@ -27,11 +25,45 @@ import java.util.Queue;
  * Current Supported Operations :
  * 
  * public 	int 		size()						//Returns total number of TreeNodes 
- * private	boolean 	isRed(TreeNode x)			//Returns true if a TreeNode is red , Default = BLACK
+ * public	boolean		isEmpty()					//Returns true if BST is empty , false otherwise
+ * public 	int			height()					//Returns height of BST , single node BST has height of 0
+ * public 	void		add(Key key , Value val)	//Add a key/value pair to BST
+ * public	Value		get(Key key)				//Returns value of a given key
+ * public 	boolean 	contains(Key key)			//Returns true if BST contains a given key
+ * public	Key			min()						//Returns the minimum key 
+ * public 	Key			max()						//Returns the maximum key
+ * public 	void		deleteMin()					//Delete minimum key from tree
+ * public	void 		deleteMax()					//Delete maximum key from tree
+ * public	void		delete(Key key)				//Delete a key/value pair given key
+ * public	Key			floor(Key key)				//Returns largest key <= given key
+ * public	Key			ceiling(Key key)			//Returns smallest key >= given key
+ * public 	Key			select(int k)				//Returns smallest zero based kth key
+ * public	int			rank(Key key)				//Returns # keys <= key
+ * public	double		getAverage(int k)			//Returns average of k smallest key's value in BST
+ * public	Iterable	range()						//Returns Iterable from lowest to highest
+ * public 	Iterable	range(key1,key2)			//Returns Iterable from key1 to key2
+ * public 	int			size(key1,key2)				//Returns # of keys between key1,key2 inclusive
+ * public	void		printLevel()				//Prints BST level by level
+ * public	void		printInOrder()				//Prints BST from smallest to largest , same as range()
+ * public	void		printPreOrder()				//Prints BST in pre order
+ * public	void		pinrtPostOrder()			//Pritns BST in post order
+ * 
+ * 
+ * Helper Functions : 
+ * 
  * private	TreeNode	rotateLeft(TreeNode h)		//Switch color between h and h.right and return h.right
  * private 	TreeNode	rotateRight(TreeNode h)		//Switch color between h and h.left and return h.left
  * private 	void		flipColors(TreeNode h)		//Change h to red  and childs of h to black
- * public 	void		add(Key key , Value val)	//Add a key/value pair to BST
+ * private	boolean 	isRed(TreeNode x)			//Returns true if a TreeNode is red , Default = BLACK
+ * private 	boolean		isBlack(TreeNode x)			//Returns true if a TeeeNode is Black 
+ * private 	TreeNode	fix(TreeNode h)				//Perform series of local transformation to restore balance
+ * private 	TreeNode	makeRedRight(TreeNode h)	//Turn h into 3/4 node aka RED NODE , prep for deleteMax()
+ * private 	TreeNode	makeRedLeft(TreeNode h)		//Turn h into 3/4 node aka RED NODE , prep for deleteMin()
+ * private 	boolean		check()						//Returns true if current tree is a LLRBST 
+ * 
+ * TODO
+ * []MORE private helper function need to be added
+ * []Add checks to each function to ensure boundaries are check
  */
 
 
@@ -413,6 +445,15 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 		if(!isEmpty()) root.color = BLACK;
 	}
 	private TreeNode delete(TreeNode h , Key key) {
+		//Reason why going left or right needs to prep is because if target node is found and is at bottom. It needs to be a red node so deleting this target node will not destroy balance. Just like in del min/max.  
+		
+		//General strategy here is 
+		//If go left , make red left (like in del min)
+		//If go right , make red right (like in del max)
+		//If found and is at bottom just delete like in del min/max
+		//If found and is not at bottom, then replace with successor and delete successor from right subtree.
+		
+		
 		int cmp = key.compareTo(h.key);
 		if(cmp < 0) { // Similar to DeleteMin Code)
 			if(isBlack(h.left) && isBlack(h.left.left)) {
@@ -425,7 +466,7 @@ public class RedBlackBST <Key extends Comparable<Key> , Value> {
 				h = rotateRight(h);
 			}
 			//EQUAL AND AT BOTTOM
-			if(cmp == 0 && h.right == null) { //By design of LLRB, h.right must be null as if h.right is not null then perfect black doesn't exist. thus h.right must be null for successor
+			if(cmp == 0 && h.right == null) { //By design of LLRB, h.right must be null because all node added must lean left. There exists no node that's at the bottom and h.right != null.  If a node is at bottom then that node's right link must be null.
 				return null;
 			}
 			//Carry red link down if necessary , just like in deleteMax()

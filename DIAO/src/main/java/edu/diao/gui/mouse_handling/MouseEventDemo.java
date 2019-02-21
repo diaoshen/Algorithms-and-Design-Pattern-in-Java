@@ -14,7 +14,9 @@ public class MouseEventDemo extends JFrame implements MouseListener , MouseMotio
 	private String[] text  = { "Pressed" , "Clicked" , "Released" , "Entered" , "Exited" , "Dragged" , "X:" , "Y:" };
 	private int currentX = 0;
 	private int currentY = 0;
+	@SuppressWarnings("unused")
 	private int width = 0;
+	@SuppressWarnings("unused")
 	private int height = 0;
 	
 	
