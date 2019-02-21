@@ -16,7 +16,7 @@ import java.util.Scanner;
 //          <list> ::= ( <exprlist> )
 //      <exprlist> ::= { <exp> }
 //         <digit> ::= 0 | 1
-//        <string> ::= a | b | c 
+//        <string> ::= a | b | c  
 //--------------------------------------------
 
 public class Recognizer
