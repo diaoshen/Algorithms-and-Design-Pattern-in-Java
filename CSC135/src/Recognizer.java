@@ -56,12 +56,41 @@ public class Recognizer
   }
 
   private void exprlist()
-  { while ((token() == '0')
-        || (token() == '1')
-        || (token() == 'a')
-        || (token() == 'b')
-        || (token() == 'c')
-        || (token() == '(')) exp(); }
+  { 
+//	  while ((token() == '0')
+//        || (token() == '1')
+//        || (token() == 'a')
+//        || (token() == 'b')
+//        || (token() == 'c')
+//        || (token() == '(')
+//        || (token() == '+')) 
+//	  match('+');
+//	  exp(); 
+	  
+	//option 3  
+//	  while(token() == '+') {
+//		  match('+');
+//		  exp();
+//	  }
+	  
+ 
+	  //Option 2
+//		  match('+');
+//	  while(token() == '0' || token() == '1' || token() == 'a' || token() == 'b' || token() == '(') {
+//		  exp();
+//		  match('+');
+//	  }
+		  
+	  while(token() == '0' ||
+			token() == '1' ||
+			token() == 'a' ||
+			token() == 'b' ||
+			token() == '(') {
+		  exp();
+		  match('+');
+	  }
+  
+  }
 
   private void digit()
   { if ((token() == '0') || (token() == '1')) match(token()); else error(); }
@@ -79,6 +108,9 @@ public class Recognizer
       System.out.println("legal." + "\n");
     else
       System.out.println("errors found." + "\n");
+    
+    index = 0;
+    errorflag = 0;
   }
 //----------------------
   @SuppressWarnings("resource")
@@ -87,10 +119,13 @@ public static void main (String[] args) throws IOException
     Recognizer rec = new Recognizer();
 
     Scanner input = new Scanner(System.in);
-
-    System.out.print("\n" + "enter an expression: ");
-    inputString = input.nextLine();
-
-    rec.start();
+    String end = "die";
+    rec.inputString = "yeah";
+	while(!inputString.equals(end)){
+	    System.out.print("\n" + "enter an expression: ");
+	    inputString = input.nextLine();
+	
+	    rec.start();
+	}
   }
 }

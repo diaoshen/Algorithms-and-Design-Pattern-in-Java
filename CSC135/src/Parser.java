@@ -80,6 +80,7 @@ public class Parser {
 			  token() == 'O' ||
 			  token() == 'C' ) {
 			statemt();
+			match('S');
 		}
 	}
 	private void statemt() {
@@ -105,7 +106,7 @@ public class Parser {
 		comprsn();
 		match('@');
 		
-		while(
+		while( //first(statemt)
 				  token() == 'W' ||
 				  token() == 'X' ||
 				  token() == 'Y' ||
@@ -119,7 +120,7 @@ public class Parser {
 		}
 		if(token() == '%') {
 			match('%');
-			while(
+			while( //first(statemt)
 					  token() == 'W' ||
 					  token() == 'X' ||
 					  token() == 'Y' ||
@@ -155,13 +156,19 @@ public class Parser {
 	private void inout() { //?????
 		iosym();
 		ident();
-		while(   
-				token() == 'W' ||
-				token() == 'X' ||
-				token() == 'Y' ||
-				token() == 'Z' ||
-				token() == '0' ||
-				token() == '1'   ) {
+		//OLD VERSION
+//		while(   
+//				token() == 'W' ||
+//				token() == 'X' ||
+//				token() == 'Y' ||
+//				token() == 'Z' ||
+//				token() == '0' ||
+//				token() == '1'   ) {
+//			match(';');
+//			ident();
+//		}
+		//New Version ( I think is correct )
+		while(token() ==',') {
 			match(';');
 			ident();
 		}
@@ -175,21 +182,27 @@ public class Parser {
 	}
 	private void exprsn() {
 		factor();
-		while(
-				token() == '0' ||
-				token() == '1' ||
-				token() == 'W' ||
-				token() == 'X' ||
-				token() == 'Y' ||
-				token() == 'Z' ||
-				token() == 'T' ||
-				token() == 'F' ||
-				token() == ')' ||
-				token() == '*' ||
-				token() == '+'   ) {
+		//OLD
+//		while(
+//				token() == '0' ||
+//				token() == '1' ||
+//				token() == 'W' ||
+//				token() == 'X' ||
+//				token() == 'Y' ||
+//				token() == 'Z' ||
+//				token() == 'T' ||
+//				token() == 'F' ||
+//				token() == ')' ||
+//				token() == '*' ||
+//				token() == '+'   ) {
+//			match('+');
+//			factor();
+//		}	
+		//NEW
+		while(token() =='+') {
 			match('+');
 			factor();
-		}		
+		}
 	}
 	private void comprsn() {
 		match('(');
@@ -243,28 +256,34 @@ public class Parser {
 	}
 	private void factor() {
 		oprnd();
-		while(
-				token() == '0' ||
-				token() == '1' ||
-				token() == 'W' ||
-				token() == 'X' ||
-				token() == 'Y' ||
-				token() == 'Z' ||
-				token() == 'T' ||
-				token() == 'F' ||
-				token() == ')' ||
-				token() == '*'   ) {
+		//OLD
+//		while(
+//				token() == '0' ||
+//				token() == '1' ||
+//				token() == 'W' ||
+//				token() == 'X' ||
+//				token() == 'Y' ||
+//				token() == 'Z' ||
+//				token() == 'T' ||
+//				token() == 'F' ||
+//				token() == ')' ||
+//				token() == '*'   ) {
+//			match('*');
+//			oprnd();
+//		}	
+		//New
+		while(token() == '*') {
 			match('*');
 			oprnd();
-		}		
+		}
 	}
 	private void integer() {
 		digit();
-		while(
-				token() == '0' ||
-				token() == '1'   ) {
+		while(token() == '0' || token() == '1'   ) {
+			digit();
 			digit();
 		}
+		//digit();
 	}
 	private void bool() {
 		if(token() == 'T') {
