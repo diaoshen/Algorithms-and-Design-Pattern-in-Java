@@ -278,12 +278,15 @@ public class Parser {
 		}
 	}
 	private void integer() {
-		digit();
-		while(token() == '0' || token() == '1'   ) {
+//		digit();
+//		while(token() == '0' || token() == '1'   ) {
+//			digit();
+//			digit();
+//		}
+//		//digit();
+		do {
 			digit();
-			digit();
-		}
-		//digit();
+		}while(token() == '0' || token() == '1');
 	}
 	private void bool() {
 		if(token() == 'T') {
