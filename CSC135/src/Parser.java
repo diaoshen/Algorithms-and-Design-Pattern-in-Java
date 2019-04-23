@@ -1,7 +1,9 @@
-import java.io.*;
+//import java.io.*;
 import java.util.Scanner;
 /*
  * @AUTHOR RONGGUANG OU
+ * @CSC 135 HW1 Recognizer 
+ *  
  * 
  * EBNF Grammar is 
  * 
@@ -37,6 +39,7 @@ public class Parser {
 	static String inputString;
 	static int index = 0;
 	static int errorflag = 0;
+
 	
 	/*
 	 * Util Functions
@@ -46,21 +49,58 @@ public class Parser {
 	private void match(char t) {
 		if(t == token())
 			advancePtr();
-		else
+		else { 
+			System.out.println("Did you mean to put " + t + "?");
 			error();
+		}
 	}
 	private void error() {
-		System.out.println("Error at position: " + index);
+		System.out.println("Error at position: " + index +  " token is " + token());
+		
 		errorflag = 1;
 		advancePtr(); //Continue for checking
 	}
 	private void start() {
-		program();
-		match('$');
-		if(errorflag == 0)
-			System.out.println("Legal\n");
-		else
-			System.out.println("Illegal\n");
+	    inputString += "$";
+	    program();
+	    match('$');
+	    if (errorflag == 0)
+	      System.out.println("legal." + "\n");
+	    else
+	      System.out.println("errors found." + "\n");
+	    
+	    index = 0;
+	    errorflag = 0;
+	}
+	private void checkLegal(String input[]) {
+		//Check all TRUE legal strings
+		for(int i = 0 ; i < input.length; i++) {
+			inputString = input[i];
+			inputString += "$";
+			program();
+			match('$');
+			if(errorflag == 0)
+				System.out.println("Legal");
+			else
+				System.out.println("Illegal");
+			index = 0; // Reset
+			errorflag = 0; //Reset
+		}
+	}
+	private void checkIllegal(String input[]) {
+		//Check all TRUE illegal string 
+		for(int i = 0 ; i < input.length; i++) {
+			inputString = input[i];
+			inputString += "$";
+			program();
+			match('$');
+			if(errorflag == 0)
+				System.out.println("Legal");
+			else
+				System.out.println("Illegal");
+			index = 0; // Reset
+			errorflag = 0; //Reset
+		}
 	}
 	
 	
@@ -69,7 +109,7 @@ public class Parser {
 	 */
 	private void program() {
 		match('S');
-		while(token() == 'S' ||
+		while(
 			  token() == 'W' ||
 			  token() == 'X' ||
 			  token() == 'Y' ||
@@ -80,7 +120,6 @@ public class Parser {
 			  token() == 'O' ||
 			  token() == 'C' ) {
 			statemt();
-			match('S');
 		}
 	}
 	private void statemt() {
@@ -101,21 +140,21 @@ public class Parser {
 		exprsn();
 		match(';');
 	}
-	private void ifstmt() { // ???? 
+	private void ifstmt() { 
 		match('I');
 		comprsn();
 		match('@');
 		
 		while( //first(statemt)
-				  token() == 'W' ||
-				  token() == 'X' ||
-				  token() == 'Y' ||
-				  token() == 'Z' ||
-				  token() == 'I' ||
-				  token() == 'D' ||
-				  token() == 'R' ||
-				  token() == 'O' ||
-				  token() == 'C'   ) {
+					  token() == 'W' ||
+					  token() == 'X' ||
+					  token() == 'Y' ||
+					  token() == 'Z' ||
+					  token() == 'I' ||
+					  token() == 'D' ||
+					  token() == 'R' ||
+					  token() == 'O' ||
+					  token() == 'C'   ) {
 				statemt();
 		}
 		if(token() == '%') {
@@ -130,7 +169,7 @@ public class Parser {
 					  token() == 'R' ||
 					  token() == 'O' ||
 					  token() == 'C'   ) {
-					statemt();
+				statemt();
 			}
 		}
 		match('&');	
@@ -138,38 +177,26 @@ public class Parser {
 	private void doo() {
 		match('D');
 		while(
-				  token() == 'W' ||
-				  token() == 'X' ||
-				  token() == 'Y' ||
-				  token() == 'Z' ||
-				  token() == 'I' ||
-				  token() == 'D' ||
-				  token() == 'R' ||
-				  token() == 'O' ||
-				  token() == 'C'   ) {
-			statemt();
+					  token() == 'W' ||
+					  token() == 'X' ||
+					  token() == 'Y' ||
+					  token() == 'Z' ||
+					  token() == 'I' ||
+					  token() == 'D' ||
+					  token() == 'R' ||
+					  token() == 'O' ||
+					  token() == 'C'   ) {
+				statemt();
 		}
 		match('U');
 		comprsn();
 		match('E');	
 	}
-	private void inout() { //?????
+	private void inout() { 
 		iosym();
 		ident();
-		//OLD VERSION
-//		while(   
-//				token() == 'W' ||
-//				token() == 'X' ||
-//				token() == 'Y' ||
-//				token() == 'Z' ||
-//				token() == '0' ||
-//				token() == '1'   ) {
-//			match(';');
-//			ident();
-//		}
-		//New Version ( I think is correct )
 		while(token() ==',') {
-			match(';');
+			match(',');
 			ident();
 		}
 		match(';');
@@ -182,24 +209,7 @@ public class Parser {
 	}
 	private void exprsn() {
 		factor();
-		//OLD
-//		while(
-//				token() == '0' ||
-//				token() == '1' ||
-//				token() == 'W' ||
-//				token() == 'X' ||
-//				token() == 'Y' ||
-//				token() == 'Z' ||
-//				token() == 'T' ||
-//				token() == 'F' ||
-//				token() == ')' ||
-//				token() == '*' ||
-//				token() == '+'   ) {
-//			match('+');
-//			factor();
-//		}	
-		//NEW
-		while(token() =='+') {
+		while(token() == '+') {
 			match('+');
 			factor();
 		}
@@ -209,6 +219,7 @@ public class Parser {
 		oprnd();
 		opratr();
 		oprnd();
+		match(')');
 	}
 	private void iosym() {
 		if(token() == 'R') {
@@ -236,10 +247,12 @@ public class Parser {
 			ident();
 		}else if(token() == 'T' || token() == 'F') {
 			bool();
-		}else { //if token() == '(' 
+		}else if(token() == '('){ 
 			match('(');
 			exprsn();
 			match(')');
+		}else {
+			error(); 
 		}
 	}
 	private void opratr() {
@@ -256,34 +269,12 @@ public class Parser {
 	}
 	private void factor() {
 		oprnd();
-		//OLD
-//		while(
-//				token() == '0' ||
-//				token() == '1' ||
-//				token() == 'W' ||
-//				token() == 'X' ||
-//				token() == 'Y' ||
-//				token() == 'Z' ||
-//				token() == 'T' ||
-//				token() == 'F' ||
-//				token() == ')' ||
-//				token() == '*'   ) {
-//			match('*');
-//			oprnd();
-//		}	
-		//New
 		while(token() == '*') {
 			match('*');
 			oprnd();
 		}
 	}
 	private void integer() {
-//		digit();
-//		while(token() == '0' || token() == '1'   ) {
-//			digit();
-//			digit();
-//		}
-//		//digit();
 		do {
 			digit();
 		}while(token() == '0' || token() == '1');
@@ -321,12 +312,37 @@ public class Parser {
 		}
 	}
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Parser miParser = new Parser();
-		Scanner input = new Scanner(System.in);
-		System.out.println("Enter an expression : ");
-		inputString = input.nextLine();
-		miParser.start();
+		/*
+		 * NOTE : All input string does not need to be terminated by $
+		 * 		"$" is added by program.
+		 * 
+		 * PLEASE READ the readme.txt before using this recognizer 
+		 */
+		Parser rec = new Parser();
+		
+		// OPTION 1  
+		
+		String trueLegalString[] =  {
+			//Insert true legal string here
+		};
+		String trueIllegalString[] = {
+			//Insert true illegal string here
+		};
+		
+		rec.checkLegal(trueLegalString);
+		rec.checkIllegal(trueIllegalString);
+		
+		// OPTION 2
+		
+	    Scanner input = new Scanner(System.in);
+	    String end = "die";
+		do{
+		    System.out.print("\n" + "enter an expression: ");
+		    inputString = input.nextLine();
+		    if(inputString.equals(end)) break;
+		    rec.start();
+		}while(true);
+		input.close();
+		System.out.println("Program Terminated by \"die\" command");
 	}
-
 }

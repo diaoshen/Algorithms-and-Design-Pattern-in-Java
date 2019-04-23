@@ -120,7 +120,7 @@ public static void main (String[] args) throws IOException
 
     Scanner input = new Scanner(System.in);
     String end = "die";
-    rec.inputString = "yeah";
+    Recognizer.inputString = "yeah";
 	while(!inputString.equals(end)){
 	    System.out.print("\n" + "enter an expression: ");
 	    inputString = input.nextLine();
