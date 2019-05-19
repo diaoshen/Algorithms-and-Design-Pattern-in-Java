@@ -311,6 +311,12 @@ public class Parser {
 			match('1');
 		}
 	}
+	
+	/*
+	 * 	Sample Legal String : 
+	 * 
+	 * SW~1;
+	 */
 	public static void main(String[] args) {
 		/*
 		 * NOTE : All input string does not need to be terminated by $
