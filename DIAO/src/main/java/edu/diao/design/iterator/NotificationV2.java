@@ -24,18 +24,18 @@ class NotificationV2
 	} 
 } 
 
-//Collection interface 
-interface CollectionV2
+//Collection interface that provides the method that returns iterator
+interface iterable
 { 
 	public  Iterator createIterator(); 
 } 
 
 //Collection of notifications 
-class NotificationCollectionV3 implements CollectionV2
+class NotificationCollectionV3 implements iterable
 { 
 	static final int MAX_ITEMS = 6; 
 	int numberOfItems = 0; 
-	ArrayList<Notification> notificationList;
+	ArrayList<Notification> notificationList; //Stores Notification using ArrayList
 	
 	public NotificationCollectionV3() 
 	{ 
@@ -64,7 +64,7 @@ class NotificationCollectionV3 implements CollectionV2
 	} 
 } 
 
-class NotificationCollectionV4 implements CollectionV2
+class NotificationCollectionV4 implements iterable
 { 
 	static final int MAX_ITEMS = 6; 
 	int numberOfItems = 0; 

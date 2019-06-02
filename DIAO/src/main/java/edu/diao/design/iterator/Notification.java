@@ -71,7 +71,6 @@ class NotificationCollection implements Collection<Notification>
 	public  Iterator<Notification> createIterator() 
 	{ 
 		return notificationList.iterator();
-		//return  new NotificationIterator(notificationList); 
 	} 
 } 
 
@@ -105,91 +104,10 @@ class NotificationCollectionV2 implements Collection<Notification>
 	{ 
 		List<Notification> list =  Arrays.asList(notificationList);
 		return list.iterator();
-		//return new NotificationIteratorV2(notificationList); 
 	} 
 } 
 
-//We could also use Java.Util.Iterator 
-/*interface Iterator
-{ 
-	// indicates whether there are more elements to 
-	// iterate over 
-	boolean hasNext(); 
 
-	// returns the next element 
-	Object next(); 
-} 
-*/
-
-
-/*
- * Use ArrayList to Implement Notification Iterator
- * 
- */
-//Notification iterator 
-/*class NotificationIterator implements Iterator
-{ 
-	ArrayList<Notification> notificationList;
-
-	// maintains curr pos of iterator over the array 
-	int pos = 0; 
-
-	// Constructor takes the array of notifiactionList are 
-	// going to iterate over. 
-	public NotificationIterator (ArrayList<Notification> notificationList) 
-	{ 
-		this.notificationList = notificationList; 
-	} 
-
-	public Object next() 
-	{ 
-		// return next element in the array and increment pos 
-		Notification notification = notificationList.get(pos);
-		pos += 1; 
-		return notification; 
-	} 
-
-	public boolean hasNext() 
-	{ 
-		if (pos >= notificationList.size() || 
-			notificationList.get(pos) == null) 
-			return false; 
-		else
-			return true; 
-	} 
-} */
-
-/*class NotificationIteratorV2 implements Iterator<Object> 
-{ 
-    Notification[] notificationList; 
-  
-    // maintains curr pos of iterator over the array 
-    int pos = 0; 
-  
-    // Constructor takes the array of notifiactionList are 
-    // going to iterate over. 
-    public  NotificationIteratorV2 (Notification[] notificationList) 
-    { 
-        this.notificationList = notificationList; 
-    } 
-  
-    public Object next() 
-    { 
-        // return next element in the array and increment pos 
-        Notification notification =  notificationList[pos]; 
-        pos += 1; 
-        return notification; 
-    } 
-  
-    public boolean hasNext() 
-    { 
-        if (pos >= notificationList.length || 
-            notificationList[pos] == null) 
-            return false; 
-        else
-            return true; 
-    } 
-} */
 
 
 //Contains collection of notifications as an object of 
@@ -235,4 +153,3 @@ class Main
 		nb.printNotifications(); 
 	} 
 } 
-
