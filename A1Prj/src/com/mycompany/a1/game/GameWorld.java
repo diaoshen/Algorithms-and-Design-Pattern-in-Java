@@ -1,7 +1,7 @@
 package com.mycompany.a1.game;
 
 import java.util.ArrayList;
-
+import java.util.Random;
 import com.mycompany.a1.gameobjects.GameObject;
 
 public class GameWorld {
@@ -35,6 +35,8 @@ public class GameWorld {
 	
 	//Methods to manipulate game world objects 
 	public void addAsteroid() {
-		
+		//Size 6-30 
+		//Random size,speed,direction
+		asteroids.add(new Asteroid());
 	}
 }
