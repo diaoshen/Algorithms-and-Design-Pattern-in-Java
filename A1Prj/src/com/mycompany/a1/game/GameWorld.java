@@ -10,7 +10,7 @@ public class GameWorld {
 	final private int gameWorldHeight = 768;
 	
 	private int playerScore;
-	private ArrayList<GameObject> gameObjects;
+	private ArrayList<GameObject> asteroids;
 	
 	//Singleton GameWorld
 	private volatile static GameWorld gw;
@@ -30,8 +30,11 @@ public class GameWorld {
 	 */
 	public void init() {
 		this.playerScore = 0;
-		gameObjects = new ArrayList<GameObject>();
+		asteroids = new ArrayList<GameObject>();
 	}
 	
 	//Methods to manipulate game world objects 
+	public void addAsteroid() {
+		
+	}
 }

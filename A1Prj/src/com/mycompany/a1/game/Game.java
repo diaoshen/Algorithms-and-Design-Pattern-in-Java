@@ -42,7 +42,7 @@ public class Game extends Form{
 				
 				switch(sCommand.charAt(0)) {
 					case 'a' :
-						gw.eliminate();
+						//gw.
 						break;
 					case 'y' :
 						//TODO
