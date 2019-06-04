@@ -3,7 +3,10 @@ package com.mycompany.a1.game;
 import java.util.ArrayList;
 import java.util.Random;
 import com.mycompany.a1.gameobjects.GameObject;
+import com.mycompany.a1.gameobjects.moveableobject.Asteroids;
 
+
+@SuppressWarnings("unused")
 public class GameWorld {
 
 	final private int gameWorldWidth = 1024;
@@ -35,8 +38,6 @@ public class GameWorld {
 	
 	//Methods to manipulate game world objects 
 	public void addAsteroid() {
-		//Size 6-30 
-		//Random size,speed,direction
-		asteroids.add(new Asteroid());
+		asteroids.add(new Asteroids());
 	}
 }

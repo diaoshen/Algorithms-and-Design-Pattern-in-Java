@@ -4,9 +4,11 @@ import com.mycompany.a1.gameobjects.GameObject;
 
 public abstract class FixedObject extends GameObject {
 
-	public FixedObject(int locationX, int locationY) {
-		super(locationX, locationY, color);
+	public FixedObject(int objectColor) {
+		super(objectColor);
 		// TODO Auto-generated constructor stub
 	}
+
+
 
 }

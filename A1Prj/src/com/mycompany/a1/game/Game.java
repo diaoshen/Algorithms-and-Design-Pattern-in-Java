@@ -23,6 +23,7 @@ public class Game extends Form{
 	
 	
 	private void play() {
+		System.out.println("In Play");
 		//TODO :  Accept and Execute User commands that operate on the game world.
 		Label myLabel = new Label("Enter a Command: ");
 		final TextField inputTextField = new TextField();
@@ -42,7 +43,8 @@ public class Game extends Form{
 				
 				switch(sCommand.charAt(0)) {
 					case 'a' :
-						//gw.
+						gw.addAsteroid();
+						System.out.println("A new ASTEROID has been created.");
 						break;
 					case 'y' :
 						//TODO
