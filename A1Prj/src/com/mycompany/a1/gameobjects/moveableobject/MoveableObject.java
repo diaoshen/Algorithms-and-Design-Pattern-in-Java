@@ -13,6 +13,11 @@ public abstract class MoveableObject extends GameObject {
 		this.speed = new Random().nextInt(21);
 		this.direction = new Random().nextInt(360);
 	}
+	public MoveableObject(int objectColor , int speed, int direction , double x , double y) {
+		super(objectColor, x , y);
+		this.speed = speed;
+		this.direction = direction;
+	}
 
 	
 	public void move() {

@@ -14,6 +14,7 @@ public class GameWorld {
 	
 	private int playerScore;
 	private ArrayList<GameObject> asteroids;// arraylist of asteroids 
+	private ArrayList<GameObject> playerShips; // arraylist of playerships
 	
 	//Singleton GameWorld
 	private volatile static GameWorld gw;
@@ -34,6 +35,7 @@ public class GameWorld {
 	public void init() {
 		this.playerScore = 0;
 		asteroids = new ArrayList<GameObject>();
+		playerShips = new ArrayList<GameObject>();
 	}
 	
 	//Methods to manipulate game world objects 

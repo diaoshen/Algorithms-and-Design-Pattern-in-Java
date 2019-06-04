@@ -23,6 +23,10 @@ public abstract class GameObject {
 		this.coord = new Point2D(x , y);
 		this.color = objectColor;
 	}
+	public GameObject(int objectColor , double x , double y) {
+		this.coord = new Point2D(x,y);
+		this.color = objectColor;
+	}
 	
 	public double getX() { return coord.getX(); }
 	public double getY() { return coord.getY(); }		
