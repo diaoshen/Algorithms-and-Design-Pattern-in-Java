@@ -10,7 +10,7 @@ public class GameWorld {
 	final private int gameWorldHeight = 768;
 	
 	private int playerScore;
-	private ArrayList<GameObject> asteroids;
+	private ArrayList<GameObject> asteroids;// arraylist of asteroids
 	
 	//Singleton GameWorld
 	private volatile static GameWorld gw;
