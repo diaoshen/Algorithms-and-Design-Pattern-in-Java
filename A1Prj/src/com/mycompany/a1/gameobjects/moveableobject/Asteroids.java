@@ -15,7 +15,7 @@ public class Asteroids extends MoveableObject {
 		final int MIN_SIZE = 6;
 		final int MAX_SIZE = 30;
 		this.size =  new Random().nextInt(MAX_SIZE - MIN_SIZE + 1) + MIN_SIZE;
-		this.toString();
+		System.out.println(this.toString());
 	}
 	
 	public int getSize() {
@@ -26,9 +26,10 @@ public class Asteroids extends MoveableObject {
 	public String toString() {
 		return (
 			"Asteroid: loc=" + Math.round(this.getX()) + "," + Math.round(this.getY()) + 
-			"color=" + this.getColorToString() +
-			"dir=" + this.getDirection() +
-			"size=" + this.getSize()
+			" color=" + this.getColorToString() +
+			" speed=" + this.getSpeed() +
+			" dir=" + this.getDirection() +
+			" size=" + this.getSize()
 		);				
 	}
 	

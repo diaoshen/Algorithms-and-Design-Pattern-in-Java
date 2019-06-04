@@ -40,11 +40,11 @@ public class Game extends Form{
 				// TODO Auto-generated method stub
 				String sCommand = inputTextField.getText().toString();
 				inputTextField.clear();
-				
+				if(sCommand == null || sCommand.isEmpty()) return;
 				switch(sCommand.charAt(0)) {
 					case 'a' :
 						gw.addAsteroid();
-						System.out.println("A new ASTEROID has been created.");
+						//System.out.println("A new ASTEROID has been created.");
 						break;
 					case 'y' :
 						//TODO
