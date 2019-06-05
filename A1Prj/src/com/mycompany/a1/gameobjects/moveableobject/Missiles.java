@@ -1,5 +1,54 @@
 package com.mycompany.a1.gameobjects.moveableobject;
 
-public class Missiles {
+import com.codename1.charts.util.ColorUtil;
 
+public class Missiles extends MoveableObject{
+
+	private Ship owner;
+	private int fuel;
+	
+	public Missiles(PlayerShip owner) {
+		super(ColorUtil.GRAY, owner.getSpeed() + 10, owner.getMl().getDirection(), owner.getX(), owner.getY());
+		this.owner = owner;
+		this.fuel = 15;
+		owner.decrementMissile();
+		//System.out.println(this.toString()); //DEBUG LINE
+	}
+	public Missiles(NonPlayerShip owner) {
+		super(ColorUtil.BLUE, owner.getSpeed() + 10, owner.getMl().getDirection(), owner.getX(), owner.getY());
+		this.fuel = 15;
+		owner.decrementMissile();
+	//	System.out.println(this.toString()); //DEBUG LINE
+	}
+	public void setSpeed(int x) {
+		System.out.println("Cannot alter missile speed");
+	}
+	public void setDirection(int x) {
+		System.out.println("Cannot alter missile direction");
+	}
+	public int getFuel() {
+		return this.fuel;
+	}
+	
+	@Override 
+	public String toString() {
+		if(owner instanceof PlayerShip) {
+			return (
+					"PS's Missile: loc=" + Math.round(this.getX()) + "," + Math.round(this.getY()) + 
+					" color=" + this.getColorToString() +
+					" speed=" + this.getSpeed() +
+					" dir=" + this.getDirection() +
+					" fuel=" + this.getFuel()
+				);	
+		}else {
+			return (
+					"NPS's Missile: loc=" + Math.round(this.getX()) + "," + Math.round(this.getY()) + 
+					" color=" + this.getColorToString() +
+					" speed=" + this.getSpeed() +
+					" dir=" + this.getDirection() +
+					" fuel=" + this.getFuel()
+				);	
+		}
+			
+	}	
 }

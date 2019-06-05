@@ -44,28 +44,27 @@ public class Game extends Form{
 				switch(sCommand.charAt(0)) {
 					case 'a' :
 						gw.addAsteroid();
-						//System.out.println("A new ASTEROID has been created.");
 						break;
 					case 'y' :
-						//TODO
+						gw.addNonPlayerShip();
 						break;
 					case 'b' :
-						//TODO
+						gw.addSpaceStation();
 						break;
 					case 's' :
-						//TODO
+						gw.addPlayerShip();
 						break;
 					case 'f' :
-						//TODO
+						gw.addPlayerMissile();
 						break;
 					case 'L' :
-						//TODO
+						gw.addNonPlayerMissile();
 						break;
 					case 'm' :
-						//TODO
+						gw.printMap();
 						break;
 					case 'p' : //MAY 5
-						//TODO
+						gw.printDisplay();
 						break;
 					case '>' :
 						//TODO

@@ -27,12 +27,24 @@ public abstract class Ship extends MoveableObject {
 	
 	private boolean isEmpty() { return missileCount == 0 ; }
 	
-	int getMissileCount() {
+	public int getMissileCount() {
 		return this.missileCount;
 	}
 	
-	void setMissileCount(int x) {
+	public void setMissileCount(int x) {
 		missileCount = x;
+	}
+	
+	public int getMaxMissileCount() {
+		return MAX_MISSILE_COUNT;
+	}
+	
+	public void setMaxMissileCount(int x) {
+		x = MAX_MISSILE_COUNT;
+	}
+	
+	public void decrementMissile() {
+		missileCount--;
 	}
 	
 	
