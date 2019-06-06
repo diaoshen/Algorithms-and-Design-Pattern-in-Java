@@ -12,14 +12,9 @@ public abstract class GameObject {
 	
 	public GameObject(int objectColor) {
 		Random rnd = new Random();
-		double x = rnd.nextInt(1025) + rnd.nextDouble();
-		double y = rnd.nextInt(769) + rnd.nextDouble();
-		while(x > 1024.0) {
-			x = rnd.nextInt(1025) + rnd.nextDouble();
-		}
-		while(y > 768.0) {
-			y = rnd.nextInt(769) + rnd.nextDouble();
-		}
+		double x =  rnd.nextDouble() * 1024;
+		double y =  rnd.nextDouble() * 768;
+
 		this.coord = new Point2D(x , y);
 		this.color = objectColor;
 	}

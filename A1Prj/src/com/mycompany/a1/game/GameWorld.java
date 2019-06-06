@@ -14,19 +14,16 @@ import com.mycompany.a1.gameobjects.moveableobject.Ship;
 @SuppressWarnings("unused")
 public class GameWorld {
 
+	/*
+	 * GameWorld Fields 
+	 */
 	final private int gameWorldWidth = 1024;
 	final private int gameWorldHeight = 768;
-	
-	
 	private int playerScore;
 	private int timer = 0;
-	private ArrayList<GameObject> asteroids;// arraylist of asteroids 
-	private ArrayList<GameObject> playerShips; // arraylist of playerships
-	private ArrayList<GameObject> nonPlayerShips;
-	private ArrayList<GameObject> spaceStations;
-	private ArrayList<GameObject> playerMissiles;
+	private ArrayList<GameObject> gameObjects; //Collection of game objects
 	
-	//Singleton GameWorld
+	//Singleton GameWorld to enforce only instance of gameworld can ever be created.
 	private volatile static GameWorld gw;
 	private GameWorld() {};
 	public static GameWorld getInstance() {
@@ -40,79 +37,100 @@ public class GameWorld {
 	}
 	
 	/*
-	 * Initialize game objects
+	 * Initialize Game
 	 */
 	public void init() {
 		this.playerScore = 0;
 		this.timer = 0;
-		asteroids = new ArrayList<GameObject>();
-		playerShips = new ArrayList<GameObject>();
-		nonPlayerShips = new ArrayList<GameObject>();
-		spaceStations = new ArrayList<GameObject>();
-		playerMissiles = new ArrayList<GameObject>();
+		gameObjects = new ArrayList<GameObject>();
 	}
+	
+	
+	
+	/*
+	 * GAME METHODS :
+	 */
+	
 	
 	/*
 	 * Game tick
 	 */
 	public void tick() {
 		timer++;
+		//TODO Call Move()
 	}
 	
-	//Methods to manipulate game world objects 
+	
 	public void addAsteroid() {
-		asteroids.add(new Asteroids());
+		gameObjects.add(new Asteroids());
 	}
 	public void addPlayerShip() {
-		playerShips.add(PlayerShip.getInstance());
+		//playerShips.add(PlayerShip.getInstance());
+		gameObjects.add(PlayerShip.getInstance());
 	}
 	public void addNonPlayerShip() {
-		nonPlayerShips.add(new NonPlayerShip());
+		gameObjects.add(new NonPlayerShip());
 	}
 	public void addSpaceStation() {
-		spaceStations.add(new SpaceStation());
+		gameObjects.add(new SpaceStation());
 	}
-	public void addPlayerMissile() {
-		if(playerShips.isEmpty()) {
-			System.out.println("There exists no playership to fire missile");
-			return;
+	public void addPlayerMissile() {	
+	
+		for(int i = 0 ; i < gameObjects.size(); i++) {
+			if(gameObjects.get(i) instanceof PlayerShip ) {
+				if(((Ship) gameObjects.get(i)).getMissileCount() > 0 ) {
+					gameObjects.add(new Missiles((PlayerShip) gameObjects.get(i)));
+					//Print Fired Missile
+					System.out.println("Player ship fired missile");
+					System.out.println(((Ship)gameObjects.get(i)).getMissileCount() + " missiles left");
+				}else {
+					//Print Ran out of missile 
+					System.out.println("Player ship ran out of missile");
+				}
+				return;
+			}
 		}
-		if(((PlayerShip) playerShips.get(0)).getMissileCount() > 0) {
-			playerMissiles.add(new Missiles((PlayerShip) playerShips.get(0)));
-		}else {
-			System.out.println("PlayerShip ran out of missiles");
-		}	
+		//No PlayerShip
+		System.out.println("There exists no playership to fire missile");
+		return;
+	
 	}
 	public void addNonPlayerMissile() {
-		if(nonPlayerShips.isEmpty()) {
-			System.out.println("There exists no non-player ship to fire missile");
+		
+		for(int i = 0 ; i < gameObjects.size(); i++) {
+			if(gameObjects.get(i) instanceof NonPlayerShip ) {
+				if(((Ship) gameObjects.get(i)).getMissileCount() > 0) {
+					gameObjects.add(new Missiles((NonPlayerShip) gameObjects.get(i)));
+					System.out.println("Non-Player ship fired missile");
+					System.out.println(((Ship)gameObjects.get(i)).getMissileCount() + " missiles left");
+				}else {
+					System.out.println("Non-Player ship ran out of missile");
+				}
+			}
 			return;
 		}
-		if(((NonPlayerShip) nonPlayerShips.get(0)).getMissileCount() > 0) {
-			playerMissiles.add(new Missiles((NonPlayerShip) nonPlayerShips.get(0)));
-		}else {
-			System.out.println("Non-Player Ship ran out of missiles");
-		}
+		//No PlayerShip
+		System.out.println("There exists no non-playership to fire missile");
+		return;
 	}
 
 	public void printDisplay() {
-		System.out.println( "Current Score=" + this.playerScore +
-							" Number of missile in ship=" + ((Ship) playerShips.get(0)).getMissileCount() + 
-							" Current elapased time=" + this.timer + 
-							" Number of lives=" + ((PlayerShip) playerShips.get(0)).getLife()
+		for(int i = 0 ; i < gameObjects.size(); i++) {
+			if(gameObjects.get(i) instanceof PlayerShip) {
+				System.out.println( "Current Score=" + this.playerScore +
+						" Number of missile in ship=" + ((Ship) gameObjects.get(i)).getMissileCount() + 
+						" Current elapased time=" + this.timer + 
+						" Number of lives=" + ((PlayerShip) gameObjects.get(i)).getLife()
 				);
+			}
+		}
+
 	}
 	
 	public void printMap() {
-		printHelper(asteroids);
-		printHelper(playerShips);
-		printHelper(nonPlayerShips);
-		printHelper(spaceStations);
-		printHelper(playerMissiles);
-	}
-	private void printHelper(ArrayList<GameObject> list) {
-		for(int i = 0 ; i< list.size() ; i++) {
-			System.out.println(list.get(i).toString());
+		for(int i = 0 ; i< gameObjects.size() ; i++) {
+			System.out.println(gameObjects.get(i).toString());
 		}
 	}
+
 }

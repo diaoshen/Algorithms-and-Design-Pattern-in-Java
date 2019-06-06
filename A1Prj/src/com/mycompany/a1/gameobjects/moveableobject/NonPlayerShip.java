@@ -16,7 +16,8 @@ public class NonPlayerShip extends Ship {
 		ml = new NonSteerableMissileLauncher(ColorUtil.MAGENTA, this.getSpeed(), this.getDirection(), this.getX(), this.getY());
 		this.setMaxMissileCount(4);
 		this.setMissileCount(4);
-	//	System.out.println(this.toString()); //DEBUG LINE
+		System.out.println("Added NonPlayerShip");
+		System.out.println(this.toString()); //DEBUG LINE
 	}
 	
 	public NonSteerableMissileLauncher getMl() {
@@ -34,7 +35,7 @@ public class NonPlayerShip extends Ship {
 	@Override 
 	public String toString() {
 		return (
-			"Non-Player Ship: loc=" + Math.round(this.getX()) + "," + Math.round(this.getY()) + 
+			"Non-Player Ship: loc=" + Math.round(this.getX()*10.0)/10.0 + "," + Math.round(this.getY()*10.0)/10.0 + 
 			" color=" + this.getColorToString() +
 			" speed=" + this.getSpeed() +
 			" dir=" + this.getDirection() +

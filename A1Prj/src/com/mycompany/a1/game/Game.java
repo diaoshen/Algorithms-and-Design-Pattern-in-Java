@@ -11,6 +11,7 @@ import com.codename1.ui.TextField;
 import com.codename1.ui.events.ActionEvent;
 import java.lang.String;
 
+//Controller Game : To capture user input and execute game functions
 public class Game extends Form{
 	
 	private GameWorld gw;
@@ -22,6 +23,7 @@ public class Game extends Form{
 	}
 	
 	
+	@SuppressWarnings("rawtypes")
 	private void play() {
 		System.out.println("In Play");
 		//TODO :  Accept and Execute User commands that operate on the game world.
@@ -45,27 +47,39 @@ public class Game extends Form{
 					case 'a' :
 						gw.addAsteroid();
 						break;
+						
 					case 'y' :
 						gw.addNonPlayerShip();
 						break;
+						
 					case 'b' :
 						gw.addSpaceStation();
 						break;
+						
 					case 's' :
 						gw.addPlayerShip();
 						break;
+						
 					case 'f' :
 						gw.addPlayerMissile();
 						break;
+						
 					case 'L' :
 						gw.addNonPlayerMissile();
 						break;
+						
 					case 'm' :
+						System.out.println("Map:");
 						gw.printMap();
 						break;
-					case 'p' : //MAY 5
+						
+					case 'p' : 
+						System.out.println("Player Status :");
 						gw.printDisplay();
 						break;
+						
+						
+						
 					case '>' :
 						//TODO
 						break;
