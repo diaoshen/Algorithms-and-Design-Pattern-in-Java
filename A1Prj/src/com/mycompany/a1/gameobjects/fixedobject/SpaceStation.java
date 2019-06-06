@@ -14,7 +14,8 @@ public class SpaceStation extends FixedObject {
 		super(ColorUtil.YELLOW);
 		this.blinkRate = new Random().nextInt(7);
 		myId = FixedObject.id++;
-	//	System.out.println(this.toString()); //DEBUG LINE
+		System.out.println("Added Blinking SpaceStation");
+		System.out.println(this.toString()); //DEBUG LINE
 	}
 	
 	public boolean getBlinkStatus() {
@@ -36,7 +37,7 @@ public class SpaceStation extends FixedObject {
 	@Override 
 	public String toString() {
 		return (
-			"Station: loc=" + Math.round(this.getX()) + "," + Math.round(this.getY()) + 
+			"Station: loc=" + Math.round(this.getX()*10.0)/10.0 + "," + Math.round(this.getY()*10.0)/10.0 + 
 			" color=" + this.getColorToString() +
 			" rate=" + this.getBlinkRate()
 		);				

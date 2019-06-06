@@ -18,7 +18,7 @@ public class Missiles extends MoveableObject{
 		super(ColorUtil.BLUE, owner.getSpeed() + 10, owner.getMl().getDirection(), owner.getX(), owner.getY());
 		this.fuel = 15;
 		owner.decrementMissile();
-	//	System.out.println(this.toString()); //DEBUG LINE
+		System.out.println(this.toString()); //DEBUG LINE
 	}
 	public void setSpeed(int x) {
 		System.out.println("Cannot alter missile speed");
@@ -34,7 +34,7 @@ public class Missiles extends MoveableObject{
 	public String toString() {
 		if(owner instanceof PlayerShip) {
 			return (
-					"PS's Missile: loc=" + Math.round(this.getX()) + "," + Math.round(this.getY()) + 
+					"PS's Missile: loc=" + Math.round(this.getX()*10.0)/10.0 + "," + Math.round(this.getY()*10.0)/10.0 + 
 					" color=" + this.getColorToString() +
 					" speed=" + this.getSpeed() +
 					" dir=" + this.getDirection() +
@@ -42,7 +42,7 @@ public class Missiles extends MoveableObject{
 				);	
 		}else {
 			return (
-					"NPS's Missile: loc=" + Math.round(this.getX()) + "," + Math.round(this.getY()) + 
+					"NPS's Missile: loc=" + Math.round(this.getX()*10.0)/10.0 + "," + Math.round(this.getY()*10.0)/10.0 + 
 					" color=" + this.getColorToString() +
 					" speed=" + this.getSpeed() +
 					" dir=" + this.getDirection() +

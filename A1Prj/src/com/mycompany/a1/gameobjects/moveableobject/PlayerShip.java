@@ -9,12 +9,13 @@ public class PlayerShip extends Ship implements ISteerable{
 	//Singleton PlayerShip
 	private volatile static PlayerShip ps;
 	private PlayerShip() {
-		super(ColorUtil.GREEN,0,0,x,y,10,10);//Color,Speed,Direction,LocationX,LocationY
+		super(ColorUtil.GREEN,0,0,x,y,10,10);//Color,Speed,Direction,LocationX,LocationY,missileCount,MaxMissileCount
 		life = 3;
 		ml = new MissileLauncher(this.getSpeed(),this.getDirection());
 		setMaxMissileCount(10);
 		setMissileCount(10);
-		
+		System.out.println("Added Playership");
+		System.out.println(this.toString()); //DEBUG LINE
 	}
 	public static PlayerShip getInstance() {
 		if(ps == null) {
@@ -73,7 +74,7 @@ public class PlayerShip extends Ship implements ISteerable{
 	@Override 
 	public String toString() {
 		return (
-			"Player Ship: loc=" + Math.round(this.getX()) + "," + Math.round(this.getY()) + 
+			"Player Ship: loc=" + Math.round(this.getX()*10.0)/10.0 + "," + Math.round(this.getY()*10.0)/10.0 + 
 			" color=" + this.getColorToString() +
 			" speed=" + this.getSpeed() +
 			" dir=" + this.getDirection() +

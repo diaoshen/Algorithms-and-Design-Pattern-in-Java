@@ -14,16 +14,16 @@ import com.mycompany.a1.gameobjects.moveableobject.Ship;
 @SuppressWarnings("unused")
 public class GameWorld {
 
+	/*
+	 * GameWorld Fields 
+	 */
 	final private int gameWorldWidth = 1024;
 	final private int gameWorldHeight = 768;
-	
-	
 	private int playerScore;
 	private int timer = 0;
-
-	private ArrayList<GameObject> gameObjects;
+	private ArrayList<GameObject> gameObjects; //Collection of game objects
 	
-	//Singleton GameWorld
+	//Singleton GameWorld to enforce only instance of gameworld can ever be created.
 	private volatile static GameWorld gw;
 	private GameWorld() {};
 	public static GameWorld getInstance() {
@@ -37,27 +37,31 @@ public class GameWorld {
 	}
 	
 	/*
-	 * Initialize game objects
+	 * Initialize Game
 	 */
 	public void init() {
 		this.playerScore = 0;
 		this.timer = 0;
-
-		
 		gameObjects = new ArrayList<GameObject>();
 	}
+	
+	
+	
+	/*
+	 * GAME METHODS :
+	 */
+	
 	
 	/*
 	 * Game tick
 	 */
 	public void tick() {
 		timer++;
-		//Call Move()
+		//TODO Call Move()
 	}
 	
-	//Methods to manipulate game world objects 
+	
 	public void addAsteroid() {
-		//asteroids.add(new Asteroids())
 		gameObjects.add(new Asteroids());
 	}
 	public void addPlayerShip() {
@@ -77,7 +81,8 @@ public class GameWorld {
 				if(((Ship) gameObjects.get(i)).getMissileCount() > 0 ) {
 					gameObjects.add(new Missiles((PlayerShip) gameObjects.get(i)));
 					//Print Fired Missile
-					//System.out.println("Player ship fired missile");
+					System.out.println("Player ship fired missile");
+					System.out.println(((Ship)gameObjects.get(i)).getMissileCount() + " missiles left");
 				}else {
 					//Print Ran out of missile 
 					System.out.println("Player ship ran out of missile");
@@ -96,6 +101,10 @@ public class GameWorld {
 			if(gameObjects.get(i) instanceof NonPlayerShip ) {
 				if(((Ship) gameObjects.get(i)).getMissileCount() > 0) {
 					gameObjects.add(new Missiles((NonPlayerShip) gameObjects.get(i)));
+					System.out.println("Non-Player ship fired missile");
+					System.out.println(((Ship)gameObjects.get(i)).getMissileCount() + " missiles left");
+				}else {
+					System.out.println("Non-Player ship ran out of missile");
 				}
 			}
 			return;

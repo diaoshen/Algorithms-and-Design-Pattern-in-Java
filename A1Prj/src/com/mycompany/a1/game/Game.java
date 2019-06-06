@@ -46,36 +46,40 @@ public class Game extends Form{
 				switch(sCommand.charAt(0)) {
 					case 'a' :
 						gw.addAsteroid();
-						System.out.println("Asteroid is created");
 						break;
+						
 					case 'y' :
 						gw.addNonPlayerShip();
-						System.out.println("Added NonPlayerShip");
 						break;
+						
 					case 'b' :
 						gw.addSpaceStation();
-						System.out.println("Added Blinking SpaceStation");
 						break;
+						
 					case 's' :
 						gw.addPlayerShip();
-						System.out.println("Added Playership");
 						break;
+						
 					case 'f' :
 						gw.addPlayerMissile();
-						System.out.println("Player Missile created and fired");
 						break;
+						
 					case 'L' :
 						gw.addNonPlayerMissile();
-						System.out.println("NonPlayerMissile created and fired");
 						break;
+						
 					case 'm' :
 						System.out.println("Map:");
 						gw.printMap();
 						break;
-					case 'p' : //MAY 5
+						
+					case 'p' : 
 						System.out.println("Player Status :");
 						gw.printDisplay();
 						break;
+						
+						
+						
 					case '>' :
 						//TODO
 						break;
