@@ -11,8 +11,10 @@ public abstract class Ship extends MoveableObject {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Ship(int objectColor, int speed, int direction, double x, double y) {
+	public Ship(int objectColor, int speed, int direction, double x, double y , int missileCount , int max) {
 		super(objectColor, speed, direction, x, y);
+		this.missileCount = missileCount;
+		this.MAX_MISSILE_COUNT = max;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -25,6 +27,7 @@ public abstract class Ship extends MoveableObject {
 		missileCount = MAX_MISSILE_COUNT;
 	}
 	
+	@SuppressWarnings("unused")
 	private boolean isEmpty() { return missileCount == 0 ; }
 	
 	public int getMissileCount() {
