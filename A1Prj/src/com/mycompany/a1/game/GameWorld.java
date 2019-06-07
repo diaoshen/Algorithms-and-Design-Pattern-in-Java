@@ -106,8 +106,8 @@ public class GameWorld {
 				}else {
 					System.out.println("Non-Player ship ran out of missile");
 				}
+				return;
 			}
-			return;
 		}
 		//No PlayerShip
 		System.out.println("There exists no non-playership to fire missile");
