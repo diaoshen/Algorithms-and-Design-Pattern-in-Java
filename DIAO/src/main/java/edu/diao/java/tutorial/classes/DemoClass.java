@@ -32,7 +32,7 @@ public class DemoClass {
 		this.x = otherObj.x;
 	}
 	
-	//Copy method
+	//Copy method to copy the current class object
 	public DemoClass copy() {
 		return new DemoClass(this.x);	
 	}

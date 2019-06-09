@@ -9,7 +9,8 @@ public interface Engine {
 	/*
 	 * Interface can have only static and/or  final variables 
 	 */
-	
+	//Default public 
+	int b = 10000;
 	//Static
 	static int hp = 100;
 	//Final 
