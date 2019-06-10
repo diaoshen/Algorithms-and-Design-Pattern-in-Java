@@ -45,7 +45,6 @@ public class PlayerShip extends Ship implements ISteerable{
 		this.setSpeed(getSpeed()-1);
 	}
 	
-	//TODO RotateMissileLauncher 
 	
 	public int getLife() {
 		return life;

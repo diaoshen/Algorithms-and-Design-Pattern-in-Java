@@ -81,7 +81,7 @@ public class Game extends Form{
 						
 						
 					case '>' :
-						//TODO
+						gw.rotatePlayerMl();	
 						break;
 					case 'n' :
 						//TODO

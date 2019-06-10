@@ -132,5 +132,19 @@ public class GameWorld {
 			System.out.println(gameObjects.get(i).toString());
 		}
 	}
-
-}
+	
+	public void rotatePlayerMl() {
+		for(int i = 0 ; i < gameObjects.size(); i++) {
+			if(gameObjects.get(i) instanceof PlayerShip) {
+				PlayerShip ps = (PlayerShip) gameObjects.get(i);
+				ps.getMl().rotate();
+				System.out.println("PlayerShip rotated by 5 degree");
+				System.out.println(ps.toString());
+			}
+		}
+	}
+	
+	
+	
+	
+}//END GameWorld
