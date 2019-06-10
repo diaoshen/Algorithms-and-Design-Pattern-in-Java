@@ -54,6 +54,16 @@ public class PlayerShip extends Ship implements ISteerable{
 		life = x;
 	}
 	
+	public void respawn() {
+		this.setX(x);
+		this.setY(y);
+		this.setDirection(0);
+		this.setSpeed(0);
+		this.reload();
+		life--;
+	}
+	
+	
 	public MissileLauncher getMl() {
 		return this.ml;
 	}

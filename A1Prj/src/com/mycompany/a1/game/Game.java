@@ -84,28 +84,28 @@ public class Game extends Form{
 						gw.rotatePlayerMl();	
 						break;
 					case 'n' :
-						//TODO
+						gw.playerShipReload();
 						break;
 					case 'k' :
-						//TODO
+						gw.killAsteroid();
 						break;
 					case 'e' :
-						//TODO
+						gw.killNonPlayerShip();
 						break;
 					case 'E' :
-						//TODO
+						gw.killPlayerShipByMissile();
 						break;
 					case 'c' :
-						//TODO
+						gw.killPlayerShipByAsteroid();
 						break;
 					case 'h' :
-						//TODO
+						gw.killPlayerShipByNPS();
 						break;
 					case 'x' :
-						//TODO
+						gw.asteroidCollision();
 						break;
 					case 'l' :
-						//TODO
+						gw.killNonPlayerShipByAsteroid();
 						break;					
 				} //End Switch
 			} //End ActionPerformed()	

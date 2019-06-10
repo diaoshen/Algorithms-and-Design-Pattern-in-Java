@@ -26,7 +26,7 @@ public class MissileLauncher implements ISteerable{
 		this.direction = direction;
 	}
 	public void rotate() {
-		this.direction += 5;
+		this.direction += delta;
 		this.direction %= 360;
 		
 	}
