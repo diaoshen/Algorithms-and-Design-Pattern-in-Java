@@ -22,6 +22,10 @@ public class GameWorld {
 	private int playerScore;
 	private int timer = 0;
 	private ArrayList<GameObject> gameObjects; //Collection of game objects
+	private int asteroidCount;
+	private int psCount;
+	private int npsCount;
+	private int stationCount;
 	
 	//Singleton GameWorld to enforce only instance of gameworld can ever be created.
 	private volatile static GameWorld gw;
@@ -43,6 +47,10 @@ public class GameWorld {
 		this.playerScore = 0;
 		this.timer = 0;
 		gameObjects = new ArrayList<GameObject>();
+		this.asteroidCount = 0;
+		this.psCount = 0;
+		this.npsCount = 0;
+		this.stationCount = 0;
 	}
 	
 	
@@ -63,16 +71,22 @@ public class GameWorld {
 	
 	public void addAsteroid() {
 		gameObjects.add(new Asteroids());
+		this.asteroidCount++;
 	}
 	public void addPlayerShip() {
-		//playerShips.add(PlayerShip.getInstance());
-		gameObjects.add(PlayerShip.getInstance());
+			PlayerShip ps = PlayerShip.getInstance();
+			if(psCount == 0) {			
+				gameObjects.add(ps);
+				this.psCount = 1;
+			}
 	}
 	public void addNonPlayerShip() {
 		gameObjects.add(new NonPlayerShip());
+		this.npsCount++;
 	}
 	public void addSpaceStation() {
 		gameObjects.add(new SpaceStation());
+		this.stationCount++;
 	}
 	public void addPlayerMissile() {	
 	
@@ -156,188 +170,185 @@ public class GameWorld {
 		System.out.println("No Playership to reload");
 	}
 	public void killAsteroid() { 
-		int ps = -1;
-		int asteroid = -1;
-		int psMissile =  -1;
-		for(int i = 0 ; i < gameObjects.size(); i++) {
-			if(gameObjects.get(i) instanceof PlayerShip) {
-				ps = i;
+		if(asteroidCount >= 1 && psCount == 1) {
+			for(int i = 0 ; i < gameObjects.size(); i++) {
+				if(gameObjects.get(i) instanceof Missiles) {
+					((Missiles) gameObjects.get(i)).getOwner().decrementMissile();
+					gameObjects.remove(i);
+					this.playerScore += 10;
+					for(int j = 0 ; j < gameObjects.size(); j++) {
+						if(gameObjects.get(j) instanceof Asteroids) {
+							gameObjects.remove(j);
+							asteroidCount--;
+							System.out.println("Asteroid is destroyed by Playership Missile");
+							return;
+						}
+					}
+				}
 			}
-			if(gameObjects.get(i) instanceof Asteroids && asteroid == -1) {
-				asteroid = i;
-			}
-			if(gameObjects.get(i) instanceof Missiles && psMissile == -1) {
-				psMissile = i;
-			}
-		}
-		
-		if(ps != -1 && asteroid != -1 && psMissile != -1) {
-			((Missiles) gameObjects.get(psMissile)).getOwner().decrementMissile();
-			gameObjects.remove(asteroid);
-			gameObjects.remove(psMissile-1);
-			this.playerScore += 10;
+			System.out.println("Error : Asteroid or Playership or PlayerMissile does not exists");
+			return;
 		}else {
 			System.out.println("Error : Asteroid or Playership or PlayerMissile does not exists");
 		}
-		
 	}
-	public void killNonPlayerShip() {
-		int ps = -1;
-		int nps = -1;
-		int psMissile =  -1;
-		
-		for(int i = 0 ; i < gameObjects.size(); i++) {
-			if(gameObjects.get(i) instanceof PlayerShip) {
-				ps = i;
-			}
-			if(gameObjects.get(i) instanceof NonPlayerShip && nps == -1) {
-				nps = i;
-			}
-			if(gameObjects.get(i) instanceof Missiles && psMissile == -1) {
-				psMissile = i;
-			}
-		}
-		
-		if(ps != -1 && nps != -1 && psMissile != -1) {
-			gameObjects.remove(nps);
-			((Missiles) gameObjects.get(psMissile)).getOwner().decrementMissile();
-			gameObjects.remove(psMissile-1);
-			this.playerScore += 10;
-		}else {
-			System.out.println("Error : NonPlayerShip or Playership or PlayerMissile does not exists");
-		}
+	public void killNonPlayerShipByMissile() {
+
+	if(npsCount >= 1) {
+        for(int i = 0; i < gameObjects.size(); i++) {
+            if(gameObjects.get(i) instanceof Missiles) {
+                if(((Missiles) gameObjects.get(i)).getOwner() instanceof PlayerShip) {
+                	//Remove missile and decrease missile count for PS 
+                	((Missiles) gameObjects.get(i)).getOwner().decrementMissile();
+                	this.playerScore += 10;
+                  	gameObjects.remove(i);
+                    for(int j = 0 ; j < gameObjects.size(); j++) {
+                    	if(gameObjects.get(j) instanceof NonPlayerShip) {
+                    		gameObjects.remove(j);
+                    		npsCount--;
+                    		System.out.println("NonPlayerShip was destroyed by PlayerShip Missile");
+                    		return;
+                    	}
+                    }
+                 }
+            }  
+        }
+    	System.out.println("Either PlayerShip,NonplayerShip,NonPlayerShip's missile does not exist");
+    	return;
+	}else {
+    	System.out.println("Either PlayerShip,NonplayerShip,NonPlayerShip's missile does not exist");
 	}
+    	
+}
+    	
+
 	
 	public void killPlayerShipByMissile() {
-		int ps = -1;
-		int nps = -1;
-		int npsMissile = -1;
-		
-        for(int i = 0; i < gameObjects.size(); i++) {
-            if(gameObjects.get(i) instanceof PlayerShip && ps == -1) {
-                ps = i;
-            }
-            if(gameObjects.get(i) instanceof Missiles &&  npsMissile == -1) {
-                if(((Missiles) gameObjects.get(i)).getOwner() instanceof NonPlayerShip) {
-                  	npsMissile = i;
-                }
-            }
-            if(gameObjects.get(i) instanceof NonPlayerShip && nps == -1) {
-                nps = i;
-            }
-            
-        }
-        if(ps != -1 && nps != -1 && npsMissile == -1) {
-        	((Missiles) gameObjects.get(npsMissile)).getOwner().decrementMissile();
-        	gameObjects.remove(npsMissile);
-        	if(((PlayerShip) gameObjects.get(ps)).getLife() > 0) {
-            	((PlayerShip) gameObjects.get(ps)).respawn();
-        	}else {
-        		gameObjects.remove(ps-1);
-        		System.out.println("Game Over");
-        	}
-        }else {
-        	System.out.println("Either PlayerShip,NonplayerShip,NonPlayerShip's missile does not exist");
-        }
 
-		
+        for(int i = 0; i < gameObjects.size(); i++) {
+            if(gameObjects.get(i) instanceof Missiles &&  psCount == 1) {
+                if(((Missiles) gameObjects.get(i)).getOwner() instanceof NonPlayerShip) {
+                	//Remove missile and decrease missile count for NPS 
+                	((Missiles) gameObjects.get(i)).getOwner().decrementMissile();
+                  	gameObjects.remove(i);
+                  	//Update Ps status 
+                  	for(int j = 0 ; j < gameObjects.size(); j++) {
+                  		if(gameObjects.get(j) instanceof PlayerShip) {
+                  			if(((PlayerShip) gameObjects.get(j)).getLife() > 0) {
+                            	((PlayerShip) gameObjects.get(j)).respawn();
+                            	System.out.println("PlayerShip was destroyed by NPS's Missile");
+                            	return;
+                        	}else {
+                        		gameObjects.remove(j);
+                        		System.out.println("Game Over");
+                        		return;
+                        	}
+                  		}
+                  	}
+                }
+            }    
+        }
+    	System.out.println("Either PlayerShip,NonplayerShip,NonPlayerShip's missile does not exist");	
 	}
 	public void killPlayerShipByAsteroid() {
-		//Kill asteroid 
-		//Kill decrease life 
-		int ps = -1;
-		int asteroid = -1;
-		
-        for(int i = 0; i < gameObjects.size(); i++) {
-            if(gameObjects.get(i) instanceof PlayerShip && ps == -1) {
-                ps = i;
-            }
-            if(gameObjects.get(i) instanceof Asteroids && asteroid == -1) {
-            	asteroid = i;
-            }
-            
-        }
-        if(ps != -1 && asteroid != -1){
-        	if(((PlayerShip) gameObjects.get(ps)).getLife() > 0) {
-            	((PlayerShip) gameObjects.get(ps)).respawn();
-            	gameObjects.remove(asteroid);
-        	}else {
-        		gameObjects.remove(ps);
-        		gameObjects.remove(asteroid-1);
-        		System.out.println("Game Over");
-        	}
-        }else {
-        	System.out.println("Either PlayerShip or Asteroid does not exist");
-        }
+
+		if(asteroidCount >= 1 &&  psCount == 1) {
+			for(int i = 0; i < gameObjects.size(); i++) {
+	            if(gameObjects.get(i) instanceof PlayerShip) {
+	            	if(((PlayerShip) gameObjects.get(i)).getLife() > 0) {
+	                	((PlayerShip) gameObjects.get(i)).respawn();
+	                	System.out.println("Playership is destroyed by Asteroid. Life decreased by 1");
+	            	}else {
+	            		gameObjects.set(i,null);
+	            		gameObjects.remove(i);
+	            		psCount = 0;
+	            		System.out.println("Game Over");
+	            	}
+	                break;
+	            }
+	        }
+			for(int i = 0; i < gameObjects.size(); i++) {
+	            if(gameObjects.get(i) instanceof Asteroids) {
+	                gameObjects.remove(i);
+	                asteroidCount--;
+	                break;
+	            }
+	        }
+		}else {
+			System.out.println("Either PlayerShip or Asteroid does not exist");
+		}
 	}
 	public void killPlayerShipByNPS() {
-		int ps = -1;
-		int nps = -1;
-		
-        for(int i = 0; i < gameObjects.size(); i++) {
-            if(gameObjects.get(i) instanceof PlayerShip && ps == -1) {
-                ps = i;
-            }
-            if(gameObjects.get(i) instanceof NonPlayerShip && nps == -1) {
-            	nps = i;
-            }
-            
-        }
-        if(ps != -1 && nps != -1){
-        	if(((PlayerShip) gameObjects.get(ps)).getLife() > 0) {
-            	((PlayerShip) gameObjects.get(ps)).respawn();
-            	gameObjects.remove(nps);
-        	}else {
-        		gameObjects.remove(ps);
-            	gameObjects.remove(nps-1);
-        		System.out.println("Game Over");
-        	}
-        }else {
-        	System.out.println("Either PlayerShip or NonPlayerShip does not exist");
-        }
-		
+
+		if(psCount == 1 && npsCount >= 1) {
+			for(int i = 0; i < gameObjects.size(); i++) {
+	            if(gameObjects.get(i) instanceof PlayerShip) {
+	            	if(((PlayerShip) gameObjects.get(i)).getLife() > 0) {
+	                	((PlayerShip) gameObjects.get(i)).respawn();
+	                	System.out.println("Playership is destroyed by NonPlayerShip. Life decreased by 1");
+	            	}else {
+	            		gameObjects.set(i,null);
+	            		gameObjects.remove(i);
+	            		psCount = 0;
+	            		System.out.println("Game Over");
+	            	}
+	                break;
+	            }
+	        }
+			for(int i = 0; i < gameObjects.size(); i++) {
+	            if(gameObjects.get(i) instanceof NonPlayerShip) {
+	                gameObjects.remove(i);
+	                npsCount--;
+	                break;
+	            }
+	        }	
+		}else {
+			System.out.println("Either PlayerShip or NonPlayerShip does not exist");
+		}
 	}
 	public void asteroidCollision() {
-		int asteroid1 = -1;
-		int asteroid2 =  -1;
-		for(int i = 0 ; i < gameObjects.size(); i++) {
-			if(gameObjects.get(i) instanceof Asteroids && asteroid1 == -1) {
-				asteroid1 = i;
-			}
-			if(gameObjects.get(i) instanceof Asteroids && asteroid2 == -1) {
-				asteroid2 = i;
-			}
-		}
-		
-		if(asteroid1 != -1 && asteroid2 != -1) {
-			gameObjects.remove(asteroid1);
-			gameObjects.remove(asteroid2-1);
 
+		if(asteroidCount >= 2) {
+			for(int i = 0 ; i < gameObjects.size(); i++) {
+				if(gameObjects.get(i) instanceof Asteroids) {
+					gameObjects.remove(i);
+					asteroidCount--;
+					break;
+				}
+			}
+			for(int i = 0 ; i < gameObjects.size(); i++) {
+				if(gameObjects.get(i) instanceof Asteroids) {
+					gameObjects.remove(i);
+					asteroidCount--;
+					break;
+				}
+			}
+			System.out.println("2 Asteroids Collided and both were destroyed.");
 		}else {
 			System.out.println("Error : NO 2 Asteroid to kill each other");
-		}
-		
+		}	
 	}
 	public void killNonPlayerShipByAsteroid() {
-		int asteroid = -1;
-		int nps =  -1;
-		for(int i = 0 ; i < gameObjects.size(); i++) {
-			if(gameObjects.get(i) instanceof Asteroids && asteroid == -1) {
-				asteroid = i;
-			}
-			if(gameObjects.get(i) instanceof NonPlayerShip && nps == -1) {
-				nps = i;
-			}
-		}
 		
-		if(asteroid != -1 && nps != -1) {
-			gameObjects.remove(asteroid);
-			gameObjects.remove(nps-1);
-
+		if(asteroidCount >=1 && npsCount >= 1) {
+			for(int i = 0 ; i < gameObjects.size(); i++) {
+				if(gameObjects.get(i) instanceof Asteroids) {
+					gameObjects.remove(i);
+					asteroidCount--;
+					break;
+				}
+			}
+			for(int i = 0 ; i < gameObjects.size(); i++) {
+				if(gameObjects.get(i) instanceof NonPlayerShip) {
+					gameObjects.remove(i);
+					npsCount--;
+					break;
+				}
+			}
+			System.out.println("NonPlayer Ship was destroyed by an Asteroid");
 		}else {
 			System.out.println("Error : NO asteroid or NonPlayerShip to kill each other");
 		}
-		
 	}
 	
 	

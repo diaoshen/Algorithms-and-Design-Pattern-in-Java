@@ -17,6 +17,7 @@ public class Missiles extends MoveableObject{
 	public Missiles(NonPlayerShip owner) {
 		super(ColorUtil.BLUE, owner.getSpeed() + 10, owner.getMl().getDirection(), owner.getX(), owner.getY());
 		this.fuel = 15;
+		this.owner = owner;
 		owner.decrementMissile();
 		System.out.println(this.toString()); //DEBUG LINE
 	}

@@ -90,7 +90,7 @@ public class Game extends Form{
 						gw.killAsteroid();
 						break;
 					case 'e' :
-						gw.killNonPlayerShip();
+						gw.killNonPlayerShipByMissile();
 						break;
 					case 'E' :
 						gw.killPlayerShipByMissile();

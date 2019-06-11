@@ -14,7 +14,6 @@ public class PlayerShip extends Ship implements ISteerable{
 		ml = new MissileLauncher(this.getSpeed(),this.getDirection());
 		setMaxMissileCount(10);
 		setMissileCount(10);
-		System.out.println("Added Playership");
 		System.out.println(this.toString()); //DEBUG LINE
 	}
 	public static PlayerShip getInstance() {
@@ -22,9 +21,15 @@ public class PlayerShip extends Ship implements ISteerable{
 			synchronized (PlayerShip.class) {
 				if(ps == null)
 					ps = new PlayerShip();
+					System.out.println("Added Playership");
 			}
 		}else {
-			System.out.println("PlayerShip Already Exists...");
+			if(ps.getLife()  != 0) {
+				System.out.println("PlayerShip Already Exists...");
+			}else {
+				ps.setLife(3);
+				System.out.println("Added Playership");
+			}
 		}
 		return ps;
 	}
