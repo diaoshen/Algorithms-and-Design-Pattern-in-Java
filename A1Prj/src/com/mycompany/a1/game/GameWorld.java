@@ -172,9 +172,9 @@ public class GameWorld {
 		}
 		
 		if(ps != -1 && asteroid != -1 && psMissile != -1) {
-			gameObjects.remove(asteroid);
 			((Missiles) gameObjects.get(psMissile)).getOwner().decrementMissile();
-			gameObjects.remove(psMissile);
+			gameObjects.remove(asteroid);
+			gameObjects.remove(psMissile-1);
 			this.playerScore += 10;
 		}else {
 			System.out.println("Error : Asteroid or Playership or PlayerMissile does not exists");
@@ -201,7 +201,7 @@ public class GameWorld {
 		if(ps != -1 && nps != -1 && psMissile != -1) {
 			gameObjects.remove(nps);
 			((Missiles) gameObjects.get(psMissile)).getOwner().decrementMissile();
-			gameObjects.remove(psMissile);
+			gameObjects.remove(psMissile-1);
 			this.playerScore += 10;
 		}else {
 			System.out.println("Error : NonPlayerShip or Playership or PlayerMissile does not exists");
@@ -233,7 +233,7 @@ public class GameWorld {
         	if(((PlayerShip) gameObjects.get(ps)).getLife() > 0) {
             	((PlayerShip) gameObjects.get(ps)).respawn();
         	}else {
-        		gameObjects.remove(ps);
+        		gameObjects.remove(ps-1);
         		System.out.println("Game Over");
         	}
         }else {
@@ -260,11 +260,12 @@ public class GameWorld {
         if(ps != -1 && asteroid != -1){
         	if(((PlayerShip) gameObjects.get(ps)).getLife() > 0) {
             	((PlayerShip) gameObjects.get(ps)).respawn();
+            	gameObjects.remove(asteroid);
         	}else {
         		gameObjects.remove(ps);
+        		gameObjects.remove(asteroid-1);
         		System.out.println("Game Over");
         	}
-        	gameObjects.remove(asteroid);
         }else {
         	System.out.println("Either PlayerShip or Asteroid does not exist");
         }
@@ -285,11 +286,12 @@ public class GameWorld {
         if(ps != -1 && nps != -1){
         	if(((PlayerShip) gameObjects.get(ps)).getLife() > 0) {
             	((PlayerShip) gameObjects.get(ps)).respawn();
+            	gameObjects.remove(nps);
         	}else {
         		gameObjects.remove(ps);
+            	gameObjects.remove(nps-1);
         		System.out.println("Game Over");
         	}
-        	gameObjects.remove(nps);
         }else {
         	System.out.println("Either PlayerShip or NonPlayerShip does not exist");
         }
@@ -309,7 +311,7 @@ public class GameWorld {
 		
 		if(asteroid1 != -1 && asteroid2 != -1) {
 			gameObjects.remove(asteroid1);
-			gameObjects.remove(asteroid2);
+			gameObjects.remove(asteroid2-1);
 
 		}else {
 			System.out.println("Error : NO 2 Asteroid to kill each other");
@@ -330,7 +332,7 @@ public class GameWorld {
 		
 		if(asteroid != -1 && nps != -1) {
 			gameObjects.remove(asteroid);
-			gameObjects.remove(nps);
+			gameObjects.remove(nps-1);
 
 		}else {
 			System.out.println("Error : NO asteroid or NonPlayerShip to kill each other");
