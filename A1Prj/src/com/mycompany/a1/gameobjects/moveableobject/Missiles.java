@@ -30,6 +30,10 @@ public class Missiles extends MoveableObject{
 		return this.fuel;
 	}
 	
+	public Ship getOwner() {
+		return this.owner;
+	}
+	
 	@Override 
 	public String toString() {
 		if(owner instanceof PlayerShip) {

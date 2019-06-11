@@ -19,11 +19,8 @@ public abstract class Ship extends MoveableObject {
 	}
 	
 	
-	void fireMissile() {
-		missileCount--;
-	}
 
-	void reload() {
+	public void reload() {
 		missileCount = MAX_MISSILE_COUNT;
 	}
 	

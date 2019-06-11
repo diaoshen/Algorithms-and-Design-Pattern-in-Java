@@ -4,11 +4,13 @@ public class MissileLauncher implements ISteerable{
 
 	private int speed;
 	private int direction;
+	private int delta; // Rotation amount 
 	
 	
 	public MissileLauncher(int speed , int direction) {
 		this.speed = speed;
 		this.direction = direction;
+		this.delta = 5;
 	}
 	
 	public int getSpeed() {
@@ -22,6 +24,11 @@ public class MissileLauncher implements ISteerable{
 	}
 	public void setDirection(int direction) {
 		this.direction = direction;
+	}
+	public void rotate() {
+		this.direction += delta;
+		this.direction %= 360;
+		
 	}
 	
 	@Override
