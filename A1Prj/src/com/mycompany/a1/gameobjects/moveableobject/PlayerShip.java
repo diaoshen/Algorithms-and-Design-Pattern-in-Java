@@ -61,6 +61,9 @@ public class PlayerShip extends Ship implements ISteerable{
 		}
 	}
 	
+	public void resetPosition() {
+		this.setLocation(x, y);
+	}
 	
 	public int getLife() {
 		return life;
@@ -118,4 +121,5 @@ public class PlayerShip extends Ship implements ISteerable{
 		// TODO Auto-generated method stub
 		
 	}
+
 }
