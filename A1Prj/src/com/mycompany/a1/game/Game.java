@@ -46,33 +46,26 @@ public class Game extends Form{
 				switch(sCommand.charAt(0)) {
 					case 'a' :
 						gw.addAsteroid();
-						break;
-						
+						break;				
 					case 'y' :
 						gw.addNonPlayerShip();
-						break;
-						
+						break;			
 					case 'b' :
 						gw.addSpaceStation();
-						break;
-						
+						break;				
 					case 's' :
 						gw.addPlayerShip();
-						break;
-						
+						break;					
 					case 'f' :
 						gw.addPlayerMissile();
-						break;
-						
+						break;				
 					case 'L' :
 						gw.addNonPlayerMissile();
-						break;
-						
+						break;			
 					case 'm' :
 						System.out.println("Map:");
 						gw.printMap();
-						break;
-						
+						break;				
 					case 'p' : 
 						System.out.println("Player Status :");
 						gw.printDisplay();
@@ -104,9 +97,27 @@ public class Game extends Form{
 					case 'x' :
 						gw.asteroidCollision();
 						break;
-					case 'l' :
+					case 'I' :
 						gw.killNonPlayerShipByAsteroid();
-						break;					
+						break;
+					case 'i' :
+						gw.increasePlayerShipSpeed();
+						break;
+					case 'd' :
+						gw.decreasePlayerShipSpeed();
+						break;
+					case 'l' :
+						gw.turnPSLeft();
+						break;
+					case 'r' :
+						gw.turnPSRight();
+						break;
+					case 'j' :
+						gw.jumpToHyperSpace();
+						break;
+					case 't' :
+						gw.tick();
+						
 				} //End Switch
 			} //End ActionPerformed()	
 		}); //End ActionListner()

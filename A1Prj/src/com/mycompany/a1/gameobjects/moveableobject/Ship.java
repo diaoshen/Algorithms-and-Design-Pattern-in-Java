@@ -8,14 +8,12 @@ public abstract class Ship extends MoveableObject {
 	
 	public Ship(int objectColor) {
 		super(objectColor);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Ship(int objectColor, int speed, int direction, double x, double y , int missileCount , int max) {
 		super(objectColor, speed, direction, x, y);
 		this.missileCount = missileCount;
 		this.MAX_MISSILE_COUNT = max;
-		// TODO Auto-generated constructor stub
 	}
 	
 	

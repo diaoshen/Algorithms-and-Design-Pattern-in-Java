@@ -37,6 +37,7 @@ public class PlayerShip extends Ship implements ISteerable{
 	
 	final static int x = 512;
 	final static int y = 384;
+	final static int MAX_SPEED = 20;
 	
 	private int life;
 	private MissileLauncher ml;
@@ -44,10 +45,20 @@ public class PlayerShip extends Ship implements ISteerable{
 
 	
 	public void increaseSpeed() {
-		this.setSpeed(getSpeed()+1);
+		int currSpeed = getSpeed();
+		if(currSpeed < MAX_SPEED) {
+			setSpeed(currSpeed + 1);
+		}else {
+			System.out.println("Already at max speed of " + MAX_SPEED);
+		}
 	}
 	public void decreaseSpeed() {
-		this.setSpeed(getSpeed()-1);
+		int currSpeed = getSpeed();
+		if(currSpeed > 0) {
+			setSpeed(currSpeed - 1);
+		}else {
+			System.out.println("Already at minimum speed of 0");
+		}
 	}
 	
 	

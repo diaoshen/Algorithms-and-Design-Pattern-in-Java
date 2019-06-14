@@ -65,7 +65,7 @@ public class GameWorld {
 	 */
 	public void tick() {
 		timer++;
-		//TODO Call Move()
+		//TODO Call Move() see description pg 7
 	}
 	
 	
@@ -350,6 +350,32 @@ public class GameWorld {
 			System.out.println("Error : NO asteroid or NonPlayerShip to kill each other");
 		}
 	}
+	public void increasePlayerShipSpeed() {
+		for(int i = 0 ; i < gameObjects.size(); i++) {
+			if(gameObjects.get(i) instanceof PlayerShip) {
+				((PlayerShip) gameObjects.get(i)).increaseSpeed();
+				return;
+			}
+		}
+		System.out.println("There exists no playership to increase speed");
+	}
+	public void decreasePlayerShipSpeed() {
+		// TODO Auto-generated method stub
+		
+	}
+	public void turnPSLeft() {
+		// TODO Auto-generated method stub
+		
+	}
+	public void turnPSRight() {
+		// TODO Auto-generated method stub
+		
+	}
+	public void jumpToHyperSpace() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	
 	
