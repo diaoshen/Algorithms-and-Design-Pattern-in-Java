@@ -3,3 +3,11 @@ A1Prj.jar
 *.class
 A1Prj/bin/
 /A1Prj/bin/
+/A1Prj/bin/com/mycompany/a1/game/*
+/A1Prj/bin/com/mycompany/a1/game/
+A1Prj/bin/com/mycompany/a1/game/*
+A1Prj/bin/com/mycompany/a1/*
+A1Prj/dist/*
+/A1Prj/dist/*
+*.tmp
+*.class
