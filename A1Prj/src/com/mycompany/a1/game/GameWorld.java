@@ -378,8 +378,13 @@ public class GameWorld {
 		System.out.println("There exists no playership to turn left");	
 	}
 	public void turnPSRight() {
-		// TODO Auto-generated method stub
-		
+		for(int i = 0 ; i < gameObjects.size(); i++) {
+			if(gameObjects.get(i) instanceof PlayerShip) {
+				((PlayerShip) gameObjects.get(i)).turnRight();
+				return;
+			}
+		}
+		System.out.println("There exists no playership to turn right");		
 	}
 	public void jumpToHyperSpace() {
 		// TODO Auto-generated method stub
