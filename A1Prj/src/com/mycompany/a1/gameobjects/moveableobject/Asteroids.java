@@ -4,9 +4,8 @@ import java.util.Random;
 
 import com.codename1.charts.util.ColorUtil;
 
-public class Asteroids extends MoveableObject {
-	//Size 6-30 
-	//Random size,speed,direction
+public class Asteroids extends MoveableObject implements IMoveable {
+
 	
 	int size;
 	
@@ -34,10 +33,6 @@ public class Asteroids extends MoveableObject {
 		);				
 	}
 
-	@Override
-	public void move() {
-		// TODO Auto-generated method stub
-		
-	}
+
 	
 }

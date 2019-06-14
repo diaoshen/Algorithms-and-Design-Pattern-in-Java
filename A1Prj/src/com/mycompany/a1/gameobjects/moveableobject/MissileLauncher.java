@@ -1,15 +1,18 @@
 package com.mycompany.a1.gameobjects.moveableobject;
 
-public class MissileLauncher implements ISteerable{
+import com.codename1.charts.util.ColorUtil;
+
+public class MissileLauncher extends MoveableObject implements ISteerable , IMoveable{
 
 	private int speed;
 	private int direction;
 	private int delta; // Rotation amount 
+	private PlayerShip owner;
 	
 	
-	public MissileLauncher(int speed , int direction) {
-		this.speed = speed;
-		this.direction = direction;
+	public MissileLauncher(PlayerShip owner , int speed , int direction, double x , double y) {
+		super(ColorUtil.GREEN , speed, direction , x , y  );
+		this.owner = owner;
 		this.delta = 5;
 	}
 	
@@ -34,13 +37,24 @@ public class MissileLauncher implements ISteerable{
 	@Override
 	public void turnLeft() {
 		// TODO Auto-generated method stub
-		
+		int currDirection = this.getDirection();
+		if(currDirection == 0) {
+			this.setDirection(359);
+		}else {
+			this.setDirection(currDirection - 1);
+		}
+		return;
 	}
 
 	@Override
 	public void turnRight() {
-		// TODO Auto-generated method stub
+		this.setDirection((this.getDirection() + 1) % 360);
 		
+	}
+	
+	@Override
+	public void move(){
+		this.setLocation(owner.getX(), owner.getY());
 	}
 
 }

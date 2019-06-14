@@ -6,6 +6,7 @@ import com.mycompany.a1.gameobjects.GameObject;
 import com.mycompany.a1.gameobjects.fixedobject.SpaceStation;
 import com.mycompany.a1.gameobjects.moveableobject.Asteroids;
 import com.mycompany.a1.gameobjects.moveableobject.Missiles;
+import com.mycompany.a1.gameobjects.moveableobject.MoveableObject;
 import com.mycompany.a1.gameobjects.moveableobject.NonPlayerShip;
 import com.mycompany.a1.gameobjects.moveableobject.PlayerShip;
 import com.mycompany.a1.gameobjects.moveableobject.Ship;
@@ -65,7 +66,20 @@ public class GameWorld {
 	 */
 	public void tick() {
 		timer++;
-		//TODO Call Move() see description pg 7
+		for(int i = 0 ; i < gameObjects.size(); i++) {
+
+			if(gameObjects.get(i) instanceof Missiles) {
+				if(((Missiles) gameObjects.get(i)).getFuel() == 1) {
+					gameObjects.remove(i);
+					System.out.println("Missile out of fuel and is removed");
+					return;
+				}else {
+					((Missiles) gameObjects.get(i)).decrementFuel();
+				}
+			}
+			
+			((MoveableObject) gameObjects.get(i)).move();
+		}
 	}
 	
 	
@@ -354,6 +368,7 @@ public class GameWorld {
 		for(int i = 0 ; i < gameObjects.size(); i++) {
 			if(gameObjects.get(i) instanceof PlayerShip) {
 				((PlayerShip) gameObjects.get(i)).increaseSpeed();
+				System.out.println("PlayerShip speed incrased to " + ((MoveableObject) gameObjects.get(i)).getSpeed());
 				return;
 			}
 		}
@@ -372,6 +387,7 @@ public class GameWorld {
 		for(int i = 0 ; i < gameObjects.size(); i++) {
 			if(gameObjects.get(i) instanceof PlayerShip) {
 				((PlayerShip) gameObjects.get(i)).turnLeft();
+				System.out.println("Playership turned left by 1");
 				return;
 			}
 		}
@@ -381,6 +397,7 @@ public class GameWorld {
 		for(int i = 0 ; i < gameObjects.size(); i++) {
 			if(gameObjects.get(i) instanceof PlayerShip) {
 				((PlayerShip) gameObjects.get(i)).turnRight();
+				System.out.println("Playership turned right by 1");
 				return;
 			}
 		}

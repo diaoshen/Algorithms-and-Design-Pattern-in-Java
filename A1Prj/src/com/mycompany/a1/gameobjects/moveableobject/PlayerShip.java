@@ -11,7 +11,7 @@ public class PlayerShip extends Ship implements ISteerable{
 	private PlayerShip() {
 		super(ColorUtil.GREEN,0,0,x,y,10,10);//Color,Speed,Direction,LocationX,LocationY,missileCount,MaxMissileCount
 		life = 3;
-		ml = new MissileLauncher(this.getSpeed(),this.getDirection());
+		ml = new MissileLauncher(ps , this.getSpeed(),this.getDirection(), x, y);
 		setMaxMissileCount(10);
 		setMissileCount(10);
 		System.out.println(this.toString()); //DEBUG LINE
@@ -116,10 +116,15 @@ public class PlayerShip extends Ship implements ISteerable{
 			" Missile Launcher dir = " + this.ml.getDirection()
 		);				
 	}
+	/*
 	@Override
 	public void move() {
-		// TODO Auto-generated method stub
-		
+		double rad = ( 360 - this.getDirection()) * Math.PI / 180;
+		double newX = this.getX() + Math.cos(rad) * this.getSpeed();
+		double newY = this.getY() + Math.sin(rad) * this.getSpeed();
+		this.setLocation(newX, newY);
 	}
+	*/
+	
 
 }

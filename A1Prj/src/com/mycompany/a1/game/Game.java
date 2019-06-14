@@ -117,6 +117,7 @@ public class Game extends Form{
 						break;
 					case 't' :
 						gw.tick();
+						break;
 						
 				} //End Switch
 			} //End ActionPerformed()	

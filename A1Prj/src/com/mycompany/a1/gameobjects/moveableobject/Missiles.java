@@ -2,7 +2,7 @@ package com.mycompany.a1.gameobjects.moveableobject;
 
 import com.codename1.charts.util.ColorUtil;
 
-public class Missiles extends MoveableObject{
+public class Missiles extends MoveableObject implements IMoveable{
 
 	private Ship owner;
 	private int fuel;
@@ -30,6 +30,12 @@ public class Missiles extends MoveableObject{
 	public int getFuel() {
 		return this.fuel;
 	}
+	public void setFuel(int x ) {
+		this.fuel = x;
+	}
+	public void decrementFuel() {
+		this.fuel--;
+	}
 	
 	public Ship getOwner() {
 		return this.owner;
@@ -56,9 +62,5 @@ public class Missiles extends MoveableObject{
 		}
 			
 	}
-	@Override
-	public void move() {
-		// TODO Auto-generated method stub
-		
-	}	
+
 }

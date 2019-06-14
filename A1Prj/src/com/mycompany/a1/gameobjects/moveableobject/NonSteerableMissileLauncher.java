@@ -1,16 +1,17 @@
 package com.mycompany.a1.gameobjects.moveableobject;
 
-public class NonSteerableMissileLauncher extends MoveableObject {
+public class NonSteerableMissileLauncher extends MoveableObject implements IMoveable{
 
-	public NonSteerableMissileLauncher(int objectColor, int speed, int direction, double x, double y) {
+	private NonPlayerShip owner;
+	
+	public NonSteerableMissileLauncher(NonPlayerShip owner , int objectColor, int speed, int direction, double x, double y) {
 		super(objectColor, speed, direction, x, y);
-		// TODO Auto-generated constructor stub
+		this.owner = owner;
 	}
 
 	@Override
 	public void move() {
-		// TODO Auto-generated method stub
-		
+		this.setLocation(owner.getX(), owner.getY());	
 	}
 
 

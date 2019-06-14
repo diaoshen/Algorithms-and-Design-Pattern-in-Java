@@ -8,6 +8,7 @@ public abstract class MoveableObject extends GameObject implements IMoveable {
 	private int speed;
 	private int direction;
 	
+	//Constructors
 	public MoveableObject(int objectColor) {
 		super(objectColor);
 		this.speed = new Random().nextInt(21);
@@ -20,8 +21,8 @@ public abstract class MoveableObject extends GameObject implements IMoveable {
 	}
 
 	
-
 	
+	//Getters and Setters
 	public int getSpeed() {
 		return this.speed;
 	}
@@ -36,4 +37,11 @@ public abstract class MoveableObject extends GameObject implements IMoveable {
 	}
 	
 
+	//Move() 
+	public void move() {
+		double rad = ( 360 - this.getDirection()) * Math.PI / 180;
+		double newX = this.getX() + Math.cos(rad) * this.getSpeed();
+		double newY = this.getY() + Math.sin(rad) * this.getSpeed();
+		this.setLocation(newX, newY);
+	}
 }

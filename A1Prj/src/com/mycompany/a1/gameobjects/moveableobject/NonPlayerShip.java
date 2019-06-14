@@ -4,7 +4,7 @@ import java.util.Random;
 
 import com.codename1.charts.util.ColorUtil;
 
-public class NonPlayerShip extends Ship {
+public class NonPlayerShip extends Ship implements IMoveable {
 
 	
 	private int size;
@@ -13,7 +13,7 @@ public class NonPlayerShip extends Ship {
 	public NonPlayerShip() {
 		super(ColorUtil.MAGENTA); //Speed,Direction,LocationX,LocationY Auto generate from Ship
 		size = new Random().nextInt(2) == 0 ? 15 : 25;
-		ml = new NonSteerableMissileLauncher(ColorUtil.MAGENTA, this.getSpeed(), this.getDirection(), this.getX(), this.getY());
+		ml = new NonSteerableMissileLauncher(this , ColorUtil.MAGENTA, this.getSpeed(), this.getDirection(), this.getX(), this.getY());
 		this.setMaxMissileCount(4);
 		this.setMissileCount(4);
 		System.out.println("Added NonPlayerShip");
@@ -43,11 +43,7 @@ public class NonPlayerShip extends Ship {
 		);				
 	}
 
-	@Override
-	public void move() {
-		// TODO Auto-generated method stub
-		
-	}	
+
 	
 
 
