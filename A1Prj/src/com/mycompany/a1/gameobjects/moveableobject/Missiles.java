@@ -55,5 +55,10 @@ public class Missiles extends MoveableObject{
 				);	
 		}
 			
+	}
+	@Override
+	public void move() {
+		// TODO Auto-generated method stub
+		
 	}	
 }

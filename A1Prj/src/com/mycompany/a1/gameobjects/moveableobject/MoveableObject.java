@@ -3,7 +3,7 @@ package com.mycompany.a1.gameobjects.moveableobject;
 import java.util.Random;
 import com.mycompany.a1.gameobjects.GameObject;
 
-public abstract class MoveableObject extends GameObject {
+public abstract class MoveableObject extends GameObject implements IMoveable {
 
 	private int speed;
 	private int direction;
@@ -20,9 +20,7 @@ public abstract class MoveableObject extends GameObject {
 	}
 
 	
-	public void move() {
-		//TODO
-	}
+
 	
 	public int getSpeed() {
 		return this.speed;

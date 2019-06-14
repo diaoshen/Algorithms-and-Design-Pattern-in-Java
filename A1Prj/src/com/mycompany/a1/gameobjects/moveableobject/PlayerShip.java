@@ -107,4 +107,9 @@ public class PlayerShip extends Ship implements ISteerable{
 			" Missile Launcher dir = " + this.ml.getDirection()
 		);				
 	}
+	@Override
+	public void move() {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -33,5 +33,11 @@ public class Asteroids extends MoveableObject {
 			" size=" + this.getSize() 
 		);				
 	}
+
+	@Override
+	public void move() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

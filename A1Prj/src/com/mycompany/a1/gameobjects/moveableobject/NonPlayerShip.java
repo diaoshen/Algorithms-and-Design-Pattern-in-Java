@@ -41,6 +41,12 @@ public class NonPlayerShip extends Ship {
 			" dir=" + this.getDirection() +
 			" size=" + this.getSize()
 		);				
+	}
+
+	@Override
+	public void move() {
+		// TODO Auto-generated method stub
+		
 	}	
 	
 
