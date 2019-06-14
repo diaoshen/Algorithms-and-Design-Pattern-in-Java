@@ -360,8 +360,13 @@ public class GameWorld {
 		System.out.println("There exists no playership to increase speed");
 	}
 	public void decreasePlayerShipSpeed() {
-		// TODO Auto-generated method stub
-		
+		for(int i = 0 ; i < gameObjects.size(); i++) {
+			if(gameObjects.get(i) instanceof PlayerShip) {
+				((PlayerShip) gameObjects.get(i)).decreaseSpeed();
+				return;
+			}
+		}
+		System.out.println("There exists no playership to decrease speed");	
 	}
 	public void turnPSLeft() {
 		// TODO Auto-generated method stub
