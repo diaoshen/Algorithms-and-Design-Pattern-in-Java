@@ -11,3 +11,5 @@ A1Prj/dist/*
 /A1Prj/dist/*
 *.tmp
 *.class
+A1Prj/Versions.properties
+/A1Prj/Versions.properties/
