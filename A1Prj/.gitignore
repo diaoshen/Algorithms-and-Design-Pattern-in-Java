@@ -1,3 +1,5 @@
 A1Prj.jar
 .project
-.class
+*.class
+A1Prj/bin/
+/A1Prj/bin/
