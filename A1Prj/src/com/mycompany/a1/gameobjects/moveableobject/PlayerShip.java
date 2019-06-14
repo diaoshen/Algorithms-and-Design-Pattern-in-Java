@@ -87,7 +87,12 @@ public class PlayerShip extends Ship implements ISteerable{
 	@Override
 	public void turnLeft() {
 		// TODO Auto-generated method stub
-		
+		int currDirection = this.getDirection();
+		if(currDirection == 0) {
+			this.setDirection(359);
+		}else {
+			this.setDirection(currDirection - 1);
+		}
 	}
 
 	@Override
