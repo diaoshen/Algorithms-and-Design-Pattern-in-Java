@@ -5,7 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.*;
-
+import java.util.List;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -192,8 +192,8 @@ public class GUI extends JFrame {
 		panel5 = new JPanel();
 		panel5.add(scrollPane);
 		panel5.add(nameBox);
-//		panel5.add(addButton);
-//		panel5.add(clearButton);
+		panel5.add(addButton);
+		panel5.add(clearButton);
 		panel5.add(buttonPanel);
 		panel5.add(inputTextBox);
 		panel5.add(list2);
@@ -218,6 +218,10 @@ public class GUI extends JFrame {
 		panel6.add(fileOpenButton);
 		panel6.add(slider1);
 		panel6.add(slider2);
+		
+		
+		//END OF 6 COLUMN SETUPS 
+		
 		/*
 		 * Borders
 		 */
@@ -289,7 +293,7 @@ public class GUI extends JFrame {
 	}
 	
 	/*
-	 * Private Inner Class 
+	 * Private Inner Class , that handles all the listener stuff
 	 */
 	private class listener implements ActionListener , ItemListener , ListSelectionListener , ChangeListener{
 
@@ -383,7 +387,11 @@ public class GUI extends JFrame {
 				all  += (s + "\r\n");
 			}
 			text1.setText(all);
-			list2.setListData((String[]) nameList.getSelectedValues());
+			//List<String> selectedValues =  nameList.getSelectedValuesList();
+			String[] updated = nameList.getSelectedValuesList().toArray(new String[0]);
+		//	list2.setListData((String[]) nameList.getSelectedValues());
+			list2.setListData(updated);
+			
 			pack();
 		}
 		@Override

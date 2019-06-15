@@ -1,3 +1,4 @@
+/*
 package edu.diao.gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -33,3 +34,4 @@ public class JAVAFXDEMOCONTROLLER {
 			outputLabel.setText(str + " km is " + miles + " miles");
 		}
 }
+*/
