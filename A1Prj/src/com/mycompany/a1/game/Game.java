@@ -100,6 +100,10 @@ public class Game extends Form{
 					case 'I' :
 						gw.killNonPlayerShipByAsteroid();
 						break;
+						
+						
+						
+						
 					case 'i' :
 						gw.increasePlayerShipSpeed();
 						break;

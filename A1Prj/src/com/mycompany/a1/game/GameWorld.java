@@ -368,7 +368,7 @@ public class GameWorld {
 		for(int i = 0 ; i < gameObjects.size(); i++) {
 			if(gameObjects.get(i) instanceof PlayerShip) {
 				((PlayerShip) gameObjects.get(i)).increaseSpeed();
-				System.out.println("PlayerShip speed incrased to " + ((MoveableObject) gameObjects.get(i)).getSpeed());
+				System.out.println("PlayerShip speed increased to " + ((MoveableObject) gameObjects.get(i)).getSpeed());
 				return;
 			}
 		}
@@ -378,6 +378,7 @@ public class GameWorld {
 		for(int i = 0 ; i < gameObjects.size(); i++) {
 			if(gameObjects.get(i) instanceof PlayerShip) {
 				((PlayerShip) gameObjects.get(i)).decreaseSpeed();
+				System.out.println("PlayerShip speed decreased to " + ((MoveableObject) gameObjects.get(i)).getSpeed());
 				return;
 			}
 		}
