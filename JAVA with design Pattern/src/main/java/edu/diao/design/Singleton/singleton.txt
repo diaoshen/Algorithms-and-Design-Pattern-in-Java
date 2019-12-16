@@ -1,0 +1,15 @@
+Singleton Design Pattern
+
+
+Generic Steps : 
+
+	1. Create singleton class 
+	2. make a private static singleton object
+	3. make constrctor private , so can't call  doing  "singleton myObject"
+	4. if singleton object doesn't exist
+			synchronized(singleton.class) // To force sycn 
+				//Other thread can still enter here before above statment was executed , so perform another check
+				if singleton object doesn't exist 
+					make singleton object
+		else
+			return original/current singleton object

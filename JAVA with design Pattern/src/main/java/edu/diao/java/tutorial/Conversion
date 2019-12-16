@@ -1,0 +1,21 @@
+Conversion:
+
+String -> char[]
+	getChars()
+	toCharArray()
+
+String -> String[]
+	split()
+	
+String -> Integer,Double,Float
+	Integer.parseInt(str)
+
+Integer,Double,Float -> String
+	Integer.toString()
+	Double.toString()
+	
+Integer,Double,Float -> BinaryString,HexString
+	Integer.toBinaryString()
+	Integer.toHexString()
+	
+	

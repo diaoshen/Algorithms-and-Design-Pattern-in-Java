@@ -1,0 +1,19 @@
+Strategy Design Pattern
+
+Generic Steps :
+	1. Create abstract class A and extract any methods x that might be changed later into its own interface 
+		1.1 create classes that will implement interface x 
+		1.2 class A will contain return type of x 
+	2. Create subclass that extends A 
+	
+	
+	
+
+Example : 
+
+	1. Abstract class Character :   Extracted method kick and jump // that means these 2 method need to be interface
+	2. Class Rugal , Mai , Ryu  will 
+	3. Interface KickBehavior , JumpBehavior
+	4. Class LongJump implements JumpBehavior     ,    Class ShortJump implements JumpBehavior
+	5. Class TornadoKick implements KickBehavior  ,    Class LightningKick implements KickBehavior
+	
