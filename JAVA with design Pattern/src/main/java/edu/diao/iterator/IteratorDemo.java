@@ -1,7 +1,9 @@
 package edu.diao.iterator;
 
-//import java.util.ArrayList;
-//import java.util.Iterator;
+
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 
 
@@ -70,51 +72,91 @@ package edu.diao.iterator;
 
 
 /*
- * Example of iterable collection
+ * Example of iterable collection with collection that's known to have iterable , thus no need to implement Iterable 
  */
 
-/*public class IteratorDemo implements Iterable<Integer>{
-	private ArrayList<Integer> x;
-	
-	public IteratorDemo(){
-		x = new ArrayList<Integer>(10);
-		for(int i = 0 ; i< 10 ; i++) {
-			x.add(i);
-		}
-	}
-	
-	@Override
-	public java.util.Iterator<Integer> iterator() {
-		// TODO Auto-generated method stub
-		return x.iterator();
-	}
-	
-	public Iterable<Integer> Iterator(){
-		//If is     public class IteratorDemo implements Iterable<Integer>
-		return this;
-		
-		//If is public class IteratorDemo
-		//return this.x;
-	}
-	
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		IteratorDemo demo = new IteratorDemo();
-		
-		Iterator<Integer> iter = demo.iterator();
-		while(iter.hasNext()) {
-			System.out.print(iter.next() + " ");
-		}
-		
-		System.out.println("");		
-		
-		for(Integer i : demo.Iterator()) {
-			System.out.print(i + " ");
-		}			
-	}// END MAIN
-}//END CLASS
-*/
+//public class IteratorDemo{
+//	private ArrayList<Integer> x;
+//	
+//	public IteratorDemo(){
+//		x = new ArrayList<Integer>(10);
+//		for(int i = 0 ; i< 10 ; i++) {
+//			x.add(i);
+//		}
+//	}
+//	
+//	//Returns Iterator to the iterable , not to be confused with iterable itself. 
+//	public java.util.Iterator<Integer> iterator() {
+//		return x.iterator();
+//	}
+//	
+//	//Returns Iterable , in this case ArrayList is known to be iterable so itself is an iterable.
+//	public Iterable<Integer> Iterator(){
+//		return this.x;
+//	}
+//	
+//	
+//	public static void main(String[] args) {
+//		// TODO Auto-generated method stub
+//		IteratorDemo demo = new IteratorDemo();
+//		
+//		Iterator<Integer> iter = demo.iterator();
+//		while(iter.hasNext()) {
+//			System.out.print(iter.next() + " ");
+//		}
+//		
+//		System.out.println("");		
+//		
+//		//advanced for loop takes instance of "iterable" not to be confuse with "iterator"
+//		for(Integer i : demo.Iterator()) {
+//			System.out.print(i + " ");
+//		}			
+//	}// END MAIN
+//}//END CLASS
+
+
+
+/**
+ * Example of class that implements iterable so it can be iterated and this entire class before iterable ! 
+ */
+//public class IteratorDemo implements Iterable<Integer>{
+//	private ArrayList<Integer> x;
+//	
+//	public IteratorDemo(){
+//		x = new ArrayList<Integer>(10);
+//		for(int i = 0 ; i< 10 ; i++) {
+//			x.add(i);
+//		}
+//	}
+//	
+//	//Returns Iterator to the iterable , not to be confused with iterable itself. 
+//	public java.util.Iterator<Integer> iterator() {
+//		return x.iterator();
+//	}
+//	
+//	//Returns Iterable , in this case ArrayList is known to be iterable so itself is an iterable.
+//	public Iterable<Integer> Iterator(){
+//		return this;
+//	}
+//	
+//	
+//	public static void main(String[] args) {
+//		// TODO Auto-generated method stub
+//		IteratorDemo demo = new IteratorDemo();
+//		
+//		Iterator<Integer> iter = demo.iterator();
+//		while(iter.hasNext()) {
+//			System.out.print(iter.next() + " ");
+//		}
+//		
+//		System.out.println("");		
+//		
+//		//advanced for loop takes instance of "iterable" not to be confuse with "iterator"
+//		for(Integer i : demo.Iterator()) {
+//			System.out.print(i + " ");
+//		}			
+//	}// END MAIN
+//}//END CLASS
 
 
 
@@ -122,9 +164,9 @@ package edu.diao.iterator;
  /*
   * Example of Non-Iterable collection
   */
- 
 
-/*public class IteratorDemo implements Iterable<Integer>{
+//Implementing Iterable will enable IteratorDemo to be iterable and need to provide a iterator function that returns iterator to this class.
+public class IteratorDemo implements Iterable<Integer>{
 	private Integer[] x;
 	
 	//Constructor
@@ -153,14 +195,17 @@ package edu.diao.iterator;
 		}
 		
 	}
-
+	
+	//This is from implementing Iterable<Integer>
+	@Override
 	public Iterator<Integer> iterator(){
 		return new ArrayIterator();
 		
 	}
 	
-	//For this to work , class must implement Iterable<Integer> b/c this tells compiler that IteratorDemo is iterable that is there is a iterator() inside IteratorDemo
-	public Iterable<Integer> Iterator(){
+	//To return Iterable<Integer> class must implement Iterable<Integer> 
+	//this function is optional , only if u want to use advance for loop.
+	public Iterable<Integer> foo(){
 		return this;
 	}
 	
@@ -168,7 +213,7 @@ package edu.diao.iterator;
 	
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
 		IteratorDemo demo = new IteratorDemo();
 		
 		Iterator<Integer> iter = demo.iterator();
@@ -178,10 +223,12 @@ package edu.diao.iterator;
 		System.out.println("");
 		
 		//Iterable Object calls iterator()
-		for(Integer i : demo.Iterator()) {
+		for(Integer i : demo.foo()) {
 			System.out.print(i + " ");
 		}
 
 	}// END MAIN
+
+
 }//END CLASS
-*/
+
